@@ -1,0 +1,55 @@
+      body {
+        background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      }
+      .card {
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        border-radius: 1.5rem;
+        border: none;
+        background: rgba(255,255,255,0.97);
+        animation: fadeInDown 1s;
+      }
+      @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .login-illustration {
+        animation: float 3s ease-in-out infinite;
+        filter: grayscale(0.2) contrast(1.1) brightness(0.95);
+      }
+      @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0); }
+      }
+      .btn-login {
+        background: linear-gradient(90deg, #232526 0%, #414345 100%);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        transition: box-shadow 0.2s, background 0.2s;
+        box-shadow: 0 2px 8px rgba(34,34,34,0.10);
+      }
+      .btn-login:hover {
+        box-shadow: 0 4px 16px rgba(34,34,34,0.18);
+        background: linear-gradient(90deg, #414345 0%, #232526 100%);
+        color: #fff;
+      }
+      .form-label {
+        color: #232526;
+        font-weight: 500;
+      }
+      .h1 span {
+        color: #232526;
+      }
+      .card-body {
+        background: transparent;
+      }
+      #loginForm input {
+        background: #f7f7f7;
+        color: #232526;
+        border: 1px solid #23252622;
+      }
+      #loginForm input:focus {
+        background: #fff;
+        color: #232526;
+      }

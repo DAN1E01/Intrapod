@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Intrapod Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End Plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="../../../../assets/img/Intrapod_logo.png" />
+  <!-- Custom js for this page -->
+  <!-- <script src="assets/js/dashboard.js"></script> -->
+  <!-- End custom js for this page -->
+  <script src="../../../../assets/js/jwt-decode.js"></script>
+  <script src="../../../../assets/js/dashboard_nav.js"></script>
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+        <a class="sidebar-brand brand-logo" href="index.html"
+          style="font-size:2rem; font-weight:bold; color:#fff; letter-spacing:2px; text-decoration:none;">INTRAPOD</a>
+        <a class="sidebar-brand brand-logo-mini" href="index.html"
+          style="font-size:1.5rem; font-weight:bold; color:#fff; letter-spacing:1px; text-decoration:none;">IP</a>
+      </div>
+      <ul class="nav">
+        <li class="nav-item profile">
+          <div class="profile-desc">
+            <div class="profile-pic">
+              <div class="count-indicator">
+                <!-- Icono de perfil usando Material Design Icons -->
+                <span class="mdi mdi-account-circle" style="font-size:2.5rem; color:#bdbdbd;"></span>
+                <span class="count bg-success"></span>
+              </div>
+              <div class="profile-name">
+                <h5 class="mb-0 font-weight-normal"></h5>
+                <span></span>
+              </div>
+            </div>
+            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+              aria-labelledby="profile-dropdown">
+              <a href="#" class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-dark rounded-circle">
+                    <i class="mdi mdi-settings text-primary"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <p class="preview-subject ellipsis mb-1 text-small">Configurar Cuenta</p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-dark rounded-circle">
+                    <i class="mdi mdi-onepassword  text-info"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <p class="preview-subject ellipsis mb-1 text-small">Cambiar Contraseña</p>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item nav-category">
+          <span class="nav-link">Navigation</span>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="../../index.html">
+            <span class="menu-icon">
+              <i class="mdi mdi-speedometer"></i>
+            </span>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <span class="menu-icon">
+              <i class="mdi mdi-security"></i>
+            </span>
+            <span class="menu-title">User Pages</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="auth">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="../gestionar_usuarios/usuarios.html">
+            <span class="menu-icon">
+              <i class="mdi mdi-account-multiple"></i>
+            </span>
+            <span class="menu-title">Gestionar Usuarios</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link"
+            href="../ventas/ventas.html">
+            <span class="menu-icon">
+              <i class="mdi mdi-shopping"></i>
+            </span>
+            <span class="menu-title">Ventas</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link"
+            href="../inventario/inventario.html">
+            <span class="menu-icon">
+              <i class="mdi mdi-blender"></i>
+            </span>
+            <span class="menu-title">Inventario</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link"
+            href="../reportes/reportes.html">
+            <span class="menu-icon">
+<i class="mdi mdi-chart-line"></i>            </span>
+            <span class="menu-title">Reportes</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar p-0 fixed-top d-flex flex-row">
+        <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav w-100">
+            <li class="nav-item w-100">
+              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                <input type="text" class="form-control" id="search-user" placeholder="Buscar Producto">
+              </form>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown">
+              <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                <div class="navbar-profile">
+                  <span class="mdi mdi-account-circle" style="font-size:2.5rem; color:#bdbdbd;"></span>
+                  <p class="mb-0 d-none d-sm-block navbar-profile-name"></p>
+                  <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                <h6 class="p-3 mb-0">Profile</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-settings text-success"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject mb-1">Settings</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item" href="#" id="cerrar_sesion">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject mb-1">Log out</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <p class="p-3 mb-0 text-center">Advanced settings</p>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="mdi mdi-format-line-spacing"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <!-- Barra superior de gestión de inventario -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <h3 class="font-weight-bold mb-3 mb-md-0">Gestión de Inventario</h3>
+            </div>
+            <div class="col-12">
+              <div class="row g-2">
+                <div class="col-12 col-md-auto mb-2">
+                  <div class="dropdown w-100">
+                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownSucursal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Todas las sucursales</button>
+                    <div class="dropdown-menu w-100" id="dropdownSucursalMenu" aria-labelledby="dropdownSucursal"></div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-auto mb-2">
+                  <div class="dropdown w-100">
+                    <button class="btn btn-success dropdown-toggle w-100" type="button" id="dropdownCategoria" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Todas las categorías</button>
+                    <div class="dropdown-menu w-100" id="dropdownCategoriaMenu" aria-labelledby="dropdownCategoria"></div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-auto mb-2">
+                  <button type="button" class="btn btn-outline-success w-100" style="min-width:150px;"><i class="mdi mdi-file-excel"></i> Exportar</button>
+                </div>
+                <div class="col-12 col-md-auto mb-2">
+                  <button type="button" class="btn btn-info w-100" id="btnAjustarStockGlobal" style="min-width:150px;"><i class="mdi mdi-plus-minus"></i> Ajustar Stock</button>
+                </div>
+                <div class="col-12 col-md-auto mb-2">
+                  <button type="button" class="btn btn-primary w-100" id="btnNuevoProducto" data-toggle="modal" data-target="#modalNuevoProducto" style="min-width:150px;"><i class="mdi mdi-plus"></i> Nuevo Producto</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fin barra superior de gestión de inventario -->
+          <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Productos en Inventario</h4>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-sm mb-0 text-nowrap" style="font-size: 0.92rem;">
+                        <thead>
+                          <tr>
+                            <th style="white-space:nowrap;">ID</th>
+                            <th style="white-space:nowrap;">Producto</th>
+                            <th class="d-none d-md-table-cell" style="white-space:nowrap; max-width:120px;">Descripción</th>
+                            <th style="white-space:nowrap;">P. Compra</th>
+                            <th style="white-space:nowrap;">P. Venta</th>
+                            <th style="white-space:nowrap;">Stock</th>
+                            <th style="white-space:nowrap;">Sucursal</th>
+                            <th style="white-space:nowrap;">Categoría</th>
+                            <th style="white-space:nowrap;">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- Las filas serán generadas dinámicamente por JS -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <!-- content-wrapper ends -->
+
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../../assets/vendors/chart.js/Chart.min.js"></script>
+  <script src="../../assets/vendors/progressbar.js/progressbar.min.js"></script>
+  <script src="../../assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+  <script src="../../assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+  <script src="../../assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../../assets/js/off-canvas.js"></script>
+  <script src="../../assets/js/hoverable-collapse.js"></script>
+  <script src="../../assets/js/misc.js"></script>
+  <script src="../../assets/js/settings.js"></script>
+  <script src="../../assets/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Agregar jQuery y Bootstrap JS para dropdowns -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../../assets/js/inventario.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- end SweetAlert2 -->
+
+  <!-- Modal Nuevo Producto -->
+<div class="modal fade" id="modalNuevoProducto" tabindex="-1" role="dialog" aria-labelledby="modalNuevoProductoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalNuevoProductoLabel">Nuevo Producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="formNuevoProducto">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nombreProducto">Nombre</label>
+            <input type="text" class="form-control" id="nombreProducto" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="descripcionProducto">Descripción</label>
+            <textarea class="form-control" id="descripcionProducto" name="descripcion" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="precioCompra">Precio Compra</label>
+            <input type="number" step="0.01" class="form-control" id="precioCompra" name="precio_compra" required>
+          </div>
+          <div class="form-group">
+            <label for="precioVenta">Precio Venta</label>
+            <input type="number" step="0.01" class="form-control" id="precioVenta" name="precio_venta" required>
+          </div>
+          <div class="form-group">
+            <label for="stockMinimo">Stock Mínimo</label>
+            <input type="number" class="form-control" id="stockMinimo" name="stock_minimo" required>
+          </div>
+          <div class="form-group">
+            <label for="sucursalProducto">Sucursal</label>
+            <select class="form-control" id="sucursalProducto" name="sucursal" required>
+              <option value="">Seleccione una sucursal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="categoriaProducto">Categoría</label>
+            <select class="form-control" id="categoriaProducto" name="categoria" required>
+              <option value="">Seleccione una categoría</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Ajustar Stock -->
+<div class="modal fade" id="modalAjustarStock" tabindex="-1" role="dialog" aria-labelledby="modalAjustarStockLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAjustarStockLabel">Ajustar Stock</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="formAjustarStock">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="ajustarStockIdProducto">Producto</label>
+            <select class="form-control" id="ajustarStockIdProducto" required></select>
+          </div>
+          <div class="form-group">
+            <label>Stock actual</label><br>
+            <span id="ajustarStockActual" class="badge badge-info" style="font-size:1.3rem; padding:0.5em 1.2em; min-width:60px; display:inline-block;">-</span>
+          </div>
+          <div class="form-group">
+            <label for="ajustarStockCantidad">Cantidad a ajustar</label>
+            <input type="number" class="form-control" id="ajustarStockCantidad" required>
+            <small class="form-text text-muted">Use valores positivos para sumar y negativos para restar.</small>
+          </div>
+          <div class="form-group">
+            <label for="ajustarStockMotivo">Motivo</label>
+            <input type="text" class="form-control" id="ajustarStockMotivo" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
