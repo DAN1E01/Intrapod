@@ -3,141 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestión para Pollería</title>
+    <title>Sistema Gestión de Inventario IntraPod</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <style>
         body {
-            padding-top: 40px;
-            background-color: #f8f9fa;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .container {
-            max-width: 800px;
+        .dashboard-container {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            padding: 40px 32px 32px 32px;
+            max-width: 440px;
+            width: 100%;
+            margin: 40px auto;
         }
-        .logo {
+        .dashboard-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
         }
-        .logo i {
-            font-size: 64px;
-            color: #dc3545;
+        .dashboard-header .logo {
+            font-size: 3.5rem;
+            color: #0d6efd;
+            margin-bottom: 10px;
         }
-        .instructions {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+        .dashboard-header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #232526;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
         }
-        .card {
-            margin-bottom: 20px;
-            border: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .dashboard-header p {
+            color: #888;
+            font-size: 1.1rem;
         }
-        .card-header {
-            background-color: #dc3545;
-            color: white;
+        .card-user {
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.07);
+            padding: 24px 18px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .card-user .bi {
+            font-size: 2.2rem;
+            color: #0d6efd;
+            margin-bottom: 8px;
+        }
+        .card-user strong {
+            color: #232526;
+        }
+        .btn-login {
+            background: #0d6efd;
+            color: #fff;
             font-weight: 500;
+            border-radius: 8px;
+            margin-top: 18px;
+            transition: background 0.2s;
+        }
+        .btn-login:hover {
+            background: #0a58ca;
+            color: #fff;
+        }
+        .features {
+            margin-top: 30px;
+        }
+        .features h5 {
+            color: #0d6efd;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .features ul {
+            padding-left: 1.2em;
+        }
+        .features li {
+            margin-bottom: 7px;
+            color: #232526;
+        }
+        .footer {
+            text-align: center;
+            color: #aaa;
+            margin-top: 30px;
+            font-size: 0.95rem;
         }
     </style>
-    <script src="./assets/js/auth.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <i class="bi bi-egg-fried"></i>
-            <h1>Sistema de Pollería</h1>
-            <p class="lead">Control de acceso y gestión basada en roles</p>
-        </div>  
-        
-        <div class="instructions">
-            <h2>¿Cómo usar el sistema?</h2>
-            
-            <div id="startSystem" class="alert alert-primary">
-                <h4><i class="bi bi-info-circle"></i> Instrucciones de inicio</h4>
-                <p>Para iniciar el sistema completo, haz doble clic en:</p>
-                <code>iniciar_sistema.bat</code>
-                <p>Esto arrancará automáticamente el backend y el frontend.</p>
-            </div>
-            
-            <h3>Usuarios disponibles para pruebas:</h3>
-            
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-person-fill-gear"></i> Administrador
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Usuario:</strong> admin</p>
-                            <p><strong>Contraseña:</strong> admin123</p>
-                            <a href="pages/login.html" class="btn btn-primary w-100">Iniciar sesión como Admin</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-cash-register"></i> Cajero
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Usuario:</strong> cajero</p>
-                            <p><strong>Contraseña:</strong> cajero123</p>
-                            <a href="pages/login.html" class="btn btn-primary w-100">Iniciar sesión como Cajero</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="bi bi-fire"></i> Cocinero
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Usuario:</strong> cocinero</p>
-                            <p><strong>Contraseña:</strong> cocinero123</p>
-                            <a href="pages/login.html" class="btn btn-primary w-100">Iniciar sesión como Cocinero</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="alert alert-info mt-3">
-                <h4><i class="bi bi-shield-lock"></i> Características de seguridad implementadas:</h4>
-                <ul>
-                    <li>Autenticación mediante JSON Web Tokens (JWT)</li>
-                    <li>Control de acceso basado en roles (RBAC)</li>
-                    <li>Protección de rutas en frontend y backend</li>
-                    <li>Verificación de permisos por rol</li>
-                    <li>Interfaz adaptada según el rol del usuario</li>
-                </ul>
-            </div>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="logo"><i class="bi bi-truck"></i></div>
+            <h1>Sistema Gestión de Inventario <span style="color:#0d6efd;">IntraPod</span></h1>
+            <p>Control y gestión eficiente para importadora de electrodomésticos</p>
         </div>
-        
-        <footer class="text-center text-muted">
-            <p>Sistema de Gestión para Pollería &copy; 2025</p>
-        </footer>
+        <div class="card-user">
+            <i class="bi bi-person-fill-gear"></i>
+            <h5 class="mb-2">Usuario de Prueba</h5>
+            <p><strong>Usuario:</strong> DAN1E10</p>
+            <p><strong>Contraseña:</strong> admin123</p>
+            <a href="pages/login.html" class="btn btn-login w-100">Ingresar al Sistema</a>
+        </div>
+
+        <div class="footer">
+            Sistema de Gestión para Importadora de Electrodomésticos IntraPod &copy; 2025
+        </div>
     </div>
-    
     <script>
         // Redirigir si hay una sesión activa
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('token');
-            const cargo = localStorage.getItem('cargo');
-            
-            if (token) {
-                switch(cargo) {
-                    case 'admin':
-                        window.location.href = './pages/admin.html';
+            const rol = localStorage.getItem('rol');
+            if (token && rol) {
+                switch(rol) {
+                    case 'administrador':
+                        window.location.href = './pages/dashboard_admin/index.html';
                         break;
-                    case 'cajero':
-                        window.location.href = './pages/cajero.html';
-                        break;
-                    case 'cocinero':
-                        window.location.href = './pages/cocinero.html';
+                    case 'empacador':
+                        window.location.href = './pages/dashboard_empacador/index.html';
                         break;
                     default:
-                        // Si no se reconoce el rol, se queda en la página actual
                         break;
                 }
             }
