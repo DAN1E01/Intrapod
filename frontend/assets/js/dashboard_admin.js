@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
           { minimumFractionDigits: 2, maximumFractionDigits: 2 }
         )}`;
 
-        // Actualizar recuadros de ejemplo
         const revenueCard = document.getElementById("revenue-card");
         if (revenueCard)
           revenueCard.textContent = `$${data.info_cards.suma_ventas.toLocaleString(

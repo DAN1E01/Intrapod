@@ -89,7 +89,6 @@ def agregar_producto(producto: ProductoCreate, db: Session = Depends(get_db)):
     db.add(nuevo_producto)
     db.commit()
     db.refresh(nuevo_producto)
-    # Crear inventario inicial en la sucursal seleccionada (stock=0)
     inventario = Inventario(
         id_producto=nuevo_producto.id,
         id_sucursal=producto.id_sucursal,
@@ -106,7 +105,6 @@ def ajustar_stock(data: AjusteStockRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Inventario no encontrado")
     inventario.stock += data.cantidad
     db.commit()
-    # Aquí podrías guardar el motivo en una tabla de auditoría si lo deseas
     return {"message": "Stock ajustado correctamente", "nuevo_stock": inventario.stock}
 
 @router.put("/editar/{id}")

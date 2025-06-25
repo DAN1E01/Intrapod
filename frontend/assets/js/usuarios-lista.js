@@ -20,7 +20,6 @@ function cargarRolesYSucursales() {
     .then((data) => {
       const selectRol = document.getElementById("rol");
       selectRol.innerHTML = "";
-      // Solo roles de la API, puedes ajustar si tienes endpoint específico
       ["administrador", "empacador", "despachador", "proveedor"].forEach((rol) => {
         const opt = document.createElement("option");
         opt.value = rol;
@@ -39,7 +38,7 @@ function cargarRolesYSucursales() {
     });
 }
 
-// Mostrar modal añadir usuario
+//Modal añadir usuario
 const btnAbrirModal = document.getElementById("btn-abrir-modal-usuario");
 if (btnAbrirModal) {
   btnAbrirModal.addEventListener("click", function () {
@@ -93,7 +92,6 @@ if (formUsuario) {
       return;
     }
     if (editId) {
-      // --- ACTUALIZAR USUARIO ---
       const token = localStorage.getItem("token");
       fetch(`${API_URL}/usuarios/editar/${editId}`, {
         method: "PUT",
@@ -158,7 +156,6 @@ if (formUsuario) {
   });
 }
 
-// Modificar cargarUsuarios para guardar usuarios existentes
 function cargarUsuarios() {
   const token = localStorage.getItem("token");
   fetch(`${API_URL}/dashboard/admin/users`, {
@@ -230,7 +227,7 @@ function abrirModalEditarUsuario(id) {
   const usuario = usuariosExistentes.find(u => u.id == id);
   if (!usuario) return;
   cargarRolesYSucursales();
-  setTimeout(() => { // Espera a que se carguen los selects
+  setTimeout(() => {  
     document.getElementById('nombre').value = usuario.nombre;
     document.getElementById('username').value = usuario.username;
     document.getElementById('correo').value = usuario.correo;

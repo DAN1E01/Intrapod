@@ -68,7 +68,7 @@ def admin_users_list(user=Depends(require_role('administrador')), db: Session = 
 
 @router.post("/dashboard/admin/users")
 def crear_usuario(
-    data: dict,  # Puedes crear un esquema Pydantic si prefieres
+    data: dict,  
     user=Depends(require_role('administrador')),
     db: Session = Depends(get_db)
 ):
