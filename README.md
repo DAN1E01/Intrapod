@@ -38,13 +38,3 @@ Este script:
 ## 4. Usuario de prueba
 - **Usuario:** DAN1E10
 - **Contraseña:** admin123
-
-## 5. Características principales
-- Autenticación mediante JSON Web Tokens (JWT)
-- Control de acceso basado en roles (RBAC)
-- Gestión de inventario de productos y sucursales
-- Protección de rutas en frontend y backend
-- Interfaz adaptada según el rol del usuario
-
----
-¡Listo! Así puedes ejecutar y probar el sistema de gestión para importadora de electrodomésticos IntraPod en cualquier máquina con Windows.
