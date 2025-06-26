@@ -134,13 +134,7 @@
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
-          <ul class="navbar-nav w-100">
-            <li class="nav-item w-100">
-              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                <input type="text" class="form-control" id="search-user" placeholder="Buscar usuario">
-              </form>
-            </li>
-          </ul>
+          
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item dropdown">
               <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
@@ -188,7 +182,105 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
+          <!-- Filtro y tabla de ventas de productos -->
+<div class="row mb-4">
+  <div class="col-12 col-md-6">
+    <input type="text" class="form-control" id="search-venta-producto" placeholder="Buscar producto vendido" autocomplete="off">
+  </div>
+</div>
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ventas de Productos</h4>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tabla-ventas-productos">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="ventas-productos-tbody">
+            <!-- Aquí se llenarán las ventas dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// --- Llenar y filtrar ventas de productos ---
+document.addEventListener("DOMContentLoaded", function () {
+  const token = localStorage.getItem("token");
+  const tbody = document.getElementById('ventas-productos-tbody');
+  const inputBuscar = document.getElementById('search-venta-producto');
+  let ventasOriginales = [];
+
+  function renderVentasTabla(ventas) {
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    ventas.forEach((v, idx) => {
+      const tr = document.createElement('tr');
+      let estadoClass = 'btn-secondary';
+      if (v.estado === 'pendiente') estadoClass = 'btn-warning';
+      else if (v.estado === 'cancelado') estadoClass = 'btn-danger';
+      else if (v.estado === 'completado') estadoClass = 'btn-success';
+      tr.innerHTML = `
+        <td>${idx + 1}</td>
+        <td>${v.producto}</td>
+        <td>${v.cantidad}</td>
+        <td>$${Number(v.total).toFixed(2)}</td>
+        <td><span class="btn ${estadoClass} btn-sm">${v.estado.charAt(0).toUpperCase() + v.estado.slice(1)}</span></td>
+        <td>
+          <button class="btn btn-success btn-sm" onclick="cambiarEstadoVenta(${v.id}, 'completado')">Completar</button>
+          <button class="btn btn-danger btn-sm" onclick="cambiarEstadoVenta(${v.id}, 'cancelado')">Cancelar</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function cargarVentas() {
+    fetch('http://localhost:8000/dashboard/admin/ventas_por_producto', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(res => res.json())
+      .then(data => {
+        // Simulación de estados para demo
+        ventasOriginales = (data.labels || []).map((nombre, idx) => ({
+          id: idx + 1,
+          producto: nombre,
+          cantidad: data.data[idx],
+          total: (data.data[idx] * 1000) || 0, // Simula total
+          estado: ['pendiente', 'completado', 'cancelado'][idx % 3]
+        }));
+        renderVentasTabla(ventasOriginales);
+      });
+  }
+
+  if (inputBuscar) {
+    inputBuscar.addEventListener('input', function() {
+      const texto = this.value.trim().toLowerCase();
+      let filtrados = ventasOriginales;
+      if (texto) {
+        filtrados = ventasOriginales.filter(v => v.producto.toLowerCase().includes(texto));
+      }
+      renderVentasTabla(filtrados);
+    });
+  }
+
+  window.cambiarEstadoVenta = function(id, nuevoEstado) {
+    ventasOriginales = ventasOriginales.map(v => v.id === id ? { ...v, estado: nuevoEstado } : v);
+    renderVentasTabla(ventasOriginales);
+  };
+
+  cargarVentas();
+});
+</script>
         </div>
         <!-- content-wrapper ends -->
 
