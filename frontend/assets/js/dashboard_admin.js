@@ -92,6 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
   `;
         tbody.appendChild(tr);
       });
+      // Refresca el filtro de productos después de llenar la tabla
+      if (window.refrescarFiltroProductos) window.refrescarFiltroProductos();
     }
   }
 

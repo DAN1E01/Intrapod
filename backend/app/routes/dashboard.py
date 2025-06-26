@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.auth.utils import require_role
 from app.config.db.db import get_db
-from app.models.modelos import Producto, Inventario, Venta, Sucursal, Rol
+from app.models.modelos import Producto, Inventario, Venta, Sucursal, Rol, Categoria
 from app.models.usuario import Usuario
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import or_
@@ -141,3 +141,53 @@ def productos_mas_vendidos(db: Session = Depends(get_db)):
         }
         for r in resultados
     ]
+
+@router.get("/dashboard/admin/ventas_por_mes")
+def ventas_por_mes(user=Depends(require_role('administrador')), db: Session = Depends(get_db)):
+    from datetime import datetime
+    meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+    ventas = db.query(Venta).all()
+    conteo = [0]*12
+    for v in ventas:
+        if v.fecha:
+            mes = v.fecha.month-1
+            conteo[mes] += float(v.total)
+    return {"labels": meses, "data": conteo}
+
+@router.get("/dashboard/admin/inventario_por_categoria")
+def inventario_por_categoria(user=Depends(require_role('administrador')), db: Session = Depends(get_db)):
+    # Usar la relación con Categoria
+    categorias = db.query(Categoria).all()
+    labels = [c.nombre for c in categorias]
+    data = []
+    for cat in categorias:
+        stock = db.query(Inventario).join(Producto, Inventario.id_producto==Producto.id).filter(Producto.id_categoria==cat.id).with_entities(func.sum(Inventario.stock)).scalar() or 0
+        data.append(stock)
+    return {"labels": labels, "data": data}
+
+@router.get("/dashboard/admin/proporcion_productos")
+def proporcion_productos(user=Depends(require_role('administrador')), db: Session = Depends(get_db)):
+    categorias = db.query(Categoria).all()
+    labels = [c.nombre for c in categorias]
+    data = []
+    for cat in categorias:
+        count = db.query(Producto).filter(Producto.id_categoria==cat.id).count()
+        data.append(count)
+    return {"labels": labels, "data": data}
+
+@router.get("/dashboard/admin/ventas_por_producto")
+def ventas_por_producto(user=Depends(require_role('administrador')), db: Session = Depends(get_db)):
+    resultados = (
+        db.query(
+            Producto.nombre,
+            func.sum(DetalleVenta.cantidad).label("unidades_vendidas")
+        )
+        .join(DetalleVenta, DetalleVenta.id_producto == Producto.id)
+        .group_by(Producto.id)
+        .order_by(func.sum(DetalleVenta.cantidad).desc())
+        .limit(10)
+        .all()
+    )
+    labels = [r[0] for r in resultados]
+    data = [r[1] for r in resultados]
+    return {"labels": labels, "data": data}

@@ -3,6 +3,66 @@ const API_URL = "http://localhost:8000"; // Cambia esto si tu backend usa otro p
 // Script para cargar y mostrar usuarios en la tabla
 
 document.addEventListener("DOMContentLoaded", function () {
+  let usuariosExistentes = [];
+  const inputBuscar = document.getElementById('search-user');
+  const tbody = document.querySelector('table.tabla-usuarios tbody');
+
+  function renderUsuariosTabla(usuarios) {
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    usuarios.forEach(usuario => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${usuario.nombre}</td>
+        <td>${usuario.username}</td>
+        <td>${usuario.correo}</td>
+        <td>${usuario.rol}</td>
+        <td>${usuario.sucursal || '-'}</td>
+        <td>
+          <button class="btn btn-warning btn-sm mr-1 btn-editar-usuario" data-id="${usuario.id}">Editar</button>
+          <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.querySelectorAll('.btn-editar-usuario').forEach(btn => {
+      btn.onclick = function() {
+        abrirModalEditarUsuario(this.dataset.id);
+      };
+    });
+  }
+
+  function cargarUsuarios() {
+    const token = localStorage.getItem("token");
+    fetch(`${API_URL}/dashboard/admin/users`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        usuariosExistentes = data.usuarios || [];
+        renderUsuariosTabla(usuariosExistentes);
+      });
+  }
+
+  if (inputBuscar) {
+    inputBuscar.value = '';
+    inputBuscar.setAttribute('autocomplete', 'off');
+    inputBuscar.addEventListener('input', function() {
+      const texto = this.value.trim().toLowerCase();
+      let filtrados = usuariosExistentes;
+      if (texto) {
+        filtrados = usuariosExistentes.filter(u =>
+          (u.nombre && u.nombre.toLowerCase().includes(texto)) ||
+          (u.username && u.username.toLowerCase().includes(texto)) ||
+          (u.correo && u.correo.toLowerCase().includes(texto)) ||
+          (u.rol && u.rol.toLowerCase().includes(texto)) ||
+          (u.sucursal && u.sucursal.toLowerCase().includes(texto))
+        );
+      }
+      renderUsuariosTabla(filtrados);
+    });
+  }
+
   cargarUsuarios();
 });
 
@@ -156,6 +216,32 @@ if (formUsuario) {
   });
 }
 
+function renderUsuariosTabla(usuarios) {
+  const tbody = document.querySelector('table.tabla-usuarios tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  usuarios.forEach(usuario => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${usuario.nombre}</td>
+      <td>${usuario.username}</td>
+      <td>${usuario.correo}</td>
+      <td>${usuario.rol}</td>
+      <td>${usuario.sucursal || '-'}</td>
+      <td>
+        <button class="btn btn-warning btn-sm mr-1 btn-editar-usuario" data-id="${usuario.id}">Editar</button>
+        <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+  document.querySelectorAll('.btn-editar-usuario').forEach(btn => {
+    btn.onclick = function() {
+      abrirModalEditarUsuario(this.dataset.id);
+    };
+  });
+}
+
 function cargarUsuarios() {
   const token = localStorage.getItem("token");
   fetch(`${API_URL}/dashboard/admin/users`, {
@@ -164,29 +250,7 @@ function cargarUsuarios() {
     .then((res) => res.json())
     .then((data) => {
       usuariosExistentes = data.usuarios || [];
-      const tbody = document.querySelector("table tbody");
-      tbody.innerHTML = "";
-      (data.usuarios || []).forEach((usuario) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-                <td>${usuario.nombre}</td>
-                <td>${usuario.username}</td>
-                <td>${usuario.correo}</td>
-                <td>${usuario.rol}</td>
-                <td>${usuario.sucursal || "-"}</td>
-                <td>
-                  <button class="btn btn-warning btn-sm mr-1 btn-editar-usuario" data-id="${usuario.id}">Editar</button>
-                  <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
-                </td>
-            `;
-        tbody.appendChild(tr);
-      });
-      // Delegar evento para editar
-      document.querySelectorAll('.btn-editar-usuario').forEach(btn => {
-        btn.onclick = function() {
-          abrirModalEditarUsuario(this.dataset.id);
-        };
-      });
+      renderUsuariosTabla(usuariosExistentes);
     });
 }
 

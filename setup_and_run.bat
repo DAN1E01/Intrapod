@@ -26,5 +26,5 @@ cd ..
 
 REM 5. Iniciar frontend y abrir navegador
 cd frontend
-start http://localhost:5500/frontend
+start http://localhost:5500/pages/login.html
 python -m http.server 5500

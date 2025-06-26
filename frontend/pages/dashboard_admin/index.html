@@ -96,24 +96,6 @@
           </a>
         </li>
         <li class="nav-item menu-items">
-          <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-            <span class="menu-icon">
-              <i class="mdi mdi-security"></i>
-            </span>
-            <span class="menu-title">User Pages</span>
-            <i class="menu-arrow"></i>
-          </a>
-          <div class="collapse" id="auth">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item menu-items">
           <a class="nav-link" href="pages/gestionar_usuarios/usuarios.html">
             <span class="menu-icon">
               <i class="mdi mdi-account-multiple"></i>
@@ -160,7 +142,7 @@
           <ul class="navbar-nav w-100">
             <li class="nav-item w-100">
               <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                <input type="text" class="form-control" id="search-user" placeholder="Buscar usuario">
+                <input type="text" class="form-control" id="search-producto" placeholder="Buscar producto" autocomplete="off">
               </form>
             </li>
           </ul>
@@ -357,6 +339,61 @@
   <script src="assets/js/settings.js"></script>
   <script src="assets/js/todolist.js"></script>
   <!-- endinject -->
+  <script>
+    // --- FILTRO DINÁMICO DE PRODUCTOS EN LA TABLA DE PRODUCTOS MÁS VENDIDOS ---
+    (function () {
+      const inputBuscar = document.getElementById('search-producto');
+      const tbody = document.getElementById('usuarios-tbody');
+      let productosOriginales = [];
+
+      // Guardar los productos originales al cargar la tabla
+      function guardarProductosOriginales() {
+        productosOriginales = [];
+        if (!tbody) return;
+        tbody.querySelectorAll('tr').forEach(tr => {
+          const tds = tr.querySelectorAll('td');
+          if (tds.length >= 5) {
+            productosOriginales.push({
+              html: tr.innerHTML,
+              producto: tds[1].textContent.trim().toLowerCase()
+            });
+          }
+        });
+      }
+
+      // Filtro dinámico
+      function aplicarFiltro() {
+        if (!inputBuscar || !tbody) return;
+        const texto = inputBuscar.value.trim().toLowerCase();
+        tbody.innerHTML = '';
+        let filtrados = productosOriginales;
+        if (texto) {
+          filtrados = productosOriginales.filter(p => p.producto.includes(texto));
+        }
+        filtrados.forEach(p => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = p.html;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Inicializar filtro
+      if (inputBuscar && tbody) {
+        inputBuscar.value = '';
+        inputBuscar.setAttribute('autocomplete', 'off');
+        inputBuscar.addEventListener('input', aplicarFiltro);
+      }
+
+      // Si la tabla se llena dinámicamente por JS, llama a esta función después de llenarla:
+      window.refrescarFiltroProductos = function() {
+        guardarProductosOriginales();
+        aplicarFiltro();
+      };
+
+      // Llama una vez al cargar la página
+      guardarProductosOriginales();
+    })();
+  </script>
 </body>
 
 </html>
