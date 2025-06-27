@@ -8,10 +8,10 @@
 ## 1. Inicializa la base de datos
 
 1. Abre tu gestor de MySQL (Workbench, consola, etc).
-2. Ejecuta el script SQL ubicado en `in_intrapod.sql` para crear la base de datos y las tablas necesarias:
+2. Ejecuta el script SQL ubicado en `inventario_intrapod` para crear la base de datos y las tablas necesarias:
    ```sql
    -- En tu consola MySQL:
-   source C:/ruta/a/in_intrapod.sql;
+   source C:/ruta/a/inventario_intrapod;
    ```
 
 ## 2. Configura y ejecuta el sistema automáticamente (Windows)
