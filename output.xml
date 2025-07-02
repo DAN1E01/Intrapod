@@ -1,0 +1,2582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.13.5 on win32)" generated="20250702 06:02:27.360" rpa="false" schemaversion="4">
+<suite id="s1" name="Tests" source="C:\Users\DANIEL\Documents\polleria\tests">
+<suite id="s1-s1" name="Api" source="C:\Users\DANIEL\Documents\polleria\tests\api">
+<suite id="s1-s1-s1" name="Test Api Basica" source="C:\Users\DANIEL\Documents\polleria\tests\api\test_api_basica.robot">
+<kw name="Setup Test Environment" library="common" type="SETUP">
+<doc>Configuración inicial para todas las pruebas</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:28.249" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:28.249" endtime="20250702 06:02:28.250"/>
+</kw>
+<status status="PASS" starttime="20250702 06:02:28.249" endtime="20250702 06:02:28.250"/>
+</kw>
+<test id="s1-s1-s1-t1" name="Test Login Admin" line="15">
+<kw name="Realizar Login API Como Admin" library="auth_keywords">
+<var>${token}</var>
+<arg>${ADMIN_USERNAME}</arg>
+<arg>${ADMIN_PASSWORD}</arg>
+<doc>Realiza login como administrador via API</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:28.254" level="INFO">${login_data} = {'username': 'admin3', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:28.254" endtime="20250702 06:02:28.254"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:30.731" level="INFO">POST Request : url=http://localhost:8000/auth/login 
+ path_url=/auth/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '46', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin3", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:30.731" level="INFO">POST Response : url=http://localhost:8000/auth/login 
+ status=400, reason=Bad Request 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:29 GMT', 'server': 'uvicorn', 'content-length': '46', 'content-type': 'application/json'} 
+ body={"detail":"Usuario o contraseña incorrectos"} 
+ </msg>
+<msg timestamp="20250702 06:02:30.732" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: http://localhost:8000/auth/login</msg>
+<status status="FAIL" starttime="20250702 06:02:28.254" endtime="20250702 06:02:30.734"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:30.734" endtime="20250702 06:02:30.734"/>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:30.735" endtime="20250702 06:02:30.735"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:28.253" endtime="20250702 06:02:30.735"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${token}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:30.735" endtime="20250702 06:02:30.735"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Login admin exitoso</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:30.735" endtime="20250702 06:02:30.735"/>
+</kw>
+<doc>Prueba login del administrador</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>auth</tag>
+<status status="FAIL" starttime="20250702 06:02:28.250" endtime="20250702 06:02:30.736">HTTPError: 400 Client Error: Bad Request for url: http://localhost:8000/auth/login</status>
+</test>
+<test id="s1-s1-s1-t2" name="Test Login Empacador" line="22">
+<kw name="Realizar Login API Como Empacador" library="auth_keywords">
+<var>${token}</var>
+<arg>${EMPACADOR_USERNAME}</arg>
+<arg>${EMPACADOR_PASSWORD}</arg>
+<doc>Realiza login como empacador via API</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:30.739" level="INFO">${login_data} = {'username': 'OSVALD0', 'password': 'empacador123'}</msg>
+<status status="PASS" starttime="20250702 06:02:30.738" endtime="20250702 06:02:30.739"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:31.102" level="INFO">POST Request : url=http://localhost:8000/auth/login 
+ path_url=/auth/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "OSVALD0", "password": "empacador123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:31.102" level="INFO">POST Response : url=http://localhost:8000/auth/login 
+ status=400, reason=Bad Request 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:30 GMT', 'server': 'uvicorn', 'content-length': '46', 'content-type': 'application/json'} 
+ body={"detail":"Usuario o contraseña incorrectos"} 
+ </msg>
+<msg timestamp="20250702 06:02:31.103" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: http://localhost:8000/auth/login</msg>
+<status status="FAIL" starttime="20250702 06:02:30.739" endtime="20250702 06:02:31.104"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:31.104" endtime="20250702 06:02:31.104"/>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:31.104" endtime="20250702 06:02:31.104"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:30.738" endtime="20250702 06:02:31.104"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${token}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:31.105" endtime="20250702 06:02:31.105"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Login empacador exitoso</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:31.105" endtime="20250702 06:02:31.105"/>
+</kw>
+<doc>Prueba login del empacador</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>empacador</tag>
+<status status="FAIL" starttime="20250702 06:02:30.737" endtime="20250702 06:02:31.105">HTTPError: 400 Client Error: Bad Request for url: http://localhost:8000/auth/login</status>
+</test>
+<kw name="Cleanup Test Environment" library="common" type="TEARDOWN">
+<doc>Limpieza después de las pruebas</doc>
+<kw name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20250702 06:02:31.108" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20250702 06:02:31.107" endtime="20250702 06:02:31.108"/>
+</kw>
+<status status="PASS" starttime="20250702 06:02:31.107" endtime="20250702 06:02:31.108"/>
+</kw>
+<doc>Pruebas básicas de API simplificadas</doc>
+<status status="FAIL" starttime="20250702 06:02:27.431" endtime="20250702 06:02:31.108"/>
+</suite>
+<suite id="s1-s1-s2" name="Test Auth Api" source="C:\Users\DANIEL\Documents\polleria\tests\api\test_auth_api.robot">
+<kw name="Setup Test Environment" library="common" type="SETUP">
+<doc>Configuración inicial para todas las pruebas</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:31.123" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:31.123" endtime="20250702 06:02:31.123"/>
+</kw>
+<status status="PASS" starttime="20250702 06:02:31.123" endtime="20250702 06:02:31.123"/>
+</kw>
+<test id="s1-s1-s2-t1" name="Prueba Login Admin Exitoso" line="9">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>email=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:31.124" level="INFO">${login_data} = {'email': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:31.124" endtime="20250702 06:02:31.124"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:33.478" level="INFO">POST Request : url=http://localhost:8000/auth/login 
+ path_url=/auth/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '42', 'Content-Type': 'application/json'} 
+ body=b'{"email": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:33.478" level="INFO">POST Response : url=http://localhost:8000/auth/login 
+ status=422, reason=Unprocessable Content 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:32 GMT', 'server': 'uvicorn', 'content-length': '128', 'content-type': 'application/json'} 
+ body={"detail":[{"type":"missing","loc":["body","username"],"msg":"Field required","input":{"email":"admin","password":"admin123"}}]} 
+ </msg>
+<msg timestamp="20250702 06:02:33.478" level="FAIL">HTTPError: 422 Client Error: Unprocessable Content for url: http://localhost:8000/auth/login</msg>
+<status status="FAIL" starttime="20250702 06:02:31.125" endtime="20250702 06:02:33.479"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:33.531" endtime="20250702 06:02:33.531"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:33.531" endtime="20250702 06:02:33.531"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>token_type</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:33.531" endtime="20250702 06:02:33.531"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${response.json()['token_type']}</arg>
+<arg>bearer</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:33.531" endtime="20250702 06:02:33.531"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Token obtenido: ${response.json()['access_token']}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:33.532" endtime="20250702 06:02:33.532"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Login de administrador exitoso</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:33.532" endtime="20250702 06:02:33.532"/>
+</kw>
+<doc>Verifica que el login del administrador funcione correctamente</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>positive</tag>
+<tag>smoke</tag>
+<status status="FAIL" starttime="20250702 06:02:31.124" endtime="20250702 06:02:33.532">HTTPError: 422 Client Error: Unprocessable Content for url: http://localhost:8000/auth/login</status>
+</test>
+<test id="s1-s1-s2-t2" name="Prueba Login Empacador Exitoso" line="24">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:33.534" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:33.534" endtime="20250702 06:02:33.534"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${EMPACADOR_USERNAME}</arg>
+<arg>password=${EMPACADOR_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:33.535" level="INFO">${login_data} = {'username': 'empleado', 'password': 'empleado123'}</msg>
+<status status="PASS" starttime="20250702 06:02:33.535" endtime="20250702 06:02:33.535"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:35.575" level="INFO">POST Request : url=http://localhost:8000/auth/login 
+ path_url=/auth/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "empleado", "password": "empleado123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:35.575" level="INFO">POST Response : url=http://localhost:8000/auth/login 
+ status=400, reason=Bad Request 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:34 GMT', 'server': 'uvicorn', 'content-length': '46', 'content-type': 'application/json'} 
+ body={"detail":"Usuario o contraseña incorrectos"} 
+ </msg>
+<msg timestamp="20250702 06:02:35.576" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: http://localhost:8000/auth/login</msg>
+<status status="FAIL" starttime="20250702 06:02:33.535" endtime="20250702 06:02:35.577"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:35.579" endtime="20250702 06:02:35.579"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:35.580" endtime="20250702 06:02:35.580"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>token_type</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:35.580" endtime="20250702 06:02:35.580"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${response.json()['token_type']}</arg>
+<arg>bearer</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:35.580" endtime="20250702 06:02:35.580"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Login de empacador exitoso</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:35.580" endtime="20250702 06:02:35.580"/>
+</kw>
+<doc>Verifica que el login del empacador funcione correctamente</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>positive</tag>
+<tag>smoke</tag>
+<status status="FAIL" starttime="20250702 06:02:33.534" endtime="20250702 06:02:35.581">HTTPError: 400 Client Error: Bad Request for url: http://localhost:8000/auth/login</status>
+</test>
+<test id="s1-s1-s2-t3" name="Prueba Login Con Credenciales Incorrectas" line="39">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:35.583" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:35.583" endtime="20250702 06:02:35.583"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=usuario_incorrecto</arg>
+<arg>password=password_incorrecto</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:35.584" level="INFO">${login_data} = {'username': 'usuario_incorrecto', 'password': 'password_incorrecto'}</msg>
+<status status="PASS" starttime="20250702 06:02:35.583" endtime="20250702 06:02:35.584"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/login</arg>
+<arg>json=${login_data}</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:37.654" level="INFO">POST Request : url=http://localhost:8000/auth/login 
+ path_url=/auth/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '69', 'Content-Type': 'application/json'} 
+ body=b'{"username": "usuario_incorrecto", "password": "password_incorrecto"}' 
+ </msg>
+<msg timestamp="20250702 06:02:37.654" level="INFO">POST Response : url=http://localhost:8000/auth/login 
+ status=400, reason=Bad Request 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:36 GMT', 'server': 'uvicorn', 'content-length': '46', 'content-type': 'application/json'} 
+ body={"detail":"Usuario o contraseña incorrectos"} 
+ </msg>
+<msg timestamp="20250702 06:02:37.654" level="FAIL">Url: http://localhost:8000/auth/login Expected status: 400 != 401</msg>
+<status status="FAIL" starttime="20250702 06:02:35.584" endtime="20250702 06:02:37.657"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:37.724" endtime="20250702 06:02:37.724"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>detail</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:37.730" endtime="20250702 06:02:37.730"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Login falló correctamente con credenciales incorrectas</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:37.822" endtime="20250702 06:02:37.822"/>
+</kw>
+<doc>Verifica que el login falle con credenciales incorrectas</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>negative</tag>
+<status status="FAIL" starttime="20250702 06:02:35.582" endtime="20250702 06:02:37.837">Url: http://localhost:8000/auth/login Expected status: 400 != 401</status>
+</test>
+<test id="s1-s1-s2-t4" name="Prueba Verificación De Token Válido" line="52">
+<kw name="Generar Token Admin" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el administrador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:37.840" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:37.839" endtime="20250702 06:02:37.840"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:37.840" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:37.840" endtime="20250702 06:02:37.840"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:39.893" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:39.893" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:39 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:39.893" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:37.841" endtime="20250702 06:02:39.894"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.894" endtime="20250702 06:02:39.894"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:02:39.899" endtime="20250702 06:02:39.899"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:37.839" endtime="20250702 06:02:39.899"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.901" endtime="20250702 06:02:39.901"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.901" endtime="20250702 06:02:39.901"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/verify-token</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.902" endtime="20250702 06:02:39.902"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.902" endtime="20250702 06:02:39.902"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.902" endtime="20250702 06:02:39.902"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>rol</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.902" endtime="20250702 06:02:39.902"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Token verificado correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:39.903" endtime="20250702 06:02:39.903"/>
+</kw>
+<doc>Verifica que se pueda validar un token correctamente</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>positive</tag>
+<status status="FAIL" starttime="20250702 06:02:37.839" endtime="20250702 06:02:39.903">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s2-t5" name="Prueba Verificación De Token Inválido" line="70">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:39.905" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:39.905" endtime="20250702 06:02:39.906"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer token_invalido</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:39.907" level="INFO">${headers} = {'Authorization': 'Bearer token_invalido'}</msg>
+<status status="PASS" starttime="20250702 06:02:39.906" endtime="20250702 06:02:39.907"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/verify-token</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:41.956" level="INFO">GET Request : url=http://localhost:8000/auth/verify-token 
+ path_url=/auth/verify-token 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer token_invalido'} 
+ body=None 
+ </msg>
+<msg timestamp="20250702 06:02:41.956" level="INFO">GET Response : url=http://localhost:8000/auth/verify-token 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:41 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:41.957" level="FAIL">Url: http://localhost:8000/auth/verify-token Expected status: 404 != 401</msg>
+<status status="FAIL" starttime="20250702 06:02:39.908" endtime="20250702 06:02:41.958"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:41.958" endtime="20250702 06:02:41.959"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Token inválido rechazado correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:41.959" endtime="20250702 06:02:41.959"/>
+</kw>
+<doc>Verifica que se rechacen tokens inválidos</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>negative</tag>
+<status status="FAIL" starttime="20250702 06:02:39.905" endtime="20250702 06:02:41.959">Url: http://localhost:8000/auth/verify-token Expected status: 404 != 401</status>
+</test>
+<test id="s1-s1-s2-t6" name="Prueba Obtener Información Del Usuario" line="82">
+<kw name="Generar Token Admin" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el administrador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:41.963" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:41.963" endtime="20250702 06:02:41.963"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:41.964" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:41.964" endtime="20250702 06:02:41.964"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:44.017" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:44.017" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:43 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:44.017" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:41.964" endtime="20250702 06:02:44.018"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.018" endtime="20250702 06:02:44.018"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:02:44.023" endtime="20250702 06:02:44.023"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:41.963" endtime="20250702 06:02:44.023"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.064" endtime="20250702 06:02:44.064"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.064" endtime="20250702 06:02:44.064"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/me</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.064" endtime="20250702 06:02:44.064"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.064" endtime="20250702 06:02:44.064"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.065" endtime="20250702 06:02:44.065"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.065" endtime="20250702 06:02:44.065"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>nombre</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.065" endtime="20250702 06:02:44.065"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>rol</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.065" endtime="20250702 06:02:44.065"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${response.json()['username']}</arg>
+<arg>${ADMIN_USERNAME}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.066" endtime="20250702 06:02:44.066"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Información del usuario obtenida correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:44.066" endtime="20250702 06:02:44.066"/>
+</kw>
+<doc>Verifica que se pueda obtener información del usuario autenticado</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>positive</tag>
+<status status="FAIL" starttime="20250702 06:02:41.961" endtime="20250702 06:02:44.066">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s2-t7" name="Prueba Acceso Sin Token" line="103">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:44.068" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:44.068" endtime="20250702 06:02:44.068"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/dashboard/admin/data</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:46.096" level="INFO">GET Request : url=http://localhost:8000/dashboard/admin/data 
+ path_url=/dashboard/admin/data 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250702 06:02:46.097" level="INFO">GET Response : url=http://localhost:8000/dashboard/admin/data 
+ status=401, reason=Unauthorized 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:45 GMT', 'server': 'uvicorn', 'www-authenticate': 'Bearer', 'content-length': '30', 'content-type': 'application/json'} 
+ body={"detail":"Not authenticated"} 
+ </msg>
+<msg timestamp="20250702 06:02:46.097" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<status status="PASS" starttime="20250702 06:02:44.069" endtime="20250702 06:02:46.097"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20250702 06:02:46.098" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20250702 06:02:46.098" endtime="20250702 06:02:46.099"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Acceso sin token rechazado correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:02:46.099" level="INFO">Acceso sin token rechazado correctamente</msg>
+<status status="PASS" starttime="20250702 06:02:46.099" endtime="20250702 06:02:46.099"/>
+</kw>
+<doc>Verifica que se rechace el acceso a endpoints protegidos sin token</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>negative</tag>
+<tag>security</tag>
+<status status="PASS" starttime="20250702 06:02:44.067" endtime="20250702 06:02:46.099"/>
+</test>
+<test id="s1-s1-s2-t8" name="Prueba Acceso Con Rol Incorrecto" line="114">
+<kw name="Generar Token Empacador" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el empacador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:46.102" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:46.102" endtime="20250702 06:02:46.102"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${EMPACADOR_USERNAME}</arg>
+<arg>password=${EMPACADOR_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:46.102" level="INFO">${login_data} = {'username': 'empleado', 'password': 'empleado123'}</msg>
+<status status="PASS" starttime="20250702 06:02:46.102" endtime="20250702 06:02:46.102"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:48.494" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "empleado", "password": "empleado123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:48.494" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:47 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:48.494" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:46.102" endtime="20250702 06:02:48.495"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:48.496" endtime="20250702 06:02:48.496"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:02:48.505" endtime="20250702 06:02:48.505"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:46.101" endtime="20250702 06:02:48.505"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:02:48.586" endtime="20250702 06:02:48.586"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:48.586" endtime="20250702 06:02:48.586"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/dashboard/admin/users</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=403</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:48.586" endtime="20250702 06:02:48.587"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>403</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:48.587" endtime="20250702 06:02:48.587"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Acceso con rol incorrecto rechazado correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:48.587" endtime="20250702 06:02:48.587"/>
+</kw>
+<doc>Verifica que se rechace el acceso con rol incorrecto</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>negative</tag>
+<tag>security</tag>
+<status status="FAIL" starttime="20250702 06:02:46.101" endtime="20250702 06:02:48.587">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<kw name="Cleanup Test Environment" library="common" type="TEARDOWN">
+<doc>Limpieza después de las pruebas</doc>
+<kw name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20250702 06:02:48.593" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20250702 06:02:48.593" endtime="20250702 06:02:48.594"/>
+</kw>
+<status status="PASS" starttime="20250702 06:02:48.593" endtime="20250702 06:02:48.594"/>
+</kw>
+<doc>Pruebas de API para autenticación</doc>
+<status status="FAIL" starttime="20250702 06:02:31.113" endtime="20250702 06:02:48.594"/>
+</suite>
+<suite id="s1-s1-s3" name="Test Auth Simple" source="C:\Users\DANIEL\Documents\polleria\tests\api\test_auth_simple.robot">
+<kw name="Setup Test Environment" library="common" type="SETUP">
+<doc>Configuración inicial para todas las pruebas</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:48.608" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:48.608" endtime="20250702 06:02:48.609"/>
+</kw>
+<status status="PASS" starttime="20250702 06:02:48.608" endtime="20250702 06:02:48.609"/>
+</kw>
+<test id="s1-s1-s3-t1" name="Login Admin Exitoso" line="8">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:48.610" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:48.609" endtime="20250702 06:02:48.610"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:50.997" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:50.997" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:50 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:50.997" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:48.610" endtime="20250702 06:02:50.999"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.000" endtime="20250702 06:02:51.000"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.000" endtime="20250702 06:02:51.000"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>token_type</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.001" endtime="20250702 06:02:51.001"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${response.json()['token_type']}</arg>
+<arg>bearer</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.002" endtime="20250702 06:02:51.002"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Token obtenido: ${response.json()['access_token']}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.002" endtime="20250702 06:02:51.002"/>
+</kw>
+<doc>Verifica que el login como administrador funcione correctamente</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>auth</tag>
+<status status="FAIL" starttime="20250702 06:02:48.609" endtime="20250702 06:02:51.003">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s3-t2" name="Login Empacador Exitoso" line="19">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${EMPACADOR_USERNAME}</arg>
+<arg>password=${EMPACADOR_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:51.007" level="INFO">${login_data} = {'username': 'empleado', 'password': 'empleado123'}</msg>
+<status status="PASS" starttime="20250702 06:02:51.006" endtime="20250702 06:02:51.007"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:51.010" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "empleado", "password": "empleado123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:51.010" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:50 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:51.010" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:51.007" endtime="20250702 06:02:51.011"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.014" endtime="20250702 06:02:51.014"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.015" endtime="20250702 06:02:51.015"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>token_type</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.015" endtime="20250702 06:02:51.015"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${response.json()['token_type']}</arg>
+<arg>bearer</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.016" endtime="20250702 06:02:51.016"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Token obtenido: ${response.json()['access_token']}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.016" endtime="20250702 06:02:51.016"/>
+</kw>
+<doc>Verifica que el login como empacador funcione correctamente</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>empacador</tag>
+<status status="FAIL" starttime="20250702 06:02:51.005" endtime="20250702 06:02:51.016">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s3-t3" name="Login Fallido Con Credenciales Incorrectas" line="30">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=usuario_falso</arg>
+<arg>password=password_falso</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:51.021" level="INFO">${login_data} = {'username': 'usuario_falso', 'password': 'password_falso'}</msg>
+<status status="PASS" starttime="20250702 06:02:51.020" endtime="20250702 06:02:51.021"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/login</arg>
+<arg>json=${login_data}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:51.035" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '59', 'Content-Type': 'application/json'} 
+ body=b'{"username": "usuario_falso", "password": "password_falso"}' 
+ </msg>
+<msg timestamp="20250702 06:02:51.035" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:50 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:51.035" level="FAIL">Url: http://localhost:8000/login Expected status: 404 != 400</msg>
+<status status="FAIL" starttime="20250702 06:02:51.021" endtime="20250702 06:02:51.037"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.039" endtime="20250702 06:02:51.039"/>
+</kw>
+<doc>Verifica que el login falle con credenciales incorrectas</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>negative</tag>
+<status status="FAIL" starttime="20250702 06:02:51.020" endtime="20250702 06:02:51.039">Url: http://localhost:8000/login Expected status: 404 != 400</status>
+</test>
+<test id="s1-s1-s3-t4" name="Acceso Sin Token" line="37">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/dashboard/admin/data</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:51.094" level="INFO">GET Request : url=http://localhost:8000/dashboard/admin/data 
+ path_url=/dashboard/admin/data 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250702 06:02:51.094" level="INFO">GET Response : url=http://localhost:8000/dashboard/admin/data 
+ status=401, reason=Unauthorized 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:50 GMT', 'server': 'uvicorn', 'www-authenticate': 'Bearer', 'content-length': '30', 'content-type': 'application/json'} 
+ body={"detail":"Not authenticated"} 
+ </msg>
+<msg timestamp="20250702 06:02:51.094" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<status status="PASS" starttime="20250702 06:02:51.079" endtime="20250702 06:02:51.094"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20250702 06:02:51.236" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20250702 06:02:51.235" endtime="20250702 06:02:51.236"/>
+</kw>
+<doc>Verifica que las rutas protegidas requieran token</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>security</tag>
+<status status="PASS" starttime="20250702 06:02:51.042" endtime="20250702 06:02:51.237"/>
+</test>
+<test id="s1-s1-s3-t5" name="Verificar Perfil Admin" line="43">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:51.240" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:51.239" endtime="20250702 06:02:51.240"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:51.264" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:51.264" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:51 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:51.264" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:51.240" endtime="20250702 06:02:51.265"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.408" endtime="20250702 06:02:51.408"/>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.409" endtime="20250702 06:02:51.409"/>
+</kw>
+<kw name="Get Auth Headers" library="common">
+<var>&amp;{headers}</var>
+<arg>${token}</arg>
+<doc>Retorna headers con autorización</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.409" endtime="20250702 06:02:51.409"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response2}</var>
+<arg>api</arg>
+<arg>/dashboard/admin/data</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.409" endtime="20250702 06:02:51.409"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response2.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.409" endtime="20250702 06:02:51.409"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response2.json()}</arg>
+<arg>info_cards</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.410" endtime="20250702 06:02:51.410"/>
+</kw>
+<doc>Verifica que se pueda acceder a datos protegidos del admin</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>profile</tag>
+<status status="FAIL" starttime="20250702 06:02:51.238" endtime="20250702 06:02:51.410">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s3-t6" name="Verificar Perfil Empacador" line="55">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${EMPACADOR_USERNAME}</arg>
+<arg>password=${EMPACADOR_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:51.412" level="INFO">${login_data} = {'username': 'empleado', 'password': 'empleado123'}</msg>
+<status status="PASS" starttime="20250702 06:02:51.412" endtime="20250702 06:02:51.412"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/login</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:51.427" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "empleado", "password": "empleado123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:51.427" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:51 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:51.427" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:51.412" endtime="20250702 06:02:51.428"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.446" endtime="20250702 06:02:51.446"/>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.447" endtime="20250702 06:02:51.447"/>
+</kw>
+<kw name="Get Auth Headers" library="common">
+<var>&amp;{headers}</var>
+<arg>${token}</arg>
+<doc>Retorna headers con autorización</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.447" endtime="20250702 06:02:51.447"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response2}</var>
+<arg>api</arg>
+<arg>/dashboard/empacador/data</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.447" endtime="20250702 06:02:51.447"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response2.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.447" endtime="20250702 06:02:51.447"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response2.json()}</arg>
+<arg>info_cards</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:51.448" endtime="20250702 06:02:51.448"/>
+</kw>
+<doc>Verifica que se pueda acceder a datos protegidos del empacador</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>empacador</tag>
+<tag>profile</tag>
+<status status="FAIL" starttime="20250702 06:02:51.411" endtime="20250702 06:02:51.448">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<kw name="Cleanup Test Environment" library="common" type="TEARDOWN">
+<doc>Limpieza después de las pruebas</doc>
+<kw name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20250702 06:02:51.471" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20250702 06:02:51.471" endtime="20250702 06:02:51.471"/>
+</kw>
+<status status="PASS" starttime="20250702 06:02:51.471" endtime="20250702 06:02:51.471"/>
+</kw>
+<doc>Pruebas básicas de API para autenticación</doc>
+<status status="FAIL" starttime="20250702 06:02:48.596" endtime="20250702 06:02:51.471"/>
+</suite>
+<suite id="s1-s1-s4" name="Test Inventario Api" source="C:\Users\DANIEL\Documents\polleria\tests\api\test_inventario_api.robot">
+<kw name="Verificar Estado Del Servidor" library="common" type="SETUP">
+<doc>Verifica que el servidor backend esté funcionando</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:51.505" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:51.505" endtime="20250702 06:02:51.506"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:53.789" level="INFO">GET Request : url=http://localhost:8000/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250702 06:02:53.789" level="INFO">GET Response : url=http://localhost:8000/ 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:53 GMT', 'server': 'uvicorn', 'content-length': '56', 'content-type': 'application/json'} 
+ body={"message":"Bienvenido a la API de Inventario Intrapod"} 
+ </msg>
+<msg timestamp="20250702 06:02:53.790" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20250702 06:02:51.506" endtime="20250702 06:02:53.790"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20250702 06:02:53.791" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20250702 06:02:53.790" endtime="20250702 06:02:53.791"/>
+</kw>
+<status status="PASS" starttime="20250702 06:02:51.505" endtime="20250702 06:02:53.791"/>
+</kw>
+<test id="s1-s1-s4-t1" name="Prueba Listar Inventario" line="11">
+<kw name="Generar Token Admin" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el administrador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:53.855" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:53.855" endtime="20250702 06:02:53.855"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:53.856" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:53.855" endtime="20250702 06:02:53.856"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:56.087" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:56.087" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:55 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:56.087" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:53.856" endtime="20250702 06:02:56.088"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.088" endtime="20250702 06:02:56.088"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:02:56.094" endtime="20250702 06:02:56.094"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:53.854" endtime="20250702 06:02:56.094"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.109" endtime="20250702 06:02:56.109"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.109" endtime="20250702 06:02:56.109"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/inventario/listar</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.109" endtime="20250702 06:02:56.109"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.109" endtime="20250702 06:02:56.109"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>inventario</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.110" endtime="20250702 06:02:56.110"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>isinstance($response.json()['inventario'], list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.110" endtime="20250702 06:02:56.110"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Lista de inventario obtenida correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:56.111" endtime="20250702 06:02:56.111"/>
+</kw>
+<doc>Verifica que se pueda obtener la lista del inventario</doc>
+<tag>api</tag>
+<tag>inventario</tag>
+<tag>positive</tag>
+<tag>smoke</tag>
+<status status="FAIL" starttime="20250702 06:02:53.791" endtime="20250702 06:02:56.111">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s4-t2" name="Prueba Crear Producto" line="26">
+<kw name="Generar Token Admin" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el administrador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:56.130" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:56.130" endtime="20250702 06:02:56.131"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:56.131" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:56.131" endtime="20250702 06:02:56.132"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:02:58.426" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:02:58.426" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:02:57 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:02:58.426" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:56.132" endtime="20250702 06:02:58.427"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.427" endtime="20250702 06:02:58.427"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:02:58.432" endtime="20250702 06:02:58.432"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:56.130" endtime="20250702 06:02:58.432"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.469" endtime="20250702 06:02:58.469"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.472" endtime="20250702 06:02:58.472"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response_data}</var>
+<arg>api</arg>
+<arg>/dashboard/admin/data</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.472" endtime="20250702 06:02:58.472"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${sucursales}</var>
+<arg>${response_data.json()}</arg>
+<arg>$.sucursales</arg>
+<status status="NOT RUN" starttime="20250702 06:02:58.479" endtime="20250702 06:02:58.479"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response_cat}</var>
+<arg>api</arg>
+<arg>/inventario/categorias</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.483" endtime="20250702 06:02:58.483"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${categorias}</var>
+<arg>${response_cat.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.537" endtime="20250702 06:02:58.538"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${producto_data}</var>
+<arg>nombre=Producto Test API</arg>
+<arg>descripcion=Descripción de prueba</arg>
+<arg>precio_compra=10.50</arg>
+<arg>precio_venta=15.75</arg>
+<arg>stock_inicial=7</arg>
+<arg>id_sucursal=${sucursales[0][0]['id']}</arg>
+<arg>id_categoria=${categorias[0]['id']}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.632" endtime="20250702 06:02:58.632"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/inventario/crear</arg>
+<arg>json=${producto_data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:58.991" endtime="20250702 06:02:58.992"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:59.370" endtime="20250702 06:02:59.370"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:59.389" endtime="20250702 06:02:59.389"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>producto_id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:59.400" endtime="20250702 06:02:59.400"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${TEST_PRODUCTO_ID}</arg>
+<arg>${response.json()['producto_id']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:59.400" endtime="20250702 06:02:59.400"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Producto creado exitosamente con ID: ${TEST_PRODUCTO_ID}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:02:59.400" endtime="20250702 06:02:59.400"/>
+</kw>
+<doc>Verifica que se pueda crear un nuevo producto</doc>
+<tag>api</tag>
+<tag>crud</tag>
+<tag>inventario</tag>
+<tag>positive</tag>
+<status status="FAIL" starttime="20250702 06:02:56.129" endtime="20250702 06:02:59.401">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s4-t3" name="Prueba Obtener Categorías" line="61">
+<kw name="Generar Token Admin" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el administrador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:02:59.403" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:02:59.403" endtime="20250702 06:02:59.403"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:02:59.403" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:02:59.403" endtime="20250702 06:02:59.403"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:03:01.610" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:03:01.610" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:03:01 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:03:01.610" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:02:59.404" endtime="20250702 06:03:01.611"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.611" endtime="20250702 06:03:01.611"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:03:01.617" endtime="20250702 06:03:01.617"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:02:59.402" endtime="20250702 06:03:01.617"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.627" endtime="20250702 06:03:01.627"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.627" endtime="20250702 06:03:01.627"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/inventario/categorias</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.628" endtime="20250702 06:03:01.628"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.629" endtime="20250702 06:03:01.629"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>isinstance($response.json(), list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.629" endtime="20250702 06:03:01.629"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>len($response.json()) &gt; 0</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.630" endtime="20250702 06:03:01.630"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${categoria}</var>
+<arg>${response.json()[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.630" endtime="20250702 06:03:01.630"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${categoria}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.631" endtime="20250702 06:03:01.631"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${categoria}</arg>
+<arg>nombre</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.631" endtime="20250702 06:03:01.631"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Categorías obtenidas correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:01.631" endtime="20250702 06:03:01.631"/>
+</kw>
+<doc>Verifica que se puedan obtener las categorías</doc>
+<tag>api</tag>
+<tag>inventario</tag>
+<tag>positive</tag>
+<status status="FAIL" starttime="20250702 06:02:59.402" endtime="20250702 06:03:01.632">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s4-t4" name="Prueba Editar Producto" line="81">
+<kw name="Skip If" library="BuiltIn" type="SETUP">
+<arg>'${TEST_PRODUCTO_ID}' == '${EMPTY}'</arg>
+<arg>No hay producto de prueba creado</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<msg timestamp="20250702 06:03:02.080" level="SKIP">No hay producto de prueba creado</msg>
+<status status="SKIP" starttime="20250702 06:03:02.050" endtime="20250702 06:03:02.080"/>
+</kw>
+<doc>Verifica que se pueda editar un producto existente</doc>
+<tag>api</tag>
+<tag>crud</tag>
+<tag>inventario</tag>
+<tag>positive</tag>
+<status status="SKIP" starttime="20250702 06:03:02.050" endtime="20250702 06:03:02.082">No hay producto de prueba creado</status>
+</test>
+<test id="s1-s1-s4-t5" name="Prueba Ajustar Stock" line="104">
+<kw name="Skip If" library="BuiltIn" type="SETUP">
+<arg>'${TEST_PRODUCTO_ID}' == '${EMPTY}'</arg>
+<arg>No hay producto de prueba creado</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<msg timestamp="20250702 06:03:02.085" level="SKIP">No hay producto de prueba creado</msg>
+<status status="SKIP" starttime="20250702 06:03:02.084" endtime="20250702 06:03:02.085"/>
+</kw>
+<doc>Verifica que se pueda ajustar el stock de un producto</doc>
+<tag>api</tag>
+<tag>inventario</tag>
+<tag>positive</tag>
+<status status="SKIP" starttime="20250702 06:03:02.084" endtime="20250702 06:03:02.100">No hay producto de prueba creado</status>
+</test>
+<test id="s1-s1-s4-t6" name="Prueba Eliminar Producto" line="124">
+<kw name="Skip If" library="BuiltIn" type="SETUP">
+<arg>'${TEST_PRODUCTO_ID}' == '${EMPTY}'</arg>
+<arg>No hay producto de prueba creado</arg>
+<doc>Skips the rest of the current test if the ``condition`` is True.</doc>
+<msg timestamp="20250702 06:03:02.110" level="SKIP">No hay producto de prueba creado</msg>
+<status status="SKIP" starttime="20250702 06:03:02.102" endtime="20250702 06:03:02.110"/>
+</kw>
+<doc>Verifica que se pueda eliminar un producto</doc>
+<tag>api</tag>
+<tag>cleanup</tag>
+<tag>crud</tag>
+<tag>inventario</tag>
+<tag>positive</tag>
+<status status="SKIP" starttime="20250702 06:03:02.101" endtime="20250702 06:03:02.110">No hay producto de prueba creado</status>
+</test>
+<test id="s1-s1-s4-t7" name="Prueba Crear Producto Con Datos Inválidos" line="143">
+<kw name="Generar Token Admin" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el administrador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:03:02.116" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:03:02.115" endtime="20250702 06:03:02.116"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${ADMIN_USERNAME}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:03:02.117" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:03:02.116" endtime="20250702 06:03:02.117"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:03:04.513" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:03:04.513" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:03:04 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:03:04.513" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:03:02.117" endtime="20250702 06:03:04.514"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:04.514" endtime="20250702 06:03:04.514"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:03:04.518" endtime="20250702 06:03:04.518"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:03:02.114" endtime="20250702 06:03:04.518"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:03:04.521" endtime="20250702 06:03:04.521"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:04.521" endtime="20250702 06:03:04.521"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${producto_data}</var>
+<arg>descripcion=Descripción sin nombre</arg>
+<arg>precio_compra=10.50</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:04.521" endtime="20250702 06:03:04.521"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/inventario/crear</arg>
+<arg>json=${producto_data}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:04.521" endtime="20250702 06:03:04.521"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:04.522" endtime="20250702 06:03:04.522"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Creación de producto con datos inválidos rechazada correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:04.522" endtime="20250702 06:03:04.522"/>
+</kw>
+<doc>Verifica que se rechace la creación de productos con datos inválidos</doc>
+<tag>api</tag>
+<tag>inventario</tag>
+<tag>negative</tag>
+<status status="FAIL" starttime="20250702 06:03:02.114" endtime="20250702 06:03:04.522">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<test id="s1-s1-s4-t8" name="Prueba Acceso Empacador A Inventario" line="162">
+<kw name="Generar Token Empacador" library="common">
+<var>${token}</var>
+<doc>Genera un token de autenticación para el empacador</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:03:04.527" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:03:04.527" endtime="20250702 06:03:04.527"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=${EMPACADOR_USERNAME}</arg>
+<arg>password=${EMPACADOR_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:03:04.528" level="INFO">${login_data} = {'username': 'empleado', 'password': 'empleado123'}</msg>
+<status status="PASS" starttime="20250702 06:03:04.528" endtime="20250702 06:03:04.528"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>${LOGIN_URL}</arg>
+<arg>json=${login_data}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:03:06.708" level="INFO">POST Request : url=http://localhost:8000/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "empleado", "password": "empleado123"}' 
+ </msg>
+<msg timestamp="20250702 06:03:06.708" level="INFO">POST Response : url=http://localhost:8000/login 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Jul 2025 10:03:06 GMT', 'server': 'uvicorn', 'content-length': '22', 'content-type': 'application/json'} 
+ body={"detail":"Not Found"} 
+ </msg>
+<msg timestamp="20250702 06:03:06.708" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</msg>
+<status status="FAIL" starttime="20250702 06:03:04.528" endtime="20250702 06:03:06.709"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:06.709" endtime="20250702 06:03:06.710"/>
+</kw>
+<kw name="Get Value From Json">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>$.access_token</arg>
+<status status="NOT RUN" starttime="20250702 06:03:06.714" endtime="20250702 06:03:06.714"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:03:04.526" endtime="20250702 06:03:06.715"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_URL}</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20250702 06:03:06.716" endtime="20250702 06:03:06.716"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:06.717" endtime="20250702 06:03:06.717"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/inventario/listar</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:06.717" endtime="20250702 06:03:06.717"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:06.717" endtime="20250702 06:03:06.717"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()}</arg>
+<arg>inventario</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:06.717" endtime="20250702 06:03:06.717"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Empacador puede acceder al inventario correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:06.718" endtime="20250702 06:03:06.718"/>
+</kw>
+<doc>Verifica que el empacador pueda acceder al inventario</doc>
+<tag>api</tag>
+<tag>inventario</tag>
+<tag>positive</tag>
+<tag>roles</tag>
+<status status="FAIL" starttime="20250702 06:03:04.525" endtime="20250702 06:03:06.718">HTTPError: 404 Client Error: Not Found for url: http://localhost:8000/login</status>
+</test>
+<doc>Pruebas de API para inventario</doc>
+<status status="FAIL" starttime="20250702 06:02:51.473" endtime="20250702 06:03:06.724"/>
+</suite>
+<suite id="s1-s1-s5" name="Test Inventario Basico" source="C:\Users\DANIEL\Documents\polleria\tests\api\test_inventario_basico.robot">
+<kw name="Setup Test Environment" type="SETUP">
+<msg timestamp="20250702 06:03:06.735" level="FAIL">No keyword with name 'Setup Test Environment' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:06.735" endtime="20250702 06:03:06.735"/>
+</kw>
+<test id="s1-s1-s5-t1" name="Test Obtener Productos Admin" line="9">
+<doc>Prueba obtener productos como admin</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>inventario</tag>
+<status status="FAIL" starttime="20250702 06:03:06.736" endtime="20250702 06:03:06.749">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s5-t2" name="Test Obtener Productos Empacador" line="25">
+<doc>Prueba obtener productos como empacador</doc>
+<tag>api</tag>
+<tag>empacador</tag>
+<tag>inventario</tag>
+<status status="FAIL" starttime="20250702 06:03:06.751" endtime="20250702 06:03:06.764">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s5-t3" name="Test Acceso Inventario Sin Token" line="41">
+<doc>Prueba acceso a inventario sin token</doc>
+<tag>api</tag>
+<tag>inventario</tag>
+<tag>security</tag>
+<status status="FAIL" starttime="20250702 06:03:06.774" endtime="20250702 06:03:06.783">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<kw name="Cleanup Test Environment" type="TEARDOWN">
+<msg timestamp="20250702 06:03:06.793" level="FAIL">No keyword with name 'Cleanup Test Environment' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:06.793" endtime="20250702 06:03:06.794">No keyword with name 'Cleanup Test Environment' found.</status>
+</kw>
+<doc>Pruebas básicas de inventario</doc>
+<status status="FAIL" starttime="20250702 06:03:06.726" endtime="20250702 06:03:06.794">Suite setup failed:
+No keyword with name 'Setup Test Environment' found.
+
+Also suite teardown failed:
+No keyword with name 'Cleanup Test Environment' found.</status>
+</suite>
+<suite id="s1-s1-s6" name="Test Ventas Api" source="C:\Users\DANIEL\Documents\polleria\tests\api\test_ventas_api.robot">
+<kw name="Setup Test Environment" type="SETUP">
+<msg timestamp="20250702 06:03:06.814" level="FAIL">No keyword with name 'Setup Test Environment' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:06.814" endtime="20250702 06:03:06.814"/>
+</kw>
+<test id="s1-s1-s6-t1" name="Admin Puede Obtener Lista De Ventas" line="16">
+<doc>Verifica que el admin pueda obtener la lista de ventas</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:06.814" endtime="20250702 06:03:06.815">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t2" name="Empacador Puede Obtener Lista De Ventas" line="24">
+<doc>Verifica que el empacador pueda obtener la lista de ventas</doc>
+<tag>api</tag>
+<tag>empacador</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:06.818" endtime="20250702 06:03:06.823">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t3" name="Admin Puede Crear Venta" line="32">
+<doc>Verifica que el admin pueda crear una nueva venta</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>crud</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:06.825" endtime="20250702 06:03:06.831">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t4" name="Empacador Puede Crear Venta" line="43">
+<doc>Verifica que el empacador pueda crear una nueva venta</doc>
+<tag>api</tag>
+<tag>crud</tag>
+<tag>empacador</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:06.834" endtime="20250702 06:03:06.835">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t5" name="Admin Puede Obtener Clientes" line="53">
+<doc>Verifica que el admin pueda obtener la lista de clientes</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>clientes</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:06.847" endtime="20250702 06:03:06.848">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t6" name="Empacador Puede Obtener Clientes" line="61">
+<doc>Verifica que el empacador pueda obtener la lista de clientes</doc>
+<tag>api</tag>
+<tag>clientes</tag>
+<tag>empacador</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:06.849" endtime="20250702 06:03:06.850">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t7" name="Admin Puede Obtener Productos Para Venta" line="69">
+<doc>Verifica que el admin pueda obtener productos disponibles para venta</doc>
+<tag>admin</tag>
+<tag>api</tag>
+<tag>productos</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:06.851" endtime="20250702 06:03:06.862">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t8" name="Empacador Puede Obtener Productos Para Venta" line="76">
+<doc>Verifica que el empacador pueda obtener productos disponibles para venta</doc>
+<tag>api</tag>
+<tag>empacador</tag>
+<tag>productos</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:07.046" endtime="20250702 06:03:07.067">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t9" name="Crear Venta Con Datos Inválidos" line="83">
+<doc>Verifica que la creación de venta falle con datos inválidos</doc>
+<tag>api</tag>
+<tag>negative</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:07.083" endtime="20250702 06:03:07.084">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t10" name="Crear Venta Sin Productos" line="92">
+<doc>Verifica que no se pueda crear una venta sin productos</doc>
+<tag>api</tag>
+<tag>negative</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:07.099" endtime="20250702 06:03:07.101">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t11" name="Acceso Sin Autenticación A Ventas" line="102">
+<doc>Verifica que las rutas de ventas requieran autenticación</doc>
+<tag>api</tag>
+<tag>security</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:07.112" endtime="20250702 06:03:07.113">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t12" name="Verificar Paridad De Funciones Entre Roles En Ventas" line="108">
+<doc>Verifica que ambos roles tengan las mismas funcionalidades en ventas</doc>
+<tag>api</tag>
+<tag>parity</tag>
+<tag>roles</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:07.119" endtime="20250702 06:03:07.127">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<test id="s1-s1-s6-t13" name="Verificar Estructura De Datos En Ventas" line="130">
+<doc>Verifica que la estructura de datos de ventas sea correcta</doc>
+<tag>api</tag>
+<tag>data</tag>
+<tag>structure</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:07.132" endtime="20250702 06:03:07.132">Parent suite setup failed:
+No keyword with name 'Setup Test Environment' found.</status>
+</test>
+<kw name="Cleanup Test Environment" type="TEARDOWN">
+<msg timestamp="20250702 06:03:07.136" level="FAIL">No keyword with name 'Cleanup Test Environment' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:07.136" endtime="20250702 06:03:07.136">No keyword with name 'Cleanup Test Environment' found.</status>
+</kw>
+<doc>Pruebas de API para ventas</doc>
+<status status="FAIL" starttime="20250702 06:03:06.800" endtime="20250702 06:03:07.136">Suite setup failed:
+No keyword with name 'Setup Test Environment' found.
+
+Also suite teardown failed:
+No keyword with name 'Cleanup Test Environment' found.</status>
+</suite>
+<status status="FAIL" starttime="20250702 06:02:27.424" endtime="20250702 06:03:07.156"/>
+</suite>
+<suite id="s1-s2" name="Suite Principal" source="C:\Users\DANIEL\Documents\polleria\tests\suite_principal.robot">
+<kw name="Configuración Inicial De Pruebas" type="SETUP">
+<doc>Configuración inicial para todas las pruebas</doc>
+<kw name="Log" library="BuiltIn">
+<arg>Iniciando suite de pruebas de Pollería Intrapod</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:07.168" level="INFO">Iniciando suite de pruebas de Pollería Intrapod</msg>
+<status status="PASS" starttime="20250702 06:03:07.167" endtime="20250702 06:03:07.168"/>
+</kw>
+<kw name="Verificar Estado Del Servidor">
+<msg timestamp="20250702 06:03:07.169" level="FAIL">No keyword with name 'Verificar Estado Del Servidor' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:07.169" endtime="20250702 06:03:07.169"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:03:07.167" endtime="20250702 06:03:07.169"/>
+</kw>
+<test id="s1-s2-t1" name="Verificar Conexión Al Servidor" line="18">
+<doc>Verifica que el servidor backend esté disponible</doc>
+<tag>connectivity</tag>
+<tag>setup</tag>
+<status status="FAIL" starttime="20250702 06:03:07.169" endtime="20250702 06:03:07.175">Parent suite setup failed:
+No keyword with name 'Verificar Estado Del Servidor' found.</status>
+</test>
+<test id="s1-s2-t2" name="Verificar Configuración De Base De Datos" line="23">
+<doc>Verifica que la base de datos esté configurada correctamente</doc>
+<tag>database</tag>
+<tag>setup</tag>
+<status status="FAIL" starttime="20250702 06:03:07.176" endtime="20250702 06:03:07.177">Parent suite setup failed:
+No keyword with name 'Verificar Estado Del Servidor' found.</status>
+</test>
+<kw name="Limpieza Final De Pruebas" type="TEARDOWN">
+<doc>Limpieza final después de todas las pruebas</doc>
+<kw name="Log" library="BuiltIn">
+<arg>Finalizando suite de pruebas de Pollería Intrapod</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:07.181" level="INFO">Finalizando suite de pruebas de Pollería Intrapod</msg>
+<status status="PASS" starttime="20250702 06:03:07.181" endtime="20250702 06:03:07.181"/>
+</kw>
+<kw name="Limpiar Datos De Prueba">
+<msg timestamp="20250702 06:03:07.182" level="FAIL">No keyword with name 'Limpiar Datos De Prueba' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:07.182" endtime="20250702 06:03:07.182"/>
+</kw>
+<status status="FAIL" starttime="20250702 06:03:07.181" endtime="20250702 06:03:07.183">No keyword with name 'Limpiar Datos De Prueba' found.</status>
+</kw>
+<doc>Suite principal para ejecutar todas las pruebas de la Pollería Intrapod</doc>
+<status status="FAIL" starttime="20250702 06:03:07.162" endtime="20250702 06:03:07.183">Suite setup failed:
+No keyword with name 'Verificar Estado Del Servidor' found.
+
+Also suite teardown failed:
+No keyword with name 'Limpiar Datos De Prueba' found.</status>
+</suite>
+<suite id="s1-s3" name="Test Conectividad" source="C:\Users\DANIEL\Documents\polleria\tests\test_conectividad.robot">
+<kw name="Create Session" library="RequestsLibrary" type="SETUP">
+<arg>api</arg>
+<arg>http://localhost:8000</arg>
+<arg>verify=False</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250702 06:03:07.196" level="INFO">Creating Session using : alias=api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250702 06:03:07.196" endtime="20250702 06:03:07.196"/>
+</kw>
+<test id="s1-s3-t1" name="Verificar Servidor Disponible" line="7">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:03:09.618" level="INFO">GET Request : url=http://localhost:8000/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250702 06:03:09.618" level="INFO">GET Response : url=http://localhost:8000/ 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 02 Jul 2025 10:03:08 GMT', 'server': 'uvicorn', 'content-length': '56', 'content-type': 'application/json'} 
+ body={"message":"Bienvenido a la API de Inventario Intrapod"} 
+ </msg>
+<msg timestamp="20250702 06:03:09.618" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20250702 06:03:07.198" endtime="20250702 06:03:09.618"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Status Code: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:09.620" level="INFO">Status Code: 200</msg>
+<status status="PASS" starttime="20250702 06:03:09.620" endtime="20250702 06:03:09.620"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:09.621" level="INFO">Response: {"message":"Bienvenido a la API de Inventario Intrapod"}</msg>
+<status status="PASS" starttime="20250702 06:03:09.620" endtime="20250702 06:03:09.621"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20250702 06:03:09.622" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20250702 06:03:09.622" endtime="20250702 06:03:09.622"/>
+</kw>
+<doc>Verifica que el servidor responda</doc>
+<status status="PASS" starttime="20250702 06:03:07.196" endtime="20250702 06:03:09.622"/>
+</test>
+<test id="s1-s3-t2" name="Probar Endpoint Login" line="14">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${login_data}</var>
+<arg>username=admin</arg>
+<arg>password=admin123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20250702 06:03:09.626" level="INFO">${login_data} = {'username': 'admin', 'password': 'admin123'}</msg>
+<status status="PASS" starttime="20250702 06:03:09.625" endtime="20250702 06:03:09.626"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>api</arg>
+<arg>/auth/login</arg>
+<arg>json=${login_data}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20250702 06:03:09.691" level="INFO">POST Request : url=http://localhost:8000/auth/login 
+ path_url=/auth/login 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '45', 'Content-Type': 'application/json'} 
+ body=b'{"username": "admin", "password": "admin123"}' 
+ </msg>
+<msg timestamp="20250702 06:03:09.691" level="INFO">POST Response : url=http://localhost:8000/auth/login 
+ status=400, reason=Bad Request 
+ headers={'date': 'Wed, 02 Jul 2025 10:03:08 GMT', 'server': 'uvicorn', 'content-length': '46', 'content-type': 'application/json'} 
+ body={"detail":"Usuario o contraseña incorrectos"} 
+ </msg>
+<msg timestamp="20250702 06:03:09.691" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20250702 06:03:09.664" endtime="20250702 06:03:09.691"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Status Code: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:09.694" level="INFO">Status Code: 400</msg>
+<status status="PASS" starttime="20250702 06:03:09.693" endtime="20250702 06:03:09.694"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:09.772" level="INFO">Response: {"detail":"Usuario o contraseña incorrectos"}</msg>
+<status status="PASS" starttime="20250702 06:03:09.771" endtime="20250702 06:03:09.772"/>
+</kw>
+<if>
+<branch type="IF" condition="${response.status_code} == 200">
+<kw name="Log" library="BuiltIn">
+<arg>✓ Login exitoso</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:09.773" endtime="20250702 06:03:09.773"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.json()}</arg>
+<arg>access_token</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" starttime="20250702 06:03:09.773" endtime="20250702 06:03:09.773"/>
+</kw>
+<status status="NOT RUN" starttime="20250702 06:03:09.772" endtime="20250702 06:03:09.773"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>✗ Login falló: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:09.773" level="INFO">✗ Login falló: {"detail":"Usuario o contraseña incorrectos"}</msg>
+<status status="PASS" starttime="20250702 06:03:09.773" endtime="20250702 06:03:09.773"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✗ Verifique que los usuarios estén creados en la base de datos</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:09.774" level="INFO">✗ Verifique que los usuarios estén creados en la base de datos</msg>
+<status status="PASS" starttime="20250702 06:03:09.774" endtime="20250702 06:03:09.774"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✗ Ejecute: python backend/scripts/crear_admin.py</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 06:03:09.774" level="INFO">✗ Ejecute: python backend/scripts/crear_admin.py</msg>
+<status status="PASS" starttime="20250702 06:03:09.774" endtime="20250702 06:03:09.774"/>
+</kw>
+<status status="PASS" starttime="20250702 06:03:09.773" endtime="20250702 06:03:09.774"/>
+</branch>
+<status status="PASS" starttime="20250702 06:03:09.772" endtime="20250702 06:03:09.774"/>
+</if>
+<doc>Prueba el endpoint de login</doc>
+<status status="PASS" starttime="20250702 06:03:09.624" endtime="20250702 06:03:09.774"/>
+</test>
+<doc>Prueba de conectividad básica</doc>
+<status status="PASS" starttime="20250702 06:03:07.191" endtime="20250702 06:03:09.775"/>
+</suite>
+<suite id="s1-s4" name="Ui" source="C:\Users\DANIEL\Documents\polleria\tests\ui">
+<suite id="s1-s4-s1" name="Test Auth Ui" source="C:\Users\DANIEL\Documents\polleria\tests\ui\test_auth_ui.robot">
+<kw name="Configurar Navegador" type="SETUP">
+<msg timestamp="20250702 06:03:09.807" level="FAIL">No keyword with name 'Configurar Navegador' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:09.807" endtime="20250702 06:03:09.807"/>
+</kw>
+<test id="s1-s4-s1-t1" name="Login Exitoso Como Administrador UI" line="9">
+<doc>Verifica el login exitoso como administrador en la interfaz</doc>
+<tag>admin</tag>
+<tag>auth</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:09.808" endtime="20250702 06:03:09.815">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t2" name="Login Exitoso Como Empacador UI" line="17">
+<doc>Verifica el login exitoso como empacador en la interfaz</doc>
+<tag>auth</tag>
+<tag>empacador</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:09.853" endtime="20250702 06:03:09.857">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t3" name="Login Fallido UI" line="25">
+<doc>Verifica que el login falle con credenciales incorrectas</doc>
+<tag>auth</tag>
+<tag>negative</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:09.909" endtime="20250702 06:03:09.937">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t4" name="Navegación Entre Páginas Admin" line="30">
+<doc>Verifica la navegación entre páginas para administrador</doc>
+<tag>admin</tag>
+<tag>navigation</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:09.956" endtime="20250702 06:03:10.095">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t5" name="Navegación Entre Páginas Empacador" line="57">
+<doc>Verifica la navegación entre páginas para empacador</doc>
+<tag>empacador</tag>
+<tag>navigation</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:11.873" endtime="20250702 06:03:11.901">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t6" name="Verificar Guards De Autenticación" line="79">
+<doc>Verifica que los guards de autenticación funcionen correctamente</doc>
+<tag>auth</tag>
+<tag>security</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:12.568" endtime="20250702 06:03:12.627">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t7" name="Logout Desde Diferentes Páginas" line="89">
+<doc>Verifica que el logout funcione desde cualquier página</doc>
+<tag>auth</tag>
+<tag>logout</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.472" endtime="20250702 06:03:13.491">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t8" name="Verificar Información De Usuario En Dashboard" line="105">
+<doc>Verifica que la información del usuario se muestre correctamente</doc>
+<tag>dashboard</tag>
+<tag>profile</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.615" endtime="20250702 06:03:13.636">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s1-t9" name="Verificar Redirección Basada En Rol" line="118">
+<doc>Verifica que los usuarios sean redirigidos al dashboard correcto</doc>
+<tag>auth</tag>
+<tag>redirect</tag>
+<tag>role</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.639" endtime="20250702 06:03:13.640">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<kw name="Cerrar Navegador" type="TEARDOWN">
+<msg timestamp="20250702 06:03:13.650" level="FAIL">No keyword with name 'Cerrar Navegador' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:13.650" endtime="20250702 06:03:13.650">No keyword with name 'Cerrar Navegador' found.</status>
+</kw>
+<doc>Pruebas de interfaz de usuario para autenticación</doc>
+<status status="FAIL" starttime="20250702 06:03:09.782" endtime="20250702 06:03:13.650">Suite setup failed:
+No keyword with name 'Configurar Navegador' found.
+
+Also suite teardown failed:
+No keyword with name 'Cerrar Navegador' found.</status>
+</suite>
+<suite id="s1-s4-s2" name="Test Inventario Ui" source="C:\Users\DANIEL\Documents\polleria\tests\ui\test_inventario_ui.robot">
+<kw name="Configurar Navegador" type="SETUP">
+<msg timestamp="20250702 06:03:13.673" level="FAIL">No keyword with name 'Configurar Navegador' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:13.673" endtime="20250702 06:03:13.673"/>
+</kw>
+<test id="s1-s4-s2-t1" name="Admin Puede Crear Producto Desde UI" line="16">
+<doc>Verifica que el admin pueda crear productos desde la interfaz</doc>
+<tag>admin</tag>
+<tag>crud</tag>
+<tag>inventario</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.673" endtime="20250702 06:03:13.674">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t2" name="Empacador Puede Crear Producto Desde UI" line="31">
+<doc>Verifica que el empacador pueda crear productos desde la interfaz</doc>
+<tag>crud</tag>
+<tag>empacador</tag>
+<tag>inventario</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.675" endtime="20250702 06:03:13.681">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t3" name="Admin Puede Editar Producto Desde UI" line="46">
+<doc>Verifica que el admin pueda editar productos desde la interfaz</doc>
+<tag>admin</tag>
+<tag>crud</tag>
+<tag>inventario</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.684" endtime="20250702 06:03:13.685">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t4" name="Empacador Puede Editar Producto Desde UI" line="68">
+<doc>Verifica que el empacador pueda editar productos desde la interfaz</doc>
+<tag>crud</tag>
+<tag>empacador</tag>
+<tag>inventario</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.686" endtime="20250702 06:03:13.687">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t5" name="Verificar Filtros De Inventario" line="79">
+<doc>Verifica que los filtros de inventario funcionen correctamente</doc>
+<tag>filters</tag>
+<tag>inventario</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.688" endtime="20250702 06:03:13.688">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t6" name="Admin Y Empacador Ven Mismos Elementos UI" line="94">
+<doc>Verifica que admin y empacador vean los mismos elementos en inventario</doc>
+<tag>inventario</tag>
+<tag>parity</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.692" endtime="20250702 06:03:13.698">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t7" name="Validación De Formulario Producto" line="116">
+<doc>Verifica que la validación del formulario funcione correctamente</doc>
+<tag>inventario</tag>
+<tag>ui</tag>
+<tag>validation</tag>
+<status status="FAIL" starttime="20250702 06:03:13.709" endtime="20250702 06:03:13.722">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t8" name="Verificar Stock En Tabla" line="131">
+<doc>Verifica que el stock se muestre correctamente en la tabla</doc>
+<tag>inventario</tag>
+<tag>stock</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.739" endtime="20250702 06:03:13.739">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t9" name="Verificar Responsive Design Inventario" line="143">
+<doc>Verifica que la página de inventario sea responsive</doc>
+<tag>inventario</tag>
+<tag>responsive</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.741" endtime="20250702 06:03:13.741">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s2-t10" name="Verificar Paginación En Inventario" line="158">
+<doc>Verifica que la paginación funcione correctamente</doc>
+<tag>inventario</tag>
+<tag>pagination</tag>
+<tag>ui</tag>
+<status status="FAIL" starttime="20250702 06:03:13.758" endtime="20250702 06:03:13.758">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<kw name="Cerrar Navegador" type="TEARDOWN">
+<msg timestamp="20250702 06:03:13.767" level="FAIL">No keyword with name 'Cerrar Navegador' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:13.767" endtime="20250702 06:03:13.767">No keyword with name 'Cerrar Navegador' found.</status>
+</kw>
+<doc>Pruebas de interfaz de usuario para inventario</doc>
+<status status="FAIL" starttime="20250702 06:03:13.656" endtime="20250702 06:03:13.767">Suite setup failed:
+No keyword with name 'Configurar Navegador' found.
+
+Also suite teardown failed:
+No keyword with name 'Cerrar Navegador' found.</status>
+</suite>
+<suite id="s1-s4-s3" name="Test Ventas Ui" source="C:\Users\DANIEL\Documents\polleria\tests\ui\test_ventas_ui.robot">
+<kw name="Configurar Navegador" type="SETUP">
+<msg timestamp="20250702 06:03:13.804" level="FAIL">No keyword with name 'Configurar Navegador' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:13.804" endtime="20250702 06:03:13.804"/>
+</kw>
+<test id="s1-s4-s3-t1" name="Admin Puede Crear Venta Desde UI" line="10">
+<doc>Verifica que el admin pueda crear ventas desde la interfaz</doc>
+<tag>admin</tag>
+<tag>crud</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.804" endtime="20250702 06:03:13.805">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t2" name="Empacador Puede Crear Venta Desde UI" line="25">
+<doc>Verifica que el empacador pueda crear ventas desde la interfaz</doc>
+<tag>crud</tag>
+<tag>empacador</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.806" endtime="20250702 06:03:13.809">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t3" name="Admin Puede Ver Detalle De Venta" line="40">
+<doc>Verifica que el admin pueda ver el detalle de las ventas</doc>
+<tag>admin</tag>
+<tag>detail</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.816" endtime="20250702 06:03:13.816">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t4" name="Empacador Puede Ver Detalle De Venta" line="62">
+<doc>Verifica que el empacador pueda ver el detalle de las ventas</doc>
+<tag>detail</tag>
+<tag>empacador</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.817" endtime="20250702 06:03:13.819">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t5" name="Verificar Filtros De Fecha En Ventas" line="73">
+<doc>Verifica que los filtros de fecha funcionen correctamente</doc>
+<tag>filters</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.821" endtime="20250702 06:03:13.822">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t6" name="Admin Y Empacador Ven Mismos Elementos UI En Ventas" line="87">
+<doc>Verifica que admin y empacador vean los mismos elementos en ventas</doc>
+<tag>parity</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.823" endtime="20250702 06:03:13.824">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t7" name="Verificar Datos De Cliente Y Sucursal En Tabla" line="113">
+<doc>Verifica que se muestren nombres de cliente y sucursal, no solo IDs</doc>
+<tag>data</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.833" endtime="20250702 06:03:13.833">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t8" name="Validación De Formulario Venta" line="129">
+<doc>Verifica que la validación del formulario de venta funcione</doc>
+<tag>ui</tag>
+<tag>validation</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.834" endtime="20250702 06:03:13.835">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t9" name="Verificar Cálculo De Total En Modal" line="144">
+<doc>Verifica que el cálculo del total se actualice correctamente</doc>
+<tag>calculation</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.836" endtime="20250702 06:03:13.836">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t10" name="Verificar Responsive Design Ventas" line="165">
+<doc>Verifica que la página de ventas sea responsive</doc>
+<tag>responsive</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.839" endtime="20250702 06:03:13.841">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t11" name="Verificar Eliminación De Venta" line="180">
+<doc>Verifica que se pueda eliminar una venta con confirmación</doc>
+<tag>delete</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.842" endtime="20250702 06:03:13.842">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<test id="s1-s4-s3-t12" name="Verificar Permisos Iguales Entre Roles" line="204">
+<doc>Verifica que ambos roles tengan los mismos permisos en ventas</doc>
+<tag>permissions</tag>
+<tag>ui</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 06:03:13.852" endtime="20250702 06:03:13.853">Parent suite setup failed:
+No keyword with name 'Configurar Navegador' found.</status>
+</test>
+<kw name="Cerrar Navegador" type="TEARDOWN">
+<msg timestamp="20250702 06:03:13.856" level="FAIL">No keyword with name 'Cerrar Navegador' found.</msg>
+<status status="FAIL" starttime="20250702 06:03:13.856" endtime="20250702 06:03:13.856">No keyword with name 'Cerrar Navegador' found.</status>
+</kw>
+<doc>Pruebas de interfaz de usuario para ventas</doc>
+<status status="FAIL" starttime="20250702 06:03:13.770" endtime="20250702 06:03:13.856">Suite setup failed:
+No keyword with name 'Configurar Navegador' found.
+
+Also suite teardown failed:
+No keyword with name 'Cerrar Navegador' found.</status>
+</suite>
+<status status="FAIL" starttime="20250702 06:03:09.777" endtime="20250702 06:03:13.866"/>
+</suite>
+<status status="FAIL" starttime="20250702 06:02:27.363" endtime="20250702 06:03:13.869"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="68" skip="3">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="14" skip="0">admin</stat>
+<stat pass="2" fail="35" skip="3">api</stat>
+<stat pass="2" fail="20" skip="0">auth</stat>
+<stat pass="0" fail="1" skip="0">calculation</stat>
+<stat pass="0" fail="0" skip="1">cleanup</stat>
+<stat pass="0" fail="2" skip="0">clientes</stat>
+<stat pass="0" fail="1" skip="0">connectivity</stat>
+<stat pass="0" fail="9" skip="2">crud</stat>
+<stat pass="0" fail="1" skip="0">dashboard</stat>
+<stat pass="0" fail="2" skip="0">data</stat>
+<stat pass="0" fail="1" skip="0">database</stat>
+<stat pass="0" fail="1" skip="0">delete</stat>
+<stat pass="0" fail="2" skip="0">detail</stat>
+<stat pass="0" fail="14" skip="0">empacador</stat>
+<stat pass="0" fail="2" skip="0">filters</stat>
+<stat pass="0" fail="18" skip="3">inventario</stat>
+<stat pass="0" fail="1" skip="0">logout</stat>
+<stat pass="0" fail="2" skip="0">navigation</stat>
+<stat pass="1" fail="8" skip="0">negative</stat>
+<stat pass="0" fail="1" skip="0">pagination</stat>
+<stat pass="0" fail="3" skip="0">parity</stat>
+<stat pass="0" fail="1" skip="0">permissions</stat>
+<stat pass="0" fail="8" skip="3">positive</stat>
+<stat pass="0" fail="2" skip="0">productos</stat>
+<stat pass="0" fail="3" skip="0">profile</stat>
+<stat pass="0" fail="1" skip="0">redirect</stat>
+<stat pass="0" fail="2" skip="0">responsive</stat>
+<stat pass="0" fail="1" skip="0">role</stat>
+<stat pass="0" fail="2" skip="0">roles</stat>
+<stat pass="2" fail="4" skip="0">security</stat>
+<stat pass="0" fail="2" skip="0">setup</stat>
+<stat pass="0" fail="3" skip="0">smoke</stat>
+<stat pass="0" fail="1" skip="0">stock</stat>
+<stat pass="0" fail="1" skip="0">structure</stat>
+<stat pass="0" fail="31" skip="0">ui</stat>
+<stat pass="0" fail="2" skip="0">validation</stat>
+<stat pass="0" fail="25" skip="0">ventas</stat>
+</tag>
+<suite>
+<stat pass="4" fail="68" skip="3" id="s1" name="Tests">Tests</stat>
+<stat pass="2" fail="35" skip="3" id="s1-s1" name="Api">Tests.Api</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s1-s1" name="Test Api Basica">Tests.Api.Test Api Basica</stat>
+<stat pass="1" fail="7" skip="0" id="s1-s1-s2" name="Test Auth Api">Tests.Api.Test Auth Api</stat>
+<stat pass="1" fail="5" skip="0" id="s1-s1-s3" name="Test Auth Simple">Tests.Api.Test Auth Simple</stat>
+<stat pass="0" fail="5" skip="3" id="s1-s1-s4" name="Test Inventario Api">Tests.Api.Test Inventario Api</stat>
+<stat pass="0" fail="3" skip="0" id="s1-s1-s5" name="Test Inventario Basico">Tests.Api.Test Inventario Basico</stat>
+<stat pass="0" fail="13" skip="0" id="s1-s1-s6" name="Test Ventas Api">Tests.Api.Test Ventas Api</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s2" name="Suite Principal">Tests.Suite Principal</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s3" name="Test Conectividad">Tests.Test Conectividad</stat>
+<stat pass="0" fail="31" skip="0" id="s1-s4" name="Ui">Tests.Ui</stat>
+<stat pass="0" fail="9" skip="0" id="s1-s4-s1" name="Test Auth Ui">Tests.Ui.Test Auth Ui</stat>
+<stat pass="0" fail="10" skip="0" id="s1-s4-s2" name="Test Inventario Ui">Tests.Ui.Test Inventario Ui</stat>
+<stat pass="0" fail="12" skip="0" id="s1-s4-s3" name="Test Ventas Ui">Tests.Ui.Test Ventas Ui</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20250702 06:03:06.729" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\api\test_inventario_basico.robot' on line 3: Resource file '..\resources\common.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:06.731" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\api\test_inventario_basico.robot' on line 4: Resource file '..\keywords\auth_keywords.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:06.803" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\api\test_ventas_api.robot' on line 3: Resource file '..\resources\common.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:06.810" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\api\test_ventas_api.robot' on line 4: Resource file '..\keywords\auth_keywords.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:06.812" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\api\test_ventas_api.robot' on line 5: Resource file '..\keywords\ventas_keywords.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:09.785" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_auth_ui.robot' on line 3: Resource file '..\resources\common.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:09.802" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_auth_ui.robot' on line 4: Resource file '..\keywords\auth_keywords.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:13.658" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_inventario_ui.robot' on line 3: Resource file '..\resources\common.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:13.665" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_inventario_ui.robot' on line 4: Resource file '..\keywords\auth_keywords.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:13.668" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_inventario_ui.robot' on line 5: Resource file '..\keywords\inventario_keywords.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:13.772" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_ventas_ui.robot' on line 3: Resource file '..\resources\common.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:13.775" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_ventas_ui.robot' on line 4: Resource file '..\keywords\auth_keywords.robot' does not exist.</msg>
+<msg timestamp="20250702 06:03:13.788" level="ERROR">Error in file 'C:\Users\DANIEL\Documents\polleria\tests\ui\test_ventas_ui.robot' on line 5: Resource file '..\keywords\ventas_keywords.robot' does not exist.</msg>
+</errors>
+</robot>

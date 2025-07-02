@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `inventario_intrapod` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `inventario_intrapod`;
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: localhost    Database: inventario_intrapod
 -- ------------------------------------------------------
--- Server version	8.0.42
+-- Server version	5.5.5-10.4.32-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,14 +23,14 @@ DROP TABLE IF EXISTS `auditoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auditoria` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_usuario` int DEFAULT NULL,
-  `accion` text,
-  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) DEFAULT NULL,
+  `accion` text DEFAULT NULL,
+  `fecha` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `auditoria_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,11 +50,11 @@ DROP TABLE IF EXISTS `categorias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categorias` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,12 +75,12 @@ DROP TABLE IF EXISTS `compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `compra` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_usuario` int NOT NULL,
-  `id_sucursal` int NOT NULL,
-  `id_proveedor` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_sucursal` int(11) NOT NULL,
+  `id_proveedor` int(11) DEFAULT NULL,
   `total` decimal(10,2) DEFAULT NULL,
-  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_sucursal` (`id_sucursal`),
@@ -90,7 +88,7 @@ CREATE TABLE `compra` (
   CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursales` (`id`),
   CONSTRAINT `compra_ibfk_3` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,10 +109,10 @@ DROP TABLE IF EXISTS `detalle_compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detalle_compra` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_compra` int NOT NULL,
-  `id_producto` int NOT NULL,
-  `cantidad` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_compra` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
   `precio_unitario` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`),
@@ -122,7 +120,7 @@ CREATE TABLE `detalle_compra` (
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compra` (`id`),
   CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +129,7 @@ CREATE TABLE `detalle_compra` (
 
 LOCK TABLES `detalle_compra` WRITE;
 /*!40000 ALTER TABLE `detalle_compra` DISABLE KEYS */;
-INSERT INTO `detalle_compra` VALUES (1,1,1,2,3000.00,6000.00),(2,1,2,1,1200.00,1200.00),(3,1,3,4,500.00,2000.00);
+INSERT INTO `detalle_compra` VALUES (1,1,1,2,3000.00,6000.00),(2,1,2,1,1200.00,1200.00);
 /*!40000 ALTER TABLE `detalle_compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,17 +141,17 @@ DROP TABLE IF EXISTS `detalle_movimiento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detalle_movimiento` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_movimiento` int NOT NULL,
-  `id_producto` int NOT NULL,
-  `cantidad` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_movimiento` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
   `precio_unitario` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_movimiento` (`id_movimiento`),
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `detalle_movimiento_ibfk_1` FOREIGN KEY (`id_movimiento`) REFERENCES `movimientos` (`id`),
   CONSTRAINT `detalle_movimiento_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +160,7 @@ CREATE TABLE `detalle_movimiento` (
 
 LOCK TABLES `detalle_movimiento` WRITE;
 /*!40000 ALTER TABLE `detalle_movimiento` DISABLE KEYS */;
-INSERT INTO `detalle_movimiento` VALUES (1,1,1,10,3000.00),(2,1,2,5,1200.00),(3,1,3,8,500.00),(4,2,1,1,3500.00),(5,2,2,1,1500.00);
+INSERT INTO `detalle_movimiento` VALUES (1,1,1,10,3000.00),(2,1,2,5,1200.00),(4,2,1,1,3500.00),(5,2,2,1,1500.00);
 /*!40000 ALTER TABLE `detalle_movimiento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,10 +172,10 @@ DROP TABLE IF EXISTS `detalle_venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detalle_venta` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_venta` int NOT NULL,
-  `id_producto` int NOT NULL,
-  `cantidad` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_venta` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
   `precio_unitario` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`),
@@ -185,7 +183,7 @@ CREATE TABLE `detalle_venta` (
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id`),
   CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +192,7 @@ CREATE TABLE `detalle_venta` (
 
 LOCK TABLES `detalle_venta` WRITE;
 /*!40000 ALTER TABLE `detalle_venta` DISABLE KEYS */;
-INSERT INTO `detalle_venta` VALUES (1,1,1,1,3500.00,3500.00),(2,2,2,1,1500.00,1500.00);
+INSERT INTO `detalle_venta` VALUES (1,1,1,1,3500.00,3500.00),(2,2,2,1,1500.00,1500.00),(14,4,2,11,1500.00,16500.00),(15,4,1,5,3500.00,17500.00),(16,6,1,3,3500.00,10500.00),(17,7,1,4,3500.00,14000.00),(18,7,11,6,4353.00,26118.00),(19,7,10,4,30000.00,120000.00),(23,11,1,2,3500.00,7000.00),(24,15,10,7,30000.00,210000.00),(26,21,2,8,1500.00,12000.00),(28,23,10,7,30000.00,210000.00),(29,23,2,5,1500.00,7500.00),(30,24,1,3,3500.00,10500.00),(31,24,10,3,30000.00,90000.00);
 /*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,16 +204,16 @@ DROP TABLE IF EXISTS `inventario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inventario` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_producto` int NOT NULL,
-  `id_sucursal` int NOT NULL,
-  `stock` int DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_producto` int(11) NOT NULL,
+  `id_sucursal` int(11) NOT NULL,
+  `stock` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id_producto` (`id_producto`),
   KEY `id_sucursal` (`id_sucursal`),
   CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
   CONSTRAINT `inventario_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursales` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +222,7 @@ CREATE TABLE `inventario` (
 
 LOCK TABLES `inventario` WRITE;
 /*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
-INSERT INTO `inventario` VALUES (1,1,1,10),(2,2,1,19),(3,3,1,8);
+INSERT INTO `inventario` VALUES (1,1,1,2),(2,2,1,17),(10,10,1,16),(11,11,1,11),(12,12,1,7),(13,13,1,7);
 /*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,13 +234,13 @@ DROP TABLE IF EXISTS `movimientos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `movimientos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_usuario` int NOT NULL,
-  `id_sucursal` int NOT NULL,
-  `id_proveedor` int DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_sucursal` int(11) NOT NULL,
+  `id_proveedor` int(11) DEFAULT NULL,
   `tipo` enum('entrada','salida','solicitud','transferencia','ajuste') NOT NULL,
-  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `observacion` text,
+  `fecha` timestamp NULL DEFAULT current_timestamp(),
+  `observacion` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_sucursal` (`id_sucursal`),
@@ -250,7 +248,7 @@ CREATE TABLE `movimientos` (
   CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `movimientos_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursales` (`id`),
   CONSTRAINT `movimientos_ibfk_3` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,20 +269,20 @@ DROP TABLE IF EXISTS `productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `productos` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
-  `descripcion` text,
+  `descripcion` text DEFAULT NULL,
   `marca` varchar(50) DEFAULT NULL,
   `modelo` varchar(50) DEFAULT NULL,
-  `id_categoria` int DEFAULT NULL,
+  `id_categoria` int(11) DEFAULT NULL,
   `precio_compra` decimal(10,2) NOT NULL,
   `precio_venta` decimal(10,2) NOT NULL,
-  `stock_minimo` int DEFAULT '0',
+  `stock_minimo` int(11) DEFAULT 0,
   `unidad` varchar(20) DEFAULT 'unidad',
   PRIMARY KEY (`id`),
   KEY `id_categoria` (`id_categoria`),
   CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,7 +291,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Refrigerador Samsung','Refrigerador de 2 puertas','Samsung','RS27T5200SR',1,3000.00,3500.00,2,'unidad'),(2,'Cocina Mabe','Cocina a gas 4 hornillas','Mabe','EM7640CFIS0',2,1200.00,1500.00,7,'unidad'),(3,'Microondas LG','Microondas digital 30L','LG','MS3042D',3,500.00,700.00,1,'unidad');
+INSERT INTO `productos` VALUES (1,'Refrigerador Samsung','Refrigerador de 2','Samsung','RS27T5200SR',1,3000.00,3500.00,6,'unidad'),(2,'Cocina Mabe','Cocina a gas 4 hornillas','Mabe','EM7640CFIS0',2,1200.00,1500.00,7,'unidad'),(10,'Microondas LG','50Kg 80 grados',NULL,NULL,3,20000.00,30000.00,28,'unidad'),(11,'Refrigerador Panasonic','Peso 50 Kg Almacena',NULL,NULL,2,400.00,4353.00,0,'unidad'),(12,'Microondas Sony','60 W',NULL,NULL,3,360.00,400.03,0,'unidad'),(13,'Refrigerador Mac','Mac Original 50 Kg 20 W',NULL,NULL,1,2000.00,4000.00,0,'unidad');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,13 +303,13 @@ DROP TABLE IF EXISTS `proveedores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proveedores` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `contacto` varchar(100) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `correo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,11 +330,11 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -357,12 +355,12 @@ DROP TABLE IF EXISTS `sucursales`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sucursales` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `ciudad` varchar(100) DEFAULT NULL,
-  `direccion` text,
+  `direccion` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,14 +381,14 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contraseña` text NOT NULL,
-  `id_rol` int NOT NULL,
-  `id_sucursal` int DEFAULT NULL,
-  `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_rol` int(11) NOT NULL,
+  `id_sucursal` int(11) DEFAULT NULL,
+  `fecha_creacion` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `correo` (`correo`),
@@ -398,7 +396,7 @@ CREATE TABLE `usuarios` (
   KEY `id_sucursal` (`id_sucursal`),
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id`),
   CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursales` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -407,7 +405,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Administrador','4DMIN','admin@intrapod.com','$2b$12$GFXbbiTDKrrnkRMYmsSFjeSL6R7A.vl7PLfZjYZcatSS2KFZSPAPC',1,1,'2025-06-25 05:55:32'),(2,'Cristian Daniel','DAN1E10','daniel@gmail.com','$2b$12$qQFpbXKEVZaxgukvbOnpMen1PyN9G7noUK.JJ/xQdLWgfj0Re2/tu',1,1,NULL),(3,'Jose Orlando','JOS3','jose@gmail.com','$2b$12$2F6pQR7qH1fgPwi.kdo0j.4eS5KhcOUR8nOe3T/YcYlhfifhXIL.q',2,1,NULL);
+INSERT INTO `usuarios` VALUES (1,'Administrador','admin3','admin@intrapod.com','$2b$12$RSNSSjHg/NAXie8wKBtMtuoBlx0FPleYExEnrMoOpcXRy4L8h6USW',1,1,'2025-06-25 05:55:32'),(2,'Cristian Daniel','DAN1E10','daniel@gmail.com','$2b$12$qQFpbXKEVZaxgukvbOnpMen1PyN9G7noUK.JJ/xQdLWgfj0Re2/tu',1,1,NULL),(6,'Jose Orlando','J0S3','jose@gmail.com','$2b$12$W1ICO9e/ae57e8aZWx4iwOBKNGzkpvAAtk/3See5F3ZoLCFnlHqjm',1,1,NULL),(8,'Osvaldo Merida','OSVALD0','osvlado@gmail.com','$2b$12$8c/oC.QNV4.XBrfxnZ93TOg/rgIthN9HYmbVzcDjtK4/uZxdHrn7q',2,1,NULL),(10,'Roberto Quispe','ROB3RT','robert@gmail.com','$2b$12$/KohyN0rv6gS162XkgWHd.ExHOavdvFCcRbIJ6/cI5hvZWPVdQgWm',2,1,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,18 +417,18 @@ DROP TABLE IF EXISTS `ventas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ventas` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_usuario` int NOT NULL,
-  `id_sucursal` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_sucursal` int(11) NOT NULL,
   `total` decimal(10,2) DEFAULT NULL,
-  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha` timestamp NULL DEFAULT current_timestamp(),
   `estado` enum('pendiente','entregado','cancelado') DEFAULT 'pendiente',
   PRIMARY KEY (`id`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_sucursal` (`id_sucursal`),
   CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursales` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,7 +437,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
-INSERT INTO `ventas` VALUES (1,1,1,3500.00,'2025-06-25 05:55:33','cancelado'),(2,1,1,1500.00,'2025-06-25 05:55:33','entregado');
+INSERT INTO `ventas` VALUES (1,1,1,3500.00,'2025-06-25 05:55:33','entregado'),(2,1,1,1500.00,'2025-06-25 05:55:33','cancelado'),(4,2,1,34000.00,'2025-07-01 23:13:18','pendiente'),(6,2,1,10500.00,'2025-07-01 23:13:21','entregado'),(7,2,1,160118.00,'2025-07-01 23:19:13','cancelado'),(11,6,1,7000.00,'2025-07-01 23:47:28','entregado'),(15,6,1,210000.00,'2025-07-01 23:53:14','pendiente'),(21,1,1,12000.00,'2025-07-01 23:55:03','pendiente'),(23,6,1,217500.00,'2025-07-02 07:33:40','entregado'),(24,2,1,100500.00,'2025-07-02 07:57:27','entregado');
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -452,4 +450,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-26 23:56:20
+-- Dump completed on 2025-07-02  5:41:50

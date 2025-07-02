@@ -1,0 +1,1827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.13.5 on win32)" generated="20250702 07:00:11.913" rpa="false" schemaversion="4">
+<suite id="s1" name="Tests" source="C:\Users\DANIEL\Documents\polleria\tests">
+<suite id="s1-s1" name="Debug Test" source="C:\Users\DANIEL\Documents\polleria\tests\debug_test.robot">
+<test id="s1-s1-t1" name="Debug - Inspeccionar Página Login" line="7">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:00:12.265" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:00:12.264" endtime="20250702 07:00:17.504"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250702 07:00:17.520" endtime="20250702 07:00:17.985"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:00:19.987" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:00:17.986" endtime="20250702 07:00:19.987"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>name=username</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:20.521" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-27.png"&gt;&lt;img src="selenium-screenshot-27.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:20.521" level="FAIL">Page should have contained element 'name=username' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:20.004" endtime="20250702 07:00:20.524"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>name=password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.540" endtime="20250702 07:00:20.540"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Campos de usuario y contraseña encontrados</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.542" endtime="20250702 07:00:20.542"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.542" endtime="20250702 07:00:20.542"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Botón de login encontrado</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.543" endtime="20250702 07:00:20.543"/>
+</kw>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.543" endtime="20250702 07:00:20.543"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Título de la página: ${title}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.543" endtime="20250702 07:00:20.543"/>
+</kw>
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.543" endtime="20250702 07:00:20.543"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>URL actual: ${url}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.543" endtime="20250702 07:00:20.544"/>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>Login</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.544" endtime="20250702 07:00:20.544"/>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>Iniciar</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.544" endtime="20250702 07:00:20.544"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Textos clave encontrados</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.544" endtime="20250702 07:00:20.544"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>debug_login_page.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.544" endtime="20250702 07:00:20.544"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" starttime="20250702 07:00:20.544" endtime="20250702 07:00:20.544"/>
+</kw>
+<doc>Abrir la página, validar campos clave y mostrar información útil</doc>
+<status status="FAIL" starttime="20250702 07:00:12.263" endtime="20250702 07:00:20.545">Page should have contained element 'name=username' but did not.</status>
+</test>
+<doc>Test de depuración para inspeccionar INTRAPOD</doc>
+<status status="FAIL" starttime="20250702 07:00:11.958" endtime="20250702 07:00:20.547"/>
+</suite>
+<suite id="s1-s2" name="Explorar Dashboard" source="C:\Users\DANIEL\Documents\polleria\tests\explorar_dashboard.robot">
+<test id="s1-s2-t1" name="Explorar Dashboard Y Enlaces" line="7">
+<kw name="Abrir Navegador" library="login_keywords_robusto">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:00:20.596" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:00:20.596" endtime="20250702 07:00:25.934"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250702 07:00:25.934" endtime="20250702 07:00:26.419"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:00:28.420" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:00:26.419" endtime="20250702 07:00:28.420"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:20.596" endtime="20250702 07:00:28.420"/>
+</kw>
+<kw name="Ir A Página De Login" library="login_keywords_robusto">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250702 07:00:28.421" level="INFO">Opening url 'http://127.0.0.1:5500/frontend/pages/login.html'</msg>
+<status status="PASS" starttime="20250702 07:00:28.421" endtime="20250702 07:00:28.507"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:00:28.507" endtime="20250702 07:00:28.749"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:00:28.749" endtime="20250702 07:00:28.761"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:28.421" endtime="20250702 07:00:28.761"/>
+</kw>
+<kw name="Ingresar Credenciales" library="login_keywords_robusto">
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>${usuario}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:00:28.764" level="INFO">Typing text 'DAN1E10' into text field 'id=username'.</msg>
+<status status="PASS" starttime="20250702 07:00:28.762" endtime="20250702 07:00:28.914"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>${clave}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:00:28.915" level="INFO">Typing text 'admin123' into text field 'id=password'.</msg>
+<status status="PASS" starttime="20250702 07:00:28.915" endtime="20250702 07:00:29.475"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20250702 07:00:29.475" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<status status="PASS" starttime="20250702 07:00:29.475" endtime="20250702 07:00:29.613"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:00:31.613" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:00:29.613" endtime="20250702 07:00:31.613"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:28.761" endtime="20250702 07:00:31.613"/>
+</kw>
+<kw name="Verificar Login Exitoso" library="login_keywords_robusto">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>INTRAPOD</arg>
+<arg>10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:00:31.624" endtime="20250702 07:00:32.354"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:31.622" endtime="20250702 07:00:32.354"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:00:35.355" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20250702 07:00:32.355" endtime="20250702 07:00:35.355"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>dashboard_completo.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20250702 07:00:36.856" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="dashboard_completo.png"&gt;&lt;img src="dashboard_completo.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20250702 07:00:35.371" endtime="20250702 07:00:36.856"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>=== EXPLORANDO ENLACES EN EL DASHBOARD ===</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:36.877" level="INFO">=== EXPLORANDO ENLACES EN EL DASHBOARD ===</msg>
+<status status="PASS" starttime="20250702 07:00:36.877" endtime="20250702 07:00:36.877"/>
+</kw>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${all_links}</var>
+<arg>xpath=//a</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<msg timestamp="20250702 07:00:36.915" level="INFO">${all_links} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="db08eaa48ed44ff7becc6374126def5d", element="f.D6D3EEB8CBDCA7226E64C8C5C2FFFF3C.d.D7DA68F5075739D3FD22E0288E46C121.e.81")&gt;, &lt;selenium.webdriv...</msg>
+<status status="PASS" starttime="20250702 07:00:36.877" endtime="20250702 07:00:36.915"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${link_count}</var>
+<arg>${all_links}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20250702 07:00:36.916" level="INFO">Length is 9</msg>
+<msg timestamp="20250702 07:00:36.916" level="INFO">${link_count} = 9</msg>
+<status status="PASS" starttime="20250702 07:00:36.915" endtime="20250702 07:00:36.916"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Total de enlaces encontrados: ${link_count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:36.916" level="INFO">Total de enlaces encontrados: 9</msg>
+<status status="PASS" starttime="20250702 07:00:36.916" endtime="20250702 07:00:36.916"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>=== PROBANDO TEXTOS DE ENLACES COMUNES ===</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:36.917" level="INFO">=== PROBANDO TEXTOS DE ENLACES COMUNES ===</msg>
+<status status="PASS" starttime="20250702 07:00:36.916" endtime="20250702 07:00:36.917"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${usuarios_texts}</var>
+<arg>Gestionar Usuarios</arg>
+<arg>Usuarios</arg>
+<arg>Users</arg>
+<arg>Administrar Usuarios</arg>
+<arg>Admin Usuarios</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20250702 07:00:36.917" level="INFO">${usuarios_texts} = ['Gestionar Usuarios', 'Usuarios', 'Users', 'Administrar Usuarios', 'Admin Usuarios']</msg>
+<status status="PASS" starttime="20250702 07:00:36.917" endtime="20250702 07:00:36.917"/>
+</kw>
+<for flavor="IN">
+<var>${text}</var>
+<value>@{usuarios_texts}</value>
+<iter>
+<var name="${text}">Gestionar Usuarios</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:37.947" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-28.png"&gt;&lt;img src="selenium-screenshot-28.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:37.947" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Gestionar Usuarios')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:36.918" endtime="20250702 07:00:37.948"/>
+</kw>
+<msg timestamp="20250702 07:00:37.949" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:36.917" endtime="20250702 07:00:37.949"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:37.949" level="INFO">Enlace 'Gestionar Usuarios': False</msg>
+<status status="PASS" starttime="20250702 07:00:37.949" endtime="20250702 07:00:37.949"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:36.917" endtime="20250702 07:00:37.949"/>
+</iter>
+<iter>
+<var name="${text}">Usuarios</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:41.112" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-29.png"&gt;&lt;img src="selenium-screenshot-29.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:41.113" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Usuarios')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:37.950" endtime="20250702 07:00:41.114"/>
+</kw>
+<msg timestamp="20250702 07:00:41.114" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:37.949" endtime="20250702 07:00:41.114"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:41.114" level="INFO">Enlace 'Usuarios': False</msg>
+<status status="PASS" starttime="20250702 07:00:41.114" endtime="20250702 07:00:41.114"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:37.949" endtime="20250702 07:00:41.114"/>
+</iter>
+<iter>
+<var name="${text}">Users</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:42.140" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-30.png"&gt;&lt;img src="selenium-screenshot-30.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:42.140" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Users')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:41.115" endtime="20250702 07:00:42.142"/>
+</kw>
+<msg timestamp="20250702 07:00:42.146" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:41.114" endtime="20250702 07:00:42.146"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:42.146" level="INFO">Enlace 'Users': False</msg>
+<status status="PASS" starttime="20250702 07:00:42.146" endtime="20250702 07:00:42.146"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:41.114" endtime="20250702 07:00:42.146"/>
+</iter>
+<iter>
+<var name="${text}">Administrar Usuarios</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:44.801" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-31.png"&gt;&lt;img src="selenium-screenshot-31.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:44.801" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Administrar Usuarios')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:42.147" endtime="20250702 07:00:44.802"/>
+</kw>
+<msg timestamp="20250702 07:00:44.803" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:42.146" endtime="20250702 07:00:44.803"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:44.803" level="INFO">Enlace 'Administrar Usuarios': False</msg>
+<status status="PASS" starttime="20250702 07:00:44.803" endtime="20250702 07:00:44.803"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:42.146" endtime="20250702 07:00:44.803"/>
+</iter>
+<iter>
+<var name="${text}">Admin Usuarios</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:46.091" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-32.png"&gt;&lt;img src="selenium-screenshot-32.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:46.091" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Admin Usuarios')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:44.804" endtime="20250702 07:00:46.093"/>
+</kw>
+<msg timestamp="20250702 07:00:46.093" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:44.803" endtime="20250702 07:00:46.093"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:46.093" level="INFO">Enlace 'Admin Usuarios': False</msg>
+<status status="PASS" starttime="20250702 07:00:46.093" endtime="20250702 07:00:46.093"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:44.803" endtime="20250702 07:00:46.093"/>
+</iter>
+<status status="PASS" starttime="20250702 07:00:36.917" endtime="20250702 07:00:46.093"/>
+</for>
+<kw name="Create List" library="BuiltIn">
+<var>${ventas_texts}</var>
+<arg>Ventas</arg>
+<arg>Sales</arg>
+<arg>Vender</arg>
+<arg>Transacciones</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20250702 07:00:46.111" level="INFO">${ventas_texts} = ['Ventas', 'Sales', 'Vender', 'Transacciones']</msg>
+<status status="PASS" starttime="20250702 07:00:46.111" endtime="20250702 07:00:46.111"/>
+</kw>
+<for flavor="IN">
+<var>${text}</var>
+<value>@{ventas_texts}</value>
+<iter>
+<var name="${text}">Ventas</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:47.688" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-33.png"&gt;&lt;img src="selenium-screenshot-33.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:47.689" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Ventas')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:46.114" endtime="20250702 07:00:47.690"/>
+</kw>
+<msg timestamp="20250702 07:00:47.690" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:46.114" endtime="20250702 07:00:47.690"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:47.690" level="INFO">Enlace 'Ventas': False</msg>
+<status status="PASS" starttime="20250702 07:00:47.690" endtime="20250702 07:00:47.690"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:46.114" endtime="20250702 07:00:47.690"/>
+</iter>
+<iter>
+<var name="${text}">Sales</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:47.954" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-34.png"&gt;&lt;img src="selenium-screenshot-34.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:47.954" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Sales')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:47.690" endtime="20250702 07:00:47.955"/>
+</kw>
+<msg timestamp="20250702 07:00:47.955" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:47.690" endtime="20250702 07:00:47.955"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:47.955" level="INFO">Enlace 'Sales': False</msg>
+<status status="PASS" starttime="20250702 07:00:47.955" endtime="20250702 07:00:47.955"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:47.690" endtime="20250702 07:00:47.955"/>
+</iter>
+<iter>
+<var name="${text}">Vender</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:49.584" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-35.png"&gt;&lt;img src="selenium-screenshot-35.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:49.584" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Vender')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:47.956" endtime="20250702 07:00:49.587"/>
+</kw>
+<msg timestamp="20250702 07:00:49.587" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:47.956" endtime="20250702 07:00:49.587"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:49.588" level="INFO">Enlace 'Vender': False</msg>
+<status status="PASS" starttime="20250702 07:00:49.587" endtime="20250702 07:00:49.588"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:47.956" endtime="20250702 07:00:49.588"/>
+</iter>
+<iter>
+<var name="${text}">Transacciones</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:50.528" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-36.png"&gt;&lt;img src="selenium-screenshot-36.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:50.528" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Transacciones')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:49.588" endtime="20250702 07:00:50.529"/>
+</kw>
+<msg timestamp="20250702 07:00:50.529" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:49.588" endtime="20250702 07:00:50.529"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:50.529" level="INFO">Enlace 'Transacciones': False</msg>
+<status status="PASS" starttime="20250702 07:00:50.529" endtime="20250702 07:00:50.529"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:49.588" endtime="20250702 07:00:50.529"/>
+</iter>
+<status status="PASS" starttime="20250702 07:00:46.113" endtime="20250702 07:00:50.529"/>
+</for>
+<kw name="Create List" library="BuiltIn">
+<var>${inventario_texts}</var>
+<arg>Inventario</arg>
+<arg>Inventory</arg>
+<arg>Productos</arg>
+<arg>Stock</arg>
+<arg>Almacén</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20250702 07:00:50.554" level="INFO">${inventario_texts} = ['Inventario', 'Inventory', 'Productos', 'Stock', 'Almacén']</msg>
+<status status="PASS" starttime="20250702 07:00:50.554" endtime="20250702 07:00:50.554"/>
+</kw>
+<for flavor="IN">
+<var>${text}</var>
+<value>@{inventario_texts}</value>
+<iter>
+<var name="${text}">Inventario</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:53.105" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-37.png"&gt;&lt;img src="selenium-screenshot-37.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:53.105" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Inventario')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:50.571" endtime="20250702 07:00:53.106"/>
+</kw>
+<msg timestamp="20250702 07:00:53.106" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:50.571" endtime="20250702 07:00:53.106"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:53.106" level="INFO">Enlace 'Inventario': False</msg>
+<status status="PASS" starttime="20250702 07:00:53.106" endtime="20250702 07:00:53.106"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:50.570" endtime="20250702 07:00:53.106"/>
+</iter>
+<iter>
+<var name="${text}">Inventory</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:54.324" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-38.png"&gt;&lt;img src="selenium-screenshot-38.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:54.324" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Inventory')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:53.106" endtime="20250702 07:00:54.325"/>
+</kw>
+<msg timestamp="20250702 07:00:54.325" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:53.106" endtime="20250702 07:00:54.325"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:54.326" level="INFO">Enlace 'Inventory': False</msg>
+<status status="PASS" starttime="20250702 07:00:54.326" endtime="20250702 07:00:54.326"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:53.106" endtime="20250702 07:00:54.326"/>
+</iter>
+<iter>
+<var name="${text}">Productos</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:57.049" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-39.png"&gt;&lt;img src="selenium-screenshot-39.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:57.049" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Productos')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:54.326" endtime="20250702 07:00:57.050"/>
+</kw>
+<msg timestamp="20250702 07:00:57.051" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:54.326" endtime="20250702 07:00:57.051"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:57.051" level="INFO">Enlace 'Productos': False</msg>
+<status status="PASS" starttime="20250702 07:00:57.051" endtime="20250702 07:00:57.051"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:54.326" endtime="20250702 07:00:57.051"/>
+</iter>
+<iter>
+<var name="${text}">Stock</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:00:58.174" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-40.png"&gt;&lt;img src="selenium-screenshot-40.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:00:58.175" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Stock')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:57.051" endtime="20250702 07:00:58.176"/>
+</kw>
+<msg timestamp="20250702 07:00:58.176" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:57.051" endtime="20250702 07:00:58.176"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:00:58.176" level="INFO">Enlace 'Stock': False</msg>
+<status status="PASS" starttime="20250702 07:00:58.176" endtime="20250702 07:00:58.176"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:57.051" endtime="20250702 07:00:58.176"/>
+</iter>
+<iter>
+<var name="${text}">Almacén</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:01.297" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-41.png"&gt;&lt;img src="selenium-screenshot-41.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:01.298" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Almacén')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:00:58.177" endtime="20250702 07:01:01.299"/>
+</kw>
+<msg timestamp="20250702 07:01:01.299" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:00:58.176" endtime="20250702 07:01:01.299"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:01.299" level="INFO">Enlace 'Almacén': False</msg>
+<status status="PASS" starttime="20250702 07:01:01.299" endtime="20250702 07:01:01.299"/>
+</kw>
+<status status="PASS" starttime="20250702 07:00:58.176" endtime="20250702 07:01:01.299"/>
+</iter>
+<status status="PASS" starttime="20250702 07:00:50.570" endtime="20250702 07:01:01.299"/>
+</for>
+<kw name="Create List" library="BuiltIn">
+<var>${reportes_texts}</var>
+<arg>Reportes</arg>
+<arg>Reports</arg>
+<arg>Informes</arg>
+<arg>Estadísticas</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20250702 07:01:01.300" level="INFO">${reportes_texts} = ['Reportes', 'Reports', 'Informes', 'Estadísticas']</msg>
+<status status="PASS" starttime="20250702 07:01:01.300" endtime="20250702 07:01:01.300"/>
+</kw>
+<for flavor="IN">
+<var>${text}</var>
+<value>@{reportes_texts}</value>
+<iter>
+<var name="${text}">Reportes</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:01.521" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-42.png"&gt;&lt;img src="selenium-screenshot-42.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:01.521" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Reportes')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:01:01.301" endtime="20250702 07:01:01.522"/>
+</kw>
+<msg timestamp="20250702 07:01:01.522" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:01:01.301" endtime="20250702 07:01:01.522"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:01.522" level="INFO">Enlace 'Reportes': False</msg>
+<status status="PASS" starttime="20250702 07:01:01.522" endtime="20250702 07:01:01.522"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:01.301" endtime="20250702 07:01:01.522"/>
+</iter>
+<iter>
+<var name="${text}">Reports</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:02.893" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-43.png"&gt;&lt;img src="selenium-screenshot-43.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:02.893" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Reports')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:01:01.523" endtime="20250702 07:01:02.894"/>
+</kw>
+<msg timestamp="20250702 07:01:02.894" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:01:01.523" endtime="20250702 07:01:02.894"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:02.894" level="INFO">Enlace 'Reports': False</msg>
+<status status="PASS" starttime="20250702 07:01:02.894" endtime="20250702 07:01:02.894"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:01.522" endtime="20250702 07:01:02.895"/>
+</iter>
+<iter>
+<var name="${text}">Informes</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:04.055" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-44.png"&gt;&lt;img src="selenium-screenshot-44.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:04.055" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Informes')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:01:02.895" endtime="20250702 07:01:04.056"/>
+</kw>
+<msg timestamp="20250702 07:01:04.056" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:01:02.895" endtime="20250702 07:01:04.056"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:04.057" level="INFO">Enlace 'Informes': False</msg>
+<status status="PASS" starttime="20250702 07:01:04.056" endtime="20250702 07:01:04.057"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:02.895" endtime="20250702 07:01:04.057"/>
+</iter>
+<iter>
+<var name="${text}">Estadísticas</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), '${text}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:05.937" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-45.png"&gt;&lt;img src="selenium-screenshot-45.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:05.937" level="FAIL">Page should have contained element 'xpath=//a[contains(text(), 'Estadísticas')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:01:04.057" endtime="20250702 07:01:05.938"/>
+</kw>
+<msg timestamp="20250702 07:01:05.939" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20250702 07:01:04.057" endtime="20250702 07:01:05.939"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Enlace '${text}': ${found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:05.939" level="INFO">Enlace 'Estadísticas': False</msg>
+<status status="PASS" starttime="20250702 07:01:05.939" endtime="20250702 07:01:05.939"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:04.057" endtime="20250702 07:01:05.939"/>
+</iter>
+<status status="PASS" starttime="20250702 07:01:01.301" endtime="20250702 07:01:05.939"/>
+</for>
+<kw name="Log" library="BuiltIn">
+<arg>=== EXPLORANDO ESTRUCTURA DE MENÚ ===</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:05.953" level="INFO">=== EXPLORANDO ESTRUCTURA DE MENÚ ===</msg>
+<status status="PASS" starttime="20250702 07:01:05.953" endtime="20250702 07:01:05.953"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${nav_found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//nav</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//nav</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:05.970" level="INFO">Current page contains element 'xpath=//nav'.</msg>
+<status status="PASS" starttime="20250702 07:01:05.953" endtime="20250702 07:01:05.971"/>
+</kw>
+<msg timestamp="20250702 07:01:05.971" level="INFO">${nav_found} = True</msg>
+<status status="PASS" starttime="20250702 07:01:05.953" endtime="20250702 07:01:05.971"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Elemento nav encontrado: ${nav_found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:05.971" level="INFO">Elemento nav encontrado: True</msg>
+<status status="PASS" starttime="20250702 07:01:05.971" endtime="20250702 07:01:05.971"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${menu_found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//ul[contains(@class, 'menu')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//ul[contains(@class, 'menu')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:06.252" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-46.png"&gt;&lt;img src="selenium-screenshot-46.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:06.252" level="FAIL">Page should have contained element 'xpath=//ul[contains(@class, 'menu')]' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:01:05.971" endtime="20250702 07:01:06.253"/>
+</kw>
+<msg timestamp="20250702 07:01:06.253" level="INFO">${menu_found} = False</msg>
+<status status="PASS" starttime="20250702 07:01:05.971" endtime="20250702 07:01:06.253"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Menú ul encontrado: ${menu_found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:06.271" level="INFO">Menú ul encontrado: False</msg>
+<status status="PASS" starttime="20250702 07:01:06.271" endtime="20250702 07:01:06.271"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${sidebar_found}</var>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=//*[contains(@class, 'sidebar')]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//*[contains(@class, 'sidebar')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:07.336" level="INFO">Current page contains element 'xpath=//*[contains(@class, 'sidebar')]'.</msg>
+<status status="PASS" starttime="20250702 07:01:06.275" endtime="20250702 07:01:07.336"/>
+</kw>
+<msg timestamp="20250702 07:01:07.336" level="INFO">${sidebar_found} = True</msg>
+<status status="PASS" starttime="20250702 07:01:06.274" endtime="20250702 07:01:07.336"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Sidebar encontrado: ${sidebar_found}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250702 07:01:07.337" level="INFO">Sidebar encontrado: True</msg>
+<status status="PASS" starttime="20250702 07:01:07.337" endtime="20250702 07:01:07.337"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>10s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:01:17.338" level="INFO">Slept 10 seconds</msg>
+<status status="PASS" starttime="20250702 07:01:07.337" endtime="20250702 07:01:17.338"/>
+</kw>
+<kw name="Cerrar Navegador" library="login_keywords_robusto">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20250702 07:01:17.339" endtime="20250702 07:01:20.885"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:17.338" endtime="20250702 07:01:20.885"/>
+</kw>
+<doc>Después del login, explorar qué enlaces están disponibles</doc>
+<status status="PASS" starttime="20250702 07:00:20.592" endtime="20250702 07:01:20.886"/>
+</test>
+<doc>Explorar enlaces en el dashboard de INTRAPOD</doc>
+<status status="PASS" starttime="20250702 07:00:20.575" endtime="20250702 07:01:20.887"/>
+</suite>
+<suite id="s1-s3" name="Explore Elements Test" source="C:\Users\DANIEL\Documents\polleria\tests\explore_elements_test.robot">
+<test id="s1-s3-t1" name="Explorar Elementos Login" line="8">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:01:20.901" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:01:20.900" endtime="20250702 07:01:25.918"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250702 07:01:25.925" endtime="20250702 07:01:26.128"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:01:28.129" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:01:26.128" endtime="20250702 07:01:28.129"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>name=username</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:28.661" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-47.png"&gt;&lt;img src="selenium-screenshot-47.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:28.661" level="FAIL">Page should have contained element 'name=username' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:01:28.251" endtime="20250702 07:01:28.662"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>name=password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.664" endtime="20250702 07:01:28.664"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Campos de usuario y contraseña encontrados</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.665" endtime="20250702 07:01:28.665"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.665" endtime="20250702 07:01:28.665"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Botón de login encontrado</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.665" endtime="20250702 07:01:28.665"/>
+</kw>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${inputs}</var>
+<arg>xpath=//input</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.665" endtime="20250702 07:01:28.665"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${input_count}</var>
+<arg>${inputs}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.668" endtime="20250702 07:01:28.668"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Total de inputs encontrados: ${input_count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.669"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>${input_count}</value>
+<iter>
+<var name="${index}"/>
+<kw name="Get From List" library="Collections">
+<var>${element}</var>
+<arg>${inputs}</arg>
+<arg>${index}</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.669"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${name}</var>
+<arg>${element}</arg>
+<arg>name</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.669"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${id}</var>
+<arg>${element}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.669"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${type}</var>
+<arg>${element}</arg>
+<arg>type</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.669"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${class}</var>
+<arg>${element}</arg>
+<arg>class</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.669"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${placeholder}</var>
+<arg>${element}</arg>
+<arg>placeholder</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.670" endtime="20250702 07:01:28.670"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Input ${index}: name=${name}, id=${id}, type=${type}, class=${class}, placeholder=${placeholder}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.670" endtime="20250702 07:01:28.670"/>
+</kw>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.670"/>
+</iter>
+<status status="NOT RUN" starttime="20250702 07:01:28.669" endtime="20250702 07:01:28.670"/>
+</for>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${buttons}</var>
+<arg>xpath=//button</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.670" endtime="20250702 07:01:28.670"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${button_count}</var>
+<arg>${buttons}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.670" endtime="20250702 07:01:28.670"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Total de botones encontrados: ${button_count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.671" endtime="20250702 07:01:28.671"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>${button_count}</value>
+<iter>
+<var name="${index}"/>
+<kw name="Get From List" library="Collections">
+<var>${element}</var>
+<arg>${buttons}</arg>
+<arg>${index}</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.671" endtime="20250702 07:01:28.671"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${element}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.671" endtime="20250702 07:01:28.673"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${type}</var>
+<arg>${element}</arg>
+<arg>type</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.673" endtime="20250702 07:01:28.673"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${onclick}</var>
+<arg>${element}</arg>
+<arg>onclick</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.673" endtime="20250702 07:01:28.673"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Botón ${index}: texto="${text}", type=${type}, onclick=${onclick}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.673" endtime="20250702 07:01:28.673"/>
+</kw>
+<status status="NOT RUN" starttime="20250702 07:01:28.671" endtime="20250702 07:01:28.673"/>
+</iter>
+<status status="NOT RUN" starttime="20250702 07:01:28.671" endtime="20250702 07:01:28.673"/>
+</for>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${forms}</var>
+<arg>xpath=//form</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.680" endtime="20250702 07:01:28.680"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${form_count}</var>
+<arg>${forms}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.681" endtime="20250702 07:01:28.681"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Total de formularios encontrados: ${form_count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.681" endtime="20250702 07:01:28.681"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${form_count} &gt; 0</arg>
+<arg>La página debe tener al menos un formulario</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.681" endtime="20250702 07:01:28.681"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>login_page_exploracion.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.681" endtime="20250702 07:01:28.681"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:28.681" endtime="20250702 07:01:28.682"/>
+</kw>
+<doc>Encontrar y validar todos los elementos de entrada y botones en la página de login</doc>
+<status status="FAIL" starttime="20250702 07:01:20.900" endtime="20250702 07:01:28.684">Page should have contained element 'name=username' but did not.</status>
+</test>
+<doc>Explora y valida elementos clave de la página de login INTRAPOD</doc>
+<status status="FAIL" starttime="20250702 07:01:20.888" endtime="20250702 07:01:28.686"/>
+</suite>
+<suite id="s1-s4" name="Find Login Fields Test" source="C:\Users\DANIEL\Documents\polleria\tests\find_login_fields_test.robot">
+<test id="s1-s4-t1" name="Encontrar Y Validar Campos Login" line="7">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:01:28.748" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:01:28.748" endtime="20250702 07:01:34.900"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250702 07:01:34.923" endtime="20250702 07:01:35.501"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:01:37.524" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:01:35.523" endtime="20250702 07:01:37.524"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>name=username</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20250702 07:01:37.813" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-48.png"&gt;&lt;img src="selenium-screenshot-48.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:01:37.813" level="FAIL">Page should have contained element 'name=username' but did not.</msg>
+<status status="FAIL" starttime="20250702 07:01:37.525" endtime="20250702 07:01:37.814"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>name=password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.828" endtime="20250702 07:01:37.828"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>✓ Campos name=username y name=password encontrados</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.828" endtime="20250702 07:01:37.828"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Page Should Contain Element</arg>
+<arg>id=username</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.828" endtime="20250702 07:01:37.828"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Page Should Contain Element</arg>
+<arg>id=password</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.828" endtime="20250702 07:01:37.828"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//input[@type='text']</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.829" endtime="20250702 07:01:37.829"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>xpath=//input[@type='password']</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.829" endtime="20250702 07:01:37.829"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name=username</arg>
+<arg>${USERNAME}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.830" endtime="20250702 07:01:37.830"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name=password</arg>
+<arg>${PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.830" endtime="20250702 07:01:37.830"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.830" endtime="20250702 07:01:37.830"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.830" endtime="20250702 07:01:37.830"/>
+</kw>
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.831" endtime="20250702 07:01:37.831"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>URL después del login: ${url}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.831" endtime="20250702 07:01:37.831"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>despues_login.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.831" endtime="20250702 07:01:37.831"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" starttime="20250702 07:01:37.832" endtime="20250702 07:01:37.832"/>
+</kw>
+<doc>Buscar y validar campos de login por diferentes métodos y probar login real</doc>
+<status status="FAIL" starttime="20250702 07:01:28.736" endtime="20250702 07:01:37.832">Page should have contained element 'name=username' but did not.</status>
+</test>
+<doc>Test específico para encontrar y validar campos de login</doc>
+<status status="FAIL" starttime="20250702 07:01:28.729" endtime="20250702 07:01:37.833"/>
+</suite>
+<suite id="s1-s5" name="Flexible Login Test" source="C:\Users\DANIEL\Documents\polleria\tests\flexible_login_test.robot">
+<test id="s1-s5-t1" name="TC001 - Login Con Selectores Genéricos" line="7">
+<kw name="Abrir Navegador" library="login_keywords">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:01:37.867" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:01:37.866" endtime="20250702 07:01:45.495"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250702 07:01:45.496" endtime="20250702 07:01:46.021"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:01:48.025" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:01:46.021" endtime="20250702 07:01:48.025"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:37.866" endtime="20250702 07:01:48.025"/>
+</kw>
+<kw name="Ir A Página De Login" library="login_keywords">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250702 07:01:48.029" level="INFO">Opening url 'http://127.0.0.1:5500/frontend/pages/login.html'</msg>
+<status status="PASS" starttime="20250702 07:01:48.029" endtime="20250702 07:01:48.365"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:01:48.365" endtime="20250702 07:01:48.420"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:01:48.420" endtime="20250702 07:01:48.477"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:48.028" endtime="20250702 07:01:48.477"/>
+</kw>
+<kw name="Ingresar Credenciales" library="login_keywords">
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>${usuario}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:01:48.497" level="INFO">Typing text 'DAN1E10' into text field 'id=username'.</msg>
+<status status="PASS" starttime="20250702 07:01:48.497" endtime="20250702 07:01:49.149"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>${clave}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:01:49.150" level="INFO">Typing text 'admin123' into text field 'id=password'.</msg>
+<status status="PASS" starttime="20250702 07:01:49.149" endtime="20250702 07:01:49.359"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20250702 07:01:49.360" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<status status="PASS" starttime="20250702 07:01:49.359" endtime="20250702 07:01:49.576"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:01:51.577" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:01:49.576" endtime="20250702 07:01:51.577"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:48.497" endtime="20250702 07:01:51.577"/>
+</kw>
+<kw name="Verificar Login Exitoso" library="login_keywords">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>INTRAPOD</arg>
+<arg>10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:01:51.616" endtime="20250702 07:01:53.037"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:51.615" endtime="20250702 07:01:53.037"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>login_result.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20250702 07:01:53.231" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="login_result.png"&gt;&lt;img src="login_result.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20250702 07:01:53.038" endtime="20250702 07:01:53.231"/>
+</kw>
+<kw name="Cerrar Navegador" library="login_keywords">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20250702 07:01:53.263" endtime="20250702 07:01:58.775"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:53.263" endtime="20250702 07:01:58.775"/>
+</kw>
+<doc>Test de login usando keywords robustos y validaciones reales</doc>
+<tag>login</tag>
+<tag>smoke</tag>
+<status status="PASS" starttime="20250702 07:01:37.865" endtime="20250702 07:01:58.780"/>
+</test>
+<doc>Test mejorado de INTRAPOD con selectores genéricos</doc>
+<status status="PASS" starttime="20250702 07:01:37.836" endtime="20250702 07:01:58.800"/>
+</suite>
+<suite id="s1-s6" name="Intrapod Complete Test" source="C:\Users\DANIEL\Documents\polleria\tests\intrapod_complete_test.robot">
+<kw name="Abrir Navegador" library="login_keywords_robusto" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:01:58.821" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:01:58.820" endtime="20250702 07:02:04.874"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250702 07:02:04.874" endtime="20250702 07:02:05.073"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:02:07.075" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:02:05.073" endtime="20250702 07:02:07.075"/>
+</kw>
+<status status="PASS" starttime="20250702 07:01:58.820" endtime="20250702 07:02:07.075"/>
+</kw>
+<test id="s1-s6-t1" name="TC001 - Login Exitoso INTRAPOD" line="9">
+<kw name="Ir A Página De Login" library="login_keywords_robusto">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250702 07:02:07.087" level="INFO">Opening url 'http://127.0.0.1:5500/frontend/pages/login.html'</msg>
+<status status="PASS" starttime="20250702 07:02:07.087" endtime="20250702 07:02:07.830"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:07.830" endtime="20250702 07:02:07.899"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:07.899" endtime="20250702 07:02:07.916"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:07.087" endtime="20250702 07:02:07.916"/>
+</kw>
+<kw name="Ingresar Credenciales" library="login_keywords_robusto">
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>${usuario}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:07.917" level="INFO">Typing text 'DAN1E10' into text field 'id=username'.</msg>
+<status status="PASS" starttime="20250702 07:02:07.917" endtime="20250702 07:02:08.168"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>${clave}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:08.168" level="INFO">Typing text 'admin123' into text field 'id=password'.</msg>
+<status status="PASS" starttime="20250702 07:02:08.168" endtime="20250702 07:02:08.333"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:08.333" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<status status="PASS" starttime="20250702 07:02:08.333" endtime="20250702 07:02:08.449"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:02:10.453" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:02:08.450" endtime="20250702 07:02:10.453"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:07.916" endtime="20250702 07:02:10.453"/>
+</kw>
+<kw name="Verificar Login Exitoso" library="login_keywords_robusto">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>INTRAPOD</arg>
+<arg>10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:10.476" endtime="20250702 07:02:12.269"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:10.476" endtime="20250702 07:02:12.270"/>
+</kw>
+<doc>Verifica login exitoso con credenciales válidas</doc>
+<tag>login</tag>
+<tag>smoke</tag>
+<status status="PASS" starttime="20250702 07:02:07.075" endtime="20250702 07:02:12.273"/>
+</test>
+<test id="s1-s6-t2" name="TC002 - Navegación Al Dashboard" line="16">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>INTRAPOD</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:12.300" endtime="20250702 07:02:12.331"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Ganancia</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:12.331" endtime="20250702 07:02:12.371"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Ventas</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:12.372" endtime="20250702 07:02:12.413"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Total Productos</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:12.413" endtime="20250702 07:02:12.431"/>
+</kw>
+<doc>Verifica que se muestra el dashboard correctamente</doc>
+<tag>dashboard</tag>
+<tag>navegacion</tag>
+<status status="PASS" starttime="20250702 07:02:12.298" endtime="20250702 07:02:12.433"/>
+</test>
+<test id="s1-s6-t3" name="TC003 - Navegación A Gestionar Usuarios" line="24">
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), 'Gestionar Usuarios')]</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:12.449" level="INFO">Clicking link 'xpath=//a[contains(text(), 'Gestionar Usuarios')]'.</msg>
+<msg timestamp="20250702 07:02:13.551" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-49.png"&gt;&lt;img src="selenium-screenshot-49.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:02:13.552" level="FAIL">Link with locator 'xpath=//a[contains(text(), 'Gestionar Usuarios')]' not found.</msg>
+<status status="FAIL" starttime="20250702 07:02:12.448" endtime="20250702 07:02:13.554"/>
+</kw>
+<kw name="Wait Until Location Contains" library="SeleniumLibrary">
+<arg>gestionar_usuarios</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:13.601" endtime="20250702 07:02:13.601"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Administrar Usuarios</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:13.606" endtime="20250702 07:02:13.606"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Lista De Usuarios</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:13.606" endtime="20250702 07:02:13.606"/>
+</kw>
+<doc>Verifica navegación al módulo de usuarios</doc>
+<tag>navegacion</tag>
+<tag>usuarios</tag>
+<status status="FAIL" starttime="20250702 07:02:12.446" endtime="20250702 07:02:13.606">Link with locator 'xpath=//a[contains(text(), 'Gestionar Usuarios')]' not found.</status>
+</test>
+<test id="s1-s6-t4" name="TC004 - Navegación A Ventas" line="32">
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), 'Ventas')]</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:13.618" level="INFO">Clicking link 'xpath=//a[contains(text(), 'Ventas')]'.</msg>
+<msg timestamp="20250702 07:02:17.568" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-50.png"&gt;&lt;img src="selenium-screenshot-50.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:02:17.568" level="FAIL">Link with locator 'xpath=//a[contains(text(), 'Ventas')]' not found.</msg>
+<status status="FAIL" starttime="20250702 07:02:13.617" endtime="20250702 07:02:17.569"/>
+</kw>
+<kw name="Wait Until Location Contains" library="SeleniumLibrary">
+<arg>ventas</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:17.572" endtime="20250702 07:02:17.572"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Ventas De Productos</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:17.572" endtime="20250702 07:02:17.572"/>
+</kw>
+<doc>Verifica navegación al módulo de ventas</doc>
+<tag>navegacion</tag>
+<tag>ventas</tag>
+<status status="FAIL" starttime="20250702 07:02:13.607" endtime="20250702 07:02:17.573">Link with locator 'xpath=//a[contains(text(), 'Ventas')]' not found.</status>
+</test>
+<test id="s1-s6-t5" name="TC005 - Navegación A Inventario" line="39">
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), 'Inventario')]</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:17.583" level="INFO">Clicking link 'xpath=//a[contains(text(), 'Inventario')]'.</msg>
+<msg timestamp="20250702 07:02:20.161" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-51.png"&gt;&lt;img src="selenium-screenshot-51.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:02:20.161" level="FAIL">Link with locator 'xpath=//a[contains(text(), 'Inventario')]' not found.</msg>
+<status status="FAIL" starttime="20250702 07:02:17.582" endtime="20250702 07:02:20.163"/>
+</kw>
+<kw name="Wait Until Location Contains" library="SeleniumLibrary">
+<arg>inventario</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:20.176" endtime="20250702 07:02:20.176"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Gestión de Inventario</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:20.176" endtime="20250702 07:02:20.176"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Productos En Inventario</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:20.181" endtime="20250702 07:02:20.181"/>
+</kw>
+<doc>Verifica navegación al módulo de inventario</doc>
+<tag>inventario</tag>
+<tag>navegacion</tag>
+<status status="FAIL" starttime="20250702 07:02:17.582" endtime="20250702 07:02:20.181">Link with locator 'xpath=//a[contains(text(), 'Inventario')]' not found.</status>
+</test>
+<test id="s1-s6-t6" name="TC006 - Navegación A Reportes" line="47">
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//a[contains(text(), 'Reportes')]</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:20.186" level="INFO">Clicking link 'xpath=//a[contains(text(), 'Reportes')]'.</msg>
+<msg timestamp="20250702 07:02:22.432" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-52.png"&gt;&lt;img src="selenium-screenshot-52.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:02:22.435" level="FAIL">Link with locator 'xpath=//a[contains(text(), 'Reportes')]' not found.</msg>
+<status status="FAIL" starttime="20250702 07:02:20.184" endtime="20250702 07:02:22.436"/>
+</kw>
+<kw name="Wait Until Location Contains" library="SeleniumLibrary">
+<arg>reportes</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:22.547" endtime="20250702 07:02:22.547"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Reportes</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:22.712" endtime="20250702 07:02:22.712"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Ventas Por Mes</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:22.885" endtime="20250702 07:02:22.886"/>
+</kw>
+<doc>Verifica navegación al módulo de reportes</doc>
+<tag>navegacion</tag>
+<tag>reportes</tag>
+<status status="FAIL" starttime="20250702 07:02:20.183" endtime="20250702 07:02:23.004">Link with locator 'xpath=//a[contains(text(), 'Reportes')]' not found.</status>
+</test>
+<test id="s1-s6-t7" name="TC007 - Login Fallido Usuario Incorrecto" line="55">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250702 07:02:23.427" level="INFO">Opening url 'http://127.0.0.1:5500/frontend/pages/login.html'</msg>
+<status status="PASS" starttime="20250702 07:02:23.426" endtime="20250702 07:02:25.883"/>
+</kw>
+<kw name="Ingresar Credenciales" library="login_keywords_robusto">
+<arg>${USERNAME_INC}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>${usuario}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:25.887" level="INFO">Typing text 'miguelito' into text field 'id=username'.</msg>
+<msg timestamp="20250702 07:02:27.390" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-53.png"&gt;&lt;img src="selenium-screenshot-53.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:02:27.390" level="FAIL">Element with locator 'id=username' not found.</msg>
+<status status="FAIL" starttime="20250702 07:02:25.887" endtime="20250702 07:02:27.392"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>${clave}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:27.392" endtime="20250702 07:02:27.392"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:27.392" endtime="20250702 07:02:27.392"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:27.392" endtime="20250702 07:02:27.392"/>
+</kw>
+<status status="FAIL" starttime="20250702 07:02:25.886" endtime="20250702 07:02:27.392"/>
+</kw>
+<kw name="Verificar Mensaje De Error" library="login_keywords_robusto">
+<status status="NOT RUN" starttime="20250702 07:02:27.416" endtime="20250702 07:02:27.416"/>
+</kw>
+<doc>Verifica rechazo con usuario incorrecto</doc>
+<tag>login</tag>
+<tag>negativo</tag>
+<status status="FAIL" starttime="20250702 07:02:23.419" endtime="20250702 07:02:27.416">Element with locator 'id=username' not found.</status>
+</test>
+<test id="s1-s6-t8" name="TC008 - Login Fallido Password Incorrecto" line="62">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250702 07:02:27.430" level="INFO">Opening url 'http://127.0.0.1:5500/frontend/pages/login.html'</msg>
+<status status="PASS" starttime="20250702 07:02:27.429" endtime="20250702 07:02:29.582"/>
+</kw>
+<kw name="Ingresar Credenciales" library="login_keywords_robusto">
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD_INC}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>${usuario}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:29.591" level="INFO">Typing text 'DAN1E10' into text field 'id=username'.</msg>
+<msg timestamp="20250702 07:02:30.451" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-54.png"&gt;&lt;img src="selenium-screenshot-54.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250702 07:02:30.452" level="FAIL">Element with locator 'id=username' not found.</msg>
+<status status="FAIL" starttime="20250702 07:02:29.591" endtime="20250702 07:02:30.453"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>${clave}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:30.453" endtime="20250702 07:02:30.453"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:30.455" endtime="20250702 07:02:30.455"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20250702 07:02:30.456" endtime="20250702 07:02:30.456"/>
+</kw>
+<status status="FAIL" starttime="20250702 07:02:29.590" endtime="20250702 07:02:30.456"/>
+</kw>
+<kw name="Verificar Mensaje De Error" library="login_keywords_robusto">
+<status status="NOT RUN" starttime="20250702 07:02:30.459" endtime="20250702 07:02:30.459"/>
+</kw>
+<doc>Verifica rechazo con password incorrecto</doc>
+<tag>login</tag>
+<tag>negativo</tag>
+<status status="FAIL" starttime="20250702 07:02:27.425" endtime="20250702 07:02:30.459">Element with locator 'id=username' not found.</status>
+</test>
+<kw name="Cerrar Navegador" library="login_keywords_robusto" type="TEARDOWN">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20250702 07:02:30.465" endtime="20250702 07:02:35.607"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:30.465" endtime="20250702 07:02:35.607"/>
+</kw>
+<doc>Tests completos para aplicación INTRAPOD</doc>
+<status status="FAIL" starttime="20250702 07:01:58.801" endtime="20250702 07:02:35.607"/>
+</suite>
+<suite id="s1-s7" name="Login Robusto Test" source="C:\Users\DANIEL\Documents\polleria\tests\login_robusto_test.robot">
+<test id="s1-s7-t1" name="TC001 - Login Exitoso Con Keywords Robustos" line="7">
+<kw name="Abrir Navegador" library="login_keywords_robusto">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:02:35.620" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:02:35.619" endtime="20250702 07:02:41.445"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250702 07:02:41.445" endtime="20250702 07:02:41.640"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:02:43.641" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:02:41.641" endtime="20250702 07:02:43.641"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:35.619" endtime="20250702 07:02:43.641"/>
+</kw>
+<kw name="Ir A Página De Login" library="login_keywords_robusto">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20250702 07:02:43.825" level="INFO">Opening url 'http://127.0.0.1:5500/frontend/pages/login.html'</msg>
+<status status="PASS" starttime="20250702 07:02:43.825" endtime="20250702 07:02:44.645"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:44.645" endtime="20250702 07:02:44.676"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:44.676" endtime="20250702 07:02:44.694"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:43.824" endtime="20250702 07:02:44.694"/>
+</kw>
+<kw name="Ingresar Credenciales" library="login_keywords_robusto">
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>${usuario}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:44.695" level="INFO">Typing text 'DAN1E10' into text field 'id=username'.</msg>
+<status status="PASS" starttime="20250702 07:02:44.695" endtime="20250702 07:02:45.329"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=password</arg>
+<arg>${clave}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:45.330" level="INFO">Typing text 'admin123' into text field 'id=password'.</msg>
+<status status="PASS" starttime="20250702 07:02:45.329" endtime="20250702 07:02:45.621"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20250702 07:02:45.622" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<status status="PASS" starttime="20250702 07:02:45.621" endtime="20250702 07:02:45.771"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250702 07:02:47.772" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250702 07:02:45.772" endtime="20250702 07:02:47.772"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:44.695" endtime="20250702 07:02:47.772"/>
+</kw>
+<kw name="Verificar Login Exitoso" library="login_keywords_robusto">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>INTRAPOD</arg>
+<arg>10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20250702 07:02:47.872" endtime="20250702 07:02:49.347"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:47.871" endtime="20250702 07:02:49.347"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>login_exitoso_robusto.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20250702 07:02:50.772" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="login_exitoso_robusto.png"&gt;&lt;img src="login_exitoso_robusto.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20250702 07:02:49.348" endtime="20250702 07:02:50.772"/>
+</kw>
+<kw name="Cerrar Navegador" library="login_keywords_robusto">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20250702 07:02:50.805" endtime="20250702 07:02:57.422"/>
+</kw>
+<status status="PASS" starttime="20250702 07:02:50.805" endtime="20250702 07:02:57.422"/>
+</kw>
+<doc>Verificar login con DAN1E10/admin123 usando keywords mejorados</doc>
+<tag>login</tag>
+<tag>robusto</tag>
+<tag>smoke</tag>
+<status status="PASS" starttime="20250702 07:02:35.617" endtime="20250702 07:02:57.423"/>
+</test>
+<test id="s1-s7-t2" name="TC002 - Login Fallido Usuario Incorrecto" line="20">
+<kw name="Abrir Navegador" library="login_keywords_robusto">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:02:57.425" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<status status="PASS" starttime="20250702 07:02:57.425" endtime="20250702 07:03:13.813"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<msg timestamp="20250702 07:03:13.819" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.92)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7bef06f95+76917]
+	GetHandleVerifier [0x0x7ff7bef06ff0+77008]
+	(No symbol) [0x0x7ff7becb9dea]
+	(No symbol) [0x0x7ff7bec92191]
+	(No symbol) [0x0x7ff7bed3f83e]
+	(No symbol) [0x0x7ff7bed5ff72]
+	(No symbol) [0x0x7ff7bed38243]
+	(No symbol) [0x0x7ff7bed01431]
+	(No symbol) [0x0x7ff7bed021c3]
+	GetHandleVerifier [0x0x7ff7bf1dd2cd+3051437]
+	GetHandleVerifier [0x0x7ff7bf1d7923+3028483]
+	GetHandleVerifier [0x0x7ff7bf1f58bd+3151261]
+	GetHandleVerifier [0x0x7ff7bef2185e+185662]
+	GetHandleVerifier [0x0x7ff7bef2971f+218111]
+	GetHandleVerifier [0x0x7ff7bef0fb14+112628]
+	GetHandleVerifier [0x0x7ff7bef0fcc9+113065]
+	GetHandleVerifier [0x0x7ff7beef6c98+10616]
+	BaseThreadInitThunk [0x0x7ff813ae7374+20]
+	RtlUserThreadStart [0x0x7ff81579cc91+33]
+</msg>
+<msg timestamp="20250702 07:03:13.830" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.92)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7bef06f95+76917]
+	GetHandleVerifier [0x0x7ff7bef06ff0+77008]
+	(No symbol) [0x0x7ff7becb9dea]
+	(No symbol) [0x0x7ff7bec92191]
+	(No symbol) [0x0x7ff7bed3f83e]
+	(No symbol) [0x0x7ff7bed5ff72]
+	(No symbol) [0x0x7ff7bed38243]
+	(No symbol) [0x0x7ff7bed01431]
+	(No symbol) [0x0x7ff7bed021c3]
+	GetHandleVerifier [0x0x7ff7bf1dd2cd+3051437]
+	GetHandleVerifier [0x0x7ff7bf1d7923+3028483]
+	GetHandleVerifier [0x0x7ff7bf1f58bd+3151261]
+	GetHandleVerifier [0x0x7ff7bef2185e+185662]
+	GetHandleVerifier [0x0x7ff7bef2971f+218111]
+	GetHandleVerifier [0x0x7ff7bef0fb14+112628]
+	GetHandleVerifier [0x0x7ff7bef0fcc9+113065]
+	GetHandleVerifier [0x0x7ff7beef6c98+10616]
+	BaseThreadInitThunk [0x0x7ff813ae7374+20]
+	RtlUserThreadStart [0x0x7ff81579cc91+33]
+</msg>
+<status status="FAIL" starttime="20250702 07:03:13.813" endtime="20250702 07:03:13.857"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20250702 07:03:13.857" endtime="20250702 07:03:13.858"/>
+</kw>
+<status status="FAIL" starttime="20250702 07:02:57.425" endtime="20250702 07:03:13.858"/>
+</kw>
+<kw name="Ir A Página De Login" library="login_keywords_robusto">
+<status status="NOT RUN" starttime="20250702 07:03:13.867" endtime="20250702 07:03:13.867"/>
+</kw>
+<kw name="Ingresar Credenciales" library="login_keywords_robusto">
+<arg>${USERNAME_INC}</arg>
+<arg>${PASSWORD}</arg>
+<status status="NOT RUN" starttime="20250702 07:03:13.921" endtime="20250702 07:03:13.921"/>
+</kw>
+<kw name="Verificar Mensaje De Error" library="login_keywords_robusto">
+<status status="NOT RUN" starttime="20250702 07:03:13.955" endtime="20250702 07:03:13.964"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>login_error_usuario.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="NOT RUN" starttime="20250702 07:03:13.968" endtime="20250702 07:03:13.968"/>
+</kw>
+<kw name="Cerrar Navegador" library="login_keywords_robusto">
+<status status="NOT RUN" starttime="20250702 07:03:13.994" endtime="20250702 07:03:13.994"/>
+</kw>
+<doc>Verificar rechazo con usuario incorrecto</doc>
+<tag>login</tag>
+<tag>negativo</tag>
+<tag>robusto</tag>
+<status status="FAIL" starttime="20250702 07:02:57.424" endtime="20250702 07:03:13.994">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.92)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7bef06f95+76917]
+	GetHandleVerifier [0x0x7ff7bef06ff0+77008]
+	(No symbol) [0x0x7ff7becb9dea]
+	(No symbol) [0x0x7ff7bec92191]
+	(No symbol) [0x0x7ff7bed3f83e]
+	(No symbol) [0x0x7ff7bed5ff72]
+	(No symbol) [0x0x7ff7bed38243]
+	(No symbol) [0x0x7ff7bed01431]
+	(No symbol) [0x0x7ff7bed021c3]
+	GetHandleVerifier [0x0x7ff7bf1dd2cd+3051437]
+	GetHandleVerifier [0x0x7ff7bf1d7923+3028483]
+	GetHandleVerifier [0x0x7ff7bf1f58bd+3151261]
+	GetHandleVerifier [0x0x7ff7bef2185e+185662]
+	GetHandleVerifier [0x0x7ff7bef2971f+218111]
+	GetHandleVerifier [0x0x7ff7bef0fb14+112628]
+	GetHandleVerifier [0x0x7ff7bef0fcc9+113065]
+	GetHandleVerifier [0x0x7ff7beef6c98+10616]
+	BaseThreadInitThunk [0x0x7ff813ae7374+20]
+	RtlUserThreadStart [0x0x7ff81579cc91+33]
+</status>
+</test>
+<test id="s1-s7-t3" name="TC003 - Login Fallido Password Incorrecto" line="33">
+<kw name="Abrir Navegador" library="login_keywords_robusto">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250702 07:03:14.005" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:5500/frontend/pages/login.html'.</msg>
+<errors>
+<msg timestamp="20250702 07:03:13.819" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=138.0.7204.92)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7bef06f95+76917]
+	GetHandleVerifier [0x0x7ff7bef06ff0+77008]
+	(No symbol) [0x0x7ff7becb9dea]
+	(No symbol) [0x0x7ff7bec92191]
+	(No symbol) [0x0x7ff7bed3f83e]
+	(No symbol) [0x0x7ff7bed5ff72]
+	(No symbol) [0x0x7ff7bed38243]
+	(No symbol) [0x0x7ff7bed01431]
+	(No symbol) [0x0x7ff7bed021c3]
+	GetHandleVerifier [0x0x7ff7bf1dd2cd+3051437]
+	GetHandleVerifier [0x0x7ff7bf1d7923+3028483]
+	GetHandleVerifier [0x0x7ff7bf1f58bd+3151261]
+	GetHandleVerifier [0x0x7ff7bef2185e+185662]
+	GetHandleVerifier [0x0x7ff7bef2971f+218111]
+	GetHandleVerifier [0x0x7ff7bef0fb14+112628]
+	GetHandleVerifier [0x0x7ff7bef0fcc9+113065]
+	GetHandleVerifier [0x0x7ff7beef6c98+10616]
+	BaseThreadInitThunk [0x0x7ff813ae7374+20]
+	RtlUserThreadStart [0x0x7ff81579cc91+33]
+</msg>
+<msg timestamp="20250702 07:03:24.699" level="ERROR">Execution stopped by user.</msg>
+</errors>
+</robot>
