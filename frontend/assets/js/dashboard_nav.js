@@ -1,8 +1,60 @@
 document.addEventListener('DOMContentLoaded', function(){
-    const token = localStorage.getItem('token');
-    fetch('http://localhost:8000/dashboard/admin/data',{
+    const navToken = localStorage.getItem('token');
+    
+    // Verificación temprana de autenticación
+    if (!navToken) {
+        console.error('[DASHBOARD-NAV] Token no encontrado');
+        localStorage.clear();
+        window.location.href = getLoginPath();
+        return;
+    }
+    
+    // Función para decodificar JWT
+    function parseJwt(token) {
+        try {
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (e) {
+            console.error('[DASHBOARD-NAV] Error al decodificar token:', e);
+            return null;
+        }
+    }
+    
+    // Detectar rol del usuario
+    const tokenUser = parseJwt(navToken);
+    const userRole = tokenUser ? tokenUser.rol : null;
+    
+    // Verificación adicional de rol
+    if (!userRole) {
+        console.error('[DASHBOARD-NAV] Rol no encontrado en token');
+        localStorage.clear();
+        window.location.href = getLoginPath();
+        return;
+    }
+    
+    // Verificar coherencia entre URL y rol del usuario
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('dashboard_admin') && userRole !== 'administrador') {
+        console.error('[DASHBOARD-NAV] Empacador intentando acceder a dashboard admin');
+        redirectToCorrectDashboard('empacador');
+        return;
+    }
+    
+    if (currentPath.includes('dashboard_empacador') && userRole !== 'empacador') {
+        console.error('[DASHBOARD-NAV] Admin intentando acceder a dashboard empacador');
+        redirectToCorrectDashboard('administrador');
+        return;
+    }
+    
+    console.log('[DASHBOARD-NAV] Usuario autorizado:', userRole);
+    
+    // Determinar endpoint según el rol
+    const endpoint = userRole === 'empacador' 
+        ? 'http://localhost:8000/dashboard/empacador/data'
+        : 'http://localhost:8000/dashboard/admin/data';
+    
+    fetch(endpoint, {
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${navToken}`
         }
     })
     .then(response => {
@@ -40,35 +92,53 @@ document.addEventListener('DOMContentLoaded', function(){
         console.error(error);
     });
 
-    // Obtener y mostrar usuarios en la tabla de Últimas Actividades
+    // Obtener y mostrar usuarios en la tabla de Últimas Actividades (solo para administradores)
     let usuariosData = [];
-    fetch('http://localhost:8000/dashboard/admin/users',{
-        headers: {
-            'Authorization': `Bearer ${token}`
+    
+    if (userRole === 'administrador') {
+        fetch('http://localhost:8000/dashboard/admin/users',{
+            headers: {
+                'Authorization': `Bearer ${navToken}`
+            }
+        })
+        .then(response => {
+            if (!response.ok){
+                throw new Error('No autorizado o error al obtener usuarios');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if(data.usuarios){
+                usuariosData = data.usuarios; // Guardar todos los usuarios para filtrar
+                renderUsuariosTable(usuariosData);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    } else {
+        // Para empacadores, ocultar la tabla de usuarios si existe
+        const usersTable = document.getElementById('usuarios-tbody');
+        if (usersTable && usersTable.parentElement) {
+            usersTable.parentElement.parentElement.style.display = 'none';
         }
-    })
-    .then(response => {
-        if (!response.ok){
-            throw new Error('No autorizado o error al obtener usuarios');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if(data.usuarios){
-            usuariosData = data.usuarios; // Guardar todos los usuarios para filtrar
-            renderUsuariosTable(usuariosData);
-        }
-    })
-    .catch(error => {
-        console.error(error);
-    });
+    }
 
     const logoutBtn = document.getElementById('cerrar_sesion');
     if (logoutBtn){
         logoutBtn.addEventListener('click',function(e){
             e.preventDefault();
             localStorage.clear();
-            window.location.href = '../../../../pages/login.html';
+            
+            // Redirección inteligente al login
+            const path = window.location.pathname;
+            if(path.includes('dashboard_empacador')) {
+                window.location.href = '../../../../pages/login.html';
+            } else if(path.includes('dashboard_admin')) {
+                window.location.href = '../../../../pages/login.html';
+            } else {
+                window.location.href = '../pages/login.html';
+            }
         });
     }
 
@@ -109,7 +179,6 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     // Mostrar nombre y rol de usuario en el perfil (navbar y sidebar)
-    const tokenUser = parseJwt(token);
     if (tokenUser && tokenUser.nombre) {
         // Solo mostrar el primer nombre
         const primerNombre = tokenUser.nombre.split(' ')[0];
@@ -136,4 +205,79 @@ document.addEventListener('DOMContentLoaded', function(){
         const title = profileMenu.querySelector('h6');
         if (title) title.textContent = 'Perfil';
     }
+
+    // Cargar y mostrar datos del usuario en el perfil
+    loadUserProfileData();
+    
+    function loadUserProfileData() {
+        const userData = parseJwt(navToken);
+        
+        if (userData) {
+            // Mostrar nombre de usuario en el sidebar
+            const profileNameElements = document.querySelectorAll('.profile-name h5');
+            profileNameElements.forEach(el => {
+                el.textContent = userData.nombre || userData.sub || 'Usuario';
+            });
+            
+            // Mostrar rol en el sidebar
+            const profileSpanElements = document.querySelectorAll('.profile-name span');
+            profileSpanElements.forEach(el => {
+                el.textContent = userData.rol === 'administrador' ? 'Administrador' : 'Empacador';
+            });
+            
+            // Mostrar nombre en la navbar
+            const navbarProfileName = document.querySelector('.navbar-profile-name');
+            if (navbarProfileName) {
+                navbarProfileName.textContent = userData.nombre || userData.sub || 'Usuario';
+            }
+        }
+    }
+
+    // Funciones auxiliares para redirección
+    function getLoginPath(){
+        const path = window.location.pathname;
+        
+        if(path.includes('dashboard_admin') || path.includes('dashboard_empacador')){
+            // Desde cualquier dashboard, volver al login principal
+            if(path.includes('/pages/')){
+                return '../../../../pages/login.html';
+            } else {
+                return '../../pages/login.html';
+            }
+        }
+        
+        // Fallback
+        return '/polleria/frontend/pages/login.html';
+    }
+
+    function redirectToCorrectDashboard(userRole){
+        // Redirección silenciosa e inmediata al dashboard correcto
+        window.location.replace(getDashboardPath(userRole));
+    }
+
+    function getDashboardPath(userRole){
+        const currentPath = window.location.pathname;
+        
+        if(userRole === 'administrador'){
+            if (currentPath.includes('/pages/dashboard_empacador/pages/')) {
+                return '../../../dashboard_admin/index.html';
+            } else if (currentPath.includes('/pages/dashboard_empacador/')) {
+                return '../dashboard_admin/index.html';
+            } else {
+                return '/polleria/frontend/pages/dashboard_admin/index.html';
+            }
+        } else if(userRole === 'empacador'){
+            if (currentPath.includes('/pages/dashboard_admin/pages/')) {
+                return '../../../dashboard_empacador/index.html';
+            } else if (currentPath.includes('/pages/dashboard_admin/')) {
+                return '../dashboard_empacador/index.html';
+            } else {
+                return '/polleria/frontend/pages/dashboard_empacador/index.html';
+            }
+        }
+        
+        // Si el rol no es reconocido, ir al login
+        return getLoginPath();
+    }
+
 });

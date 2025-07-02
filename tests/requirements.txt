@@ -1,0 +1,10 @@
+# Dependencias para Robot Framework
+robotframework==6.1.1
+robotframework-seleniumlibrary==6.2.0
+robotframework-requests==0.9.5
+robotframework-jsonlibrary==0.5
+robotframework-databaselibrary==1.4.3
+robotframework-faker==5.0.0
+selenium==4.15.2
+requests==2.31.0
+PyMySQL==1.1.0

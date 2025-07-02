@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const token = localStorage.getItem("token");
+  const adminToken = localStorage.getItem("token");
   fetch("http://localhost:8000/dashboard/admin/data", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${adminToken}`,
     },
   })
     .then((response) => {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Obtener y mostrar productos más vendidos en la tabla
   fetch("http://localhost:8000/dashboard/admin/productos-mas-vendidos", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${adminToken}`,
     },
   })
     .then((response) => {
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Mostrar nombre y rol de usuario en el perfil (navbar y sidebar)
-  const tokenUser = parseJwt(token);
+  const tokenUser = parseJwt(adminToken);
   if (tokenUser && tokenUser.nombre) {
     // Solo mostrar el primer nombre
     const primerNombre = tokenUser.nombre.split(" ")[0];

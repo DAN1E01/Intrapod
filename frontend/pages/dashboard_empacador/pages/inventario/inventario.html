@@ -21,8 +21,7 @@
   <!-- Custom js for this page -->
   <!-- <script src="assets/js/dashboard.js"></script> -->
   <!-- End custom js for this page -->
-  <script src="../../../../assets/js/jwt-decode.js"></script>
-  <script src="../../../../assets/js/profile-display.js"></script>
+  <script src="../../../../assets/js/jwt-decode.js"></script>  
   <script src="../../../../assets/js/global-guard.js"></script>
   <script src="../../../../assets/js/auth-guard.js"></script>
   <script src="../../../../assets/js/role-guard.js"></script>
@@ -70,14 +69,7 @@
           </a>
         </li>
 
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../gestionar_usuarios/usuarios.html">
-            <span class="menu-icon">
-              <i class="mdi mdi-account-multiple"></i>
-            </span>
-            <span class="menu-title">Gestionar Usuarios</span>
-          </a>
-        </li>
+        <!-- Gestionar Usuarios removido para empacadores -->
         <li class="nav-item menu-items">
           <a class="nav-link" href="../ventas/ventas.html">
             <span class="menu-icon">
@@ -94,13 +86,7 @@
             <span class="menu-title">Inventario</span>
           </a>
         </li>
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../reportes/reportes.html">
-            <span class="menu-icon">
-              <i class="mdi mdi-chart-line"></i> </span>
-            <span class="menu-title">Reportes</span>
-          </a>
-        </li>
+        
       </ul>
     </nav>
     <!-- partial -->
@@ -124,7 +110,7 @@
                 aria-expanded="false">
                 <div class="navbar-profile">
                   <span class="mdi mdi-account-circle" style="font-size:2.5rem; color:#bdbdbd;"></span>
-                  <p class="mb-0 d-none d-sm-block navbar-profile-name"></p>
+                  <p class="mb-0 d-none d-sm-block navbar-profile-name">Cristian</p>
                   <!-- Flecha restaurada -->
                   <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>
@@ -205,8 +191,8 @@
                         <th style="white-space:nowrap;">ID</th>
                         <th style="white-space:nowrap;">Producto</th>
                         <th class="d-none d-md-table-cell" style="white-space:nowrap; max-width:120px;">Descripción</th>
-                        <th style="white-space:nowrap;">P. Compra</th>
-                        <th style="white-space:nowrap;">P. Venta</th>
+                        <th style="white-space:nowrap;">Estado Stock</th>
+                        <th style="white-space:nowrap;">Ubicación</th>
                         <th style="white-space:nowrap;">Stock</th>
                         <th style="white-space:nowrap;">Sucursal</th>
                         <th style="white-space:nowrap;">Categoría</th>
@@ -231,10 +217,9 @@
   </div>
 
   <!-- container-scroller -->
-  <!-- Agregar jQuery ANTES de cualquier otro script -->
+  <!-- Agregar jQuery y Bootstrap JS para dropdowns (debe ir antes de los scripts de la plantilla) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  
   <!-- plugins:js -->
   <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -252,12 +237,10 @@
   <script src="../../assets/js/settings.js"></script>
   <script src="../../assets/js/todolist.js"></script>
   <!-- endinject -->
-  
+  <script src="../../../../assets/js/inventario.js"></script>
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
-  <!-- Scripts de inventario -->
-  <script src="../../../../assets/js/inventario.js"></script>
+  <!-- end SweetAlert2 -->
 
   <!-- Modal Nuevo Producto -->
   <div class="modal fade" id="modalNuevoProducto" tabindex="-1" role="dialog" aria-labelledby="modalNuevoProductoLabel"
@@ -356,30 +339,13 @@
     </div>
   </div>
   <script>
-    $(document).ready(function() {
-      // Verificar que jQuery está cargado
-      console.log('jQuery version:', $.fn.jquery);
-      console.log('Bootstrap dropdown disponible:', typeof $.fn.dropdown !== 'undefined');
-      
-      // Inicializar dropdowns de Bootstrap
+    $(function () {
+      // Forzar inicialización de todos los dropdowns de Bootstrap
       $('.dropdown-toggle').dropdown();
-      
-      // Debug específico para dropdowns de inventario
-      console.log('Dropdown Sucursal encontrado:', $('#dropdownSucursal').length > 0);
-      console.log('Dropdown Categoria encontrado:', $('#dropdownCategoria').length > 0);
-      console.log('Profile Dropdown encontrado:', $('#profileDropdown').length > 0);
-      
-      // Manejar clics en dropdowns manualmente si Bootstrap falla
-      $('#dropdownSucursal, #dropdownCategoria, #profileDropdown').on('click', function(e) {
-        const $this = $(this);
-        const $menu = $this.next('.dropdown-menu');
-        
-        // Toggle manual si Bootstrap no funciona
-        if ($menu.length > 0) {
-          $menu.toggle();
-          console.log('Dropdown toggled manually:', $this.attr('id'));
-        }
-      });
+      // Diagnóstico: mostrar alerta si el botón no existe
+      if (!$('#profileDropdown').length) {
+        console.error('No se encontró el botón #profileDropdown');
+      }
     });
   </script>
 </body>

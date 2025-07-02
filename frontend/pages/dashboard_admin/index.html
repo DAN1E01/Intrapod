@@ -25,6 +25,9 @@
   <!-- Cargar jQuery ANTES de cualquier script que lo use -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../../assets/js/jwt-decode.js"></script>
+  <script src="../../assets/js/global-guard.js"></script>
+  <script src="../../assets/js/auth-guard.js"></script>
+  <script src="../../assets/js/role-guard.js"></script>
   <!-- Custom js for this page -->
   <script src="assets/js/dashboard.js"></script>
   <!-- End custom js for this page -->
@@ -56,32 +59,7 @@
                 <span></span>
               </div>
             </div>
-            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-              aria-labelledby="profile-dropdown">
-              <a href="#" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-settings text-primary"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1 text-small">Configurar Cuenta</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-onepassword  text-info"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1 text-small">Cambiar Contraseña</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-            </div>
+
           </div>
         </li>
         <li class="nav-item nav-category">
@@ -104,8 +82,7 @@
           </a>
         </li>
         <li class="nav-item menu-items">
-          <a class="nav-link"
-            href="pages/ventas/ventas.html">
+          <a class="nav-link" href="pages/ventas/ventas.html">
             <span class="menu-icon">
               <i class="mdi mdi-shopping"></i>
             </span>
@@ -113,8 +90,7 @@
           </a>
         </li>
         <li class="nav-item menu-items">
-          <a class="nav-link"
-            href="pages/inventario/inventario.html">
+          <a class="nav-link" href="pages/inventario/inventario.html">
             <span class="menu-icon">
               <i class="mdi mdi-blender"></i>
             </span>
@@ -122,10 +98,9 @@
           </a>
         </li>
         <li class="nav-item menu-items">
-          <a class="nav-link"
-            href="pages/reportes/reportes.html">
+          <a class="nav-link" href="pages/reportes/reportes.html">
             <span class="menu-icon">
-<i class="mdi mdi-chart-line"></i>            </span>
+              <i class="mdi mdi-chart-line"></i> </span>
             <span class="menu-title">Reportes</span>
           </a>
         </li>
@@ -142,7 +117,8 @@
           <ul class="navbar-nav w-100">
             <li class="nav-item w-100">
               <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                <input type="text" class="form-control" id="search-producto" placeholder="Buscar producto" autocomplete="off">
+                <input type="text" class="form-control" id="search-producto" placeholder="Buscar producto"
+                  autocomplete="off">
               </form>
             </li>
           </ul>
@@ -161,17 +137,7 @@
                 aria-labelledby="profileDropdown">
                 <h6 class="p-3 mb-0">Profile</h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-settings text-success"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject mb-1">Settings</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
+
                 <a class="dropdown-item preview-item" href="#" id="cerrar_sesion">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
@@ -241,6 +207,7 @@
                   <div class="row">
                     <div class="col-8 col-sm-12 col-xl-8 my-auto">
                       <div class="d-flex d-sm-block d-md-flex align-items-center">
+                        <h2 class="mb-0" id="purchase-card">0</h2>
                       </div>
                       <h6 class="text-muted font-weight-normal" id="purchase-desc"></h6>
                     </div>
@@ -383,7 +350,7 @@
       }
 
       // Si la tabla se llena dinámicamente por JS, llama a esta función después de llenarla:
-      window.refrescarFiltroProductos = function() {
+      window.refrescarFiltroProductos = function () {
         guardarProductosOriginales();
         aplicarFiltro();
       };

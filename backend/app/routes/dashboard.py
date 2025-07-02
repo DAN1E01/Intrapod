@@ -5,7 +5,7 @@ from app.config.db.db import get_db
 from app.models.modelos import Producto, Inventario, Venta, Sucursal, Rol, Categoria
 from app.models.usuario import Usuario
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import or_
+from sqlalchemy import or_, and_, and_
 from passlib.hash import bcrypt
 from sqlalchemy import func
 from app.models.modelos import DetalleVenta
@@ -39,15 +39,39 @@ def admin_dashboard_data(user=Depends(require_role('administrador')), db: Sessio
 
 @router.get("/dashboard/empacador/data")
 def empacador_dashboard_data(user=Depends(require_role('empacador')), db: Session = Depends(get_db)):
-    # Ejemplo: solo mostrar total productos y stock
-    total_productos = db.query(Producto).count()
-    total_stock = db.query(Inventario).with_entities(Inventario.stock).all()
-    total_stock = sum([s[0] for s in total_stock])
+    # Obtener información del usuario actual
+    usuario_actual = user  # user ya es un objeto Usuario
+    
+    # Si el empacador tiene una sucursal asignada, filtrar por ella
+    if usuario_actual.id_sucursal:
+        # Productos de su sucursal
+        total_productos = db.query(Inventario).filter(Inventario.id_sucursal == usuario_actual.id_sucursal).count()
+        # Stock de su sucursal
+        total_stock = db.query(Inventario).filter(Inventario.id_sucursal == usuario_actual.id_sucursal).with_entities(Inventario.stock).all()
+        total_stock = sum([s[0] for s in total_stock])
+        # Ventas de su sucursal (información limitada)
+        total_ventas = db.query(Venta).filter(Venta.id_sucursal == usuario_actual.id_sucursal).count()
+        
+        # Información de las sucursales disponibles para el empacador
+        sucursales = db.query(Sucursal).all()
+        sucursales_list = [{"id": s.id, "nombre": s.nombre, "ciudad": s.ciudad, "direccion": s.direccion} for s in sucursales]
+    else:
+        # Si no tiene sucursal asignada, mostrar datos generales limitados
+        total_productos = db.query(Producto).count()
+        total_stock = db.query(Inventario).with_entities(Inventario.stock).all()
+        total_stock = sum([s[0] for s in total_stock])
+        total_ventas = db.query(Venta).count()
+        # Permitir acceso a todas las sucursales
+        sucursales = db.query(Sucursal).all()
+        sucursales_list = [{"id": s.id, "nombre": s.nombre, "ciudad": s.ciudad, "direccion": s.direccion} for s in sucursales]
+    
     return {
         "info_cards": {
             "total_productos": total_productos,
-            "total_stock": total_stock
-        }
+            "total_stock": total_stock,
+            "total_ventas": total_ventas
+        },
+        "sucursales": sucursales_list
     }
 
 @router.get("/dashboard/admin/users")
@@ -191,3 +215,56 @@ def ventas_por_producto(user=Depends(require_role('administrador')), db: Session
     labels = [r[0] for r in resultados]
     data = [r[1] for r in resultados]
     return {"labels": labels, "data": data}
+
+@router.get("/dashboard/empacador/productos-mas-vendidos")
+def productos_mas_vendidos_empacador(user=Depends(require_role('empacador')), db: Session = Depends(get_db)):
+    # Obtener información del usuario actual
+    usuario_actual = user  # user ya es un objeto Usuario
+    
+    # Base query para productos más vendidos
+    query = (
+        db.query(
+            Producto.nombre,
+            Sucursal.nombre.label("sucursal"),
+            func.sum(DetalleVenta.cantidad).label("total_vendido"),
+            Inventario.stock.label("stock_actual")
+        )
+        .join(DetalleVenta, DetalleVenta.id_producto == Producto.id)
+        .join(Venta, DetalleVenta.id_venta == Venta.id)
+        .join(Sucursal, Venta.id_sucursal == Sucursal.id)
+        .join(Inventario, and_(Inventario.id_producto == Producto.id, Inventario.id_sucursal == Sucursal.id))
+        .group_by(Producto.id, Sucursal.id, Inventario.stock)
+    )
+    
+    # Si el empacador tiene sucursal asignada, filtrar por ella
+    if usuario_actual.id_sucursal:
+        query = query.filter(Venta.id_sucursal == usuario_actual.id_sucursal)
+    
+    resultados = query.order_by(func.sum(DetalleVenta.cantidad).desc()).limit(10).all()
+    
+    return [
+        {
+            "producto": r[0],
+            "sucursal": r[1],
+            "total_vendido": r[2],
+            "stock_actual": r[3]
+        }
+        for r in resultados
+    ]
+
+@router.get("/dashboard/empacador/users")
+def empacador_users_list(user=Depends(require_role('empacador')), db: Session = Depends(get_db)):
+    # Los empacadores pueden ver la lista de usuarios para crear ventas
+    usuarios = db.query(Usuario).all()
+    result = []
+    for u in usuarios:
+        result.append({
+            "id": u.id,
+            "nombre": u.nombre,
+            "username": u.username,
+            "correo": u.correo,
+            "rol": u.rol.nombre if u.rol else None,
+            "sucursal": u.sucursal.nombre if u.sucursal else None,
+            "fecha_creacion": u.fecha_creacion.strftime('%Y-%m-%d %H:%M:%S') if u.fecha_creacion else None
+        })
+    return {"usuarios": result}

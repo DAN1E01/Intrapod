@@ -73,7 +73,6 @@ class ProductoBase(BaseModel):
     descripcion: Optional[str] = None
     precio_compra: Decimal = Field(gt=0)
     precio_venta: Decimal = Field(gt=0)
-    stock_minimo: int = 0
     unidad: str = "unidad"
 
 class ProductoCreate(ProductoBase):
@@ -84,8 +83,8 @@ class ProductoUpdate(BaseModel):
     descripcion: Optional[str] = None
     precio_compra: Optional[Decimal] = None
     precio_venta: Optional[Decimal] = None
-    stock_minimo: Optional[int] = None
     unidad: Optional[str] = None
+    id_categoria: Optional[int] = None
 
 class ProductoResponse(ProductoBase):
     id: int
@@ -165,7 +164,8 @@ class VentaCreate(VentaBase):
 class VentaResponse(VentaBase):
     id: int
     fecha: datetime
-    
+    estado: str  # <-- AGREGADO para que el frontend reciba el estado
+
     class Config:
         from_attributes = True
 

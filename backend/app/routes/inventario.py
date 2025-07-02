@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.config.db.db import get_db
-from app.models.modelos import Producto, Inventario, Sucursal, Categoria, DetalleCompra, DetalleVenta
+from app.models.modelos import Producto, Inventario, Sucursal, Categoria, DetalleCompra, DetalleVenta, DetalleMovimiento
 from pydantic import BaseModel
 from fastapi import status
+from typing import Optional
 
 router = APIRouter(
     prefix="/inventario",
@@ -15,9 +16,9 @@ class ProductoCreate(BaseModel):
     descripcion: str
     precio_compra: float
     precio_venta: float
-    stock_minimo: int
     id_sucursal: int
     id_categoria: int
+    stock_inicial: Optional[int] = 10
 
 class AjusteStockRequest(BaseModel):
     id_inventario: int
@@ -29,7 +30,6 @@ class ProductoUpdate(BaseModel):
     descripcion: str
     precio_compra: float
     precio_venta: float
-    stock_minimo: int
     id_categoria: int
 
 @router.get("/listar")
@@ -42,7 +42,6 @@ def listar_inventario(db: Session = Depends(get_db)):
             Producto.precio_compra.label("precio_compra"),
             Producto.precio_venta.label("precio_venta"),
             Inventario.stock.label("stock"),
-            Producto.stock_minimo.label("stock_minimo"),
             Sucursal.nombre.label("sucursal"),
             Categoria.nombre.label("categoria")
         )
@@ -59,7 +58,6 @@ def listar_inventario(db: Session = Depends(get_db)):
             "precio_compra": float(r.precio_compra),
             "precio_venta": float(r.precio_venta),
             "stock": r.stock,
-            "stock_minimo": r.stock_minimo,
             "sucursal": r.sucursal,
             "categoria": r.categoria
         }
@@ -83,17 +81,20 @@ def agregar_producto(producto: ProductoCreate, db: Session = Depends(get_db)):
         descripcion=producto.descripcion.strip(),
         precio_compra=producto.precio_compra,
         precio_venta=producto.precio_venta,
-        stock_minimo=producto.stock_minimo,
         id_categoria=producto.id_categoria
     )
     db.add(nuevo_producto)
     db.commit()
     db.refresh(nuevo_producto)
+    print(f"[DEBUG] stock_inicial recibido: {producto.stock_inicial}")
+    # Si el stock_inicial es None o menor a 1, usar 7 por defecto
+    stock_final = producto.stock_inicial if producto.stock_inicial is not None and producto.stock_inicial >= 1 else 7
     inventario = Inventario(
         id_producto=nuevo_producto.id,
         id_sucursal=producto.id_sucursal,
-        stock=0
+        stock=stock_final
     )
+    print(f"[DEBUG] Stock guardado en inventario: {inventario.stock}")
     db.add(inventario)
     db.commit()
     return {"message": "Producto agregado correctamente"}
@@ -116,7 +117,6 @@ def editar_producto(id: int, producto: ProductoUpdate, db: Session = Depends(get
     prod.descripcion = producto.descripcion.strip()
     prod.precio_compra = producto.precio_compra
     prod.precio_venta = producto.precio_venta
-    prod.stock_minimo = producto.stock_minimo
     prod.id_categoria = producto.id_categoria
     db.commit()
     return {"message": "Producto editado correctamente"}
@@ -128,10 +128,11 @@ def eliminar_producto(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     # Eliminar primero los inventarios relacionados
     db.query(Inventario).filter(Inventario.id_producto == id).delete()
+    # Eliminar detalles de movimiento relacionados
+    db.query(DetalleMovimiento).filter(DetalleMovimiento.id_producto == id).delete()
     # Eliminar detalles de compra relacionados
     db.query(DetalleCompra).filter(DetalleCompra.id_producto == id).delete()
     # Eliminar detalles de venta relacionados
     db.query(DetalleVenta).filter(DetalleVenta.id_producto == id).delete()
     db.delete(prod)
     db.commit()
-    return

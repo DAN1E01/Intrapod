@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Intrapod Admin</title>
+  <title>Intrapod Empacador</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -22,7 +22,9 @@
   <!-- <script src="assets/js/dashboard.js"></script> -->
   <!-- End custom js for this page -->
   <script src="../../../../assets/js/jwt-decode.js"></script>
-  <script src="../../../../assets/js/auth-guard_nav.js"></script>
+  <script src="../../../../assets/js/global-guard.js"></script>
+  <script src="../../../../assets/js/auth-guard.js"></script>
+  <script src="../../../../assets/js/role-guard.js"></script>
   <script src="../../../../assets/js/dashboard_nav.js"></script>
 
 </head>
@@ -65,14 +67,7 @@
           </a>
         </li>
         
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../gestionar_usuarios/usuarios.html">
-            <span class="menu-icon">
-              <i class="mdi mdi-account-multiple"></i>
-            </span>
-            <span class="menu-title">Gestionar Usuarios</span>
-          </a>
-        </li>
+        <!-- Gestionar Usuarios removido para empacadores -->
         <li class="nav-item menu-items">
           <a class="nav-link"
             href="../ventas/ventas.html">
@@ -145,45 +140,48 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="page-header">
-            <h3 class="page-title"> Reportes </h3>
+            <h3 class="page-title"> Reportes Empacador </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Reportes</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Gráficas</li>
+                <li class="breadcrumb-item active" aria-current="page">Gráficas Limitadas</li>
               </ol>
             </nav>
+          </div>
+          <!-- Mensaje informativo para empacadores -->
+          <div class="row">
+            <div class="col-12">
+              <div class="alert alert-info" role="alert">
+                <strong>Nota:</strong> Como empacador, solo puedes ver reportes relacionados con inventario y productos de tu sucursal.
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Ventas por mes</h4>
-                  <canvas id="lineChart" style="height:250px"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Inventario por categoría</h4>
+                  <h4 class="card-title">Inventario por categoría (Mi Sucursal)</h4>
                   <canvas id="barChart" style="height:230px"></canvas>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Proporción de productos</h4>
+                  <h4 class="card-title">Proporción de productos (Mi Sucursal)</h4>
                   <canvas id="doughnutChart" style="height:250px"></canvas>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 grid-margin stretch-card">
+          </div>
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Ventas por producto</h4>
+                  <h4 class="card-title">Stock de productos por categoría</h4>
+                  <div class="alert alert-warning" role="alert">
+                    Los reportes de ventas y financieros están restringidos para empacadores.
+                  </div>
                   <canvas id="pieChart" style="height:250px"></canvas>
                 </div>
               </div>

@@ -15,22 +15,73 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// frontend/assets/js/reportes.js
+// Este archivo obtiene datos reales del backend y genera los gráficos de reportes
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // Cargar Chart.js si no está cargado
+  if (typeof Chart === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+    script.onload = () => cargarReportes();
+    document.head.appendChild(script);
+  } else {
+    cargarReportes();
+  }
+});
+
+// Función para decodificar JWT
+function parseJwt(token) {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+}
+
+// Detectar el rol del usuario
+function getUserRole() {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+  const decoded = parseJwt(token);
+  return decoded ? decoded.rol : null;
+}
+
 async function cargarReportes() {
-  // 1. Ventas por mes
-  const ventasPorMes = await fetchDatos('/dashboard/admin/ventas_por_mes');
-  renderLineChart(ventasPorMes);
+  const userRole = getUserRole();
+  
+  if (userRole === 'administrador') {
+    // Administradores ven todos los reportes
+    const ventasPorMes = await fetchDatos('/dashboard/admin/ventas_por_mes');
+    renderLineChart(ventasPorMes);
 
-  // 2. Inventario por categoría
-  const inventarioPorCategoria = await fetchDatos('/dashboard/admin/inventario_por_categoria');
-  renderBarChart(inventarioPorCategoria);
+    const inventarioPorCategoria = await fetchDatos('/dashboard/admin/inventario_por_categoria');
+    renderBarChart(inventarioPorCategoria);
 
-  // 3. Proporción de productos
-  const proporcionProductos = await fetchDatos('/dashboard/admin/proporcion_productos');
-  renderDoughnutChart(proporcionProductos);
+    const proporcionProductos = await fetchDatos('/dashboard/admin/proporcion_productos');
+    renderDoughnutChart(proporcionProductos);
 
-  // 4. Ventas por producto
-  const ventasPorProducto = await fetchDatos('/dashboard/admin/ventas_por_producto');
-  renderPieChart(ventasPorProducto);
+    const ventasPorProducto = await fetchDatos('/dashboard/admin/ventas_por_producto');
+    renderPieChart(ventasPorProducto);
+  } else if (userRole === 'empacador') {
+    // Empacadores ven reportes limitados
+    // Ocultar gráfico de ventas por mes (información financiera)
+    const lineChartContainer = document.getElementById('lineChart');
+    if (lineChartContainer) {
+      lineChartContainer.parentElement.parentElement.style.display = 'none';
+    }
+
+    // Mostrar solo inventario por categoría de su sucursal
+    const inventarioPorCategoria = await fetchDatos('/dashboard/admin/inventario_por_categoria');
+    renderBarChart(inventarioPorCategoria);
+
+    const proporcionProductos = await fetchDatos('/dashboard/admin/proporcion_productos');
+    renderDoughnutChart(proporcionProductos);
+
+    // En lugar del pie chart de ventas, mostrar distribución de stock
+    const stockData = await fetchDatos('/dashboard/admin/inventario_por_categoria');
+    renderPieChart(stockData);
+  }
 }
 
 const token = localStorage.getItem('token');

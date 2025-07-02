@@ -22,7 +22,9 @@
   <!-- <script src="assets/js/dashboard.js"></script> -->
   <!-- End custom js for this page -->
   <script src="../../../../assets/js/jwt-decode.js"></script>
-  <script src="../../../../assets/js/auth-guard_nav.js"></script>
+  <script src="../../../../assets/js/global-guard.js"></script>
+  <script src="../../../../assets/js/auth-guard.js"></script>
+  <script src="../../../../assets/js/role-guard.js"></script>
   <script src="../../../../assets/js/dashboard_nav.js"></script>
 
 </head>
@@ -51,32 +53,7 @@
                 <span></span>
               </div>
             </div>
-            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-              aria-labelledby="profile-dropdown">
-              <a href="#" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-settings text-primary"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1 text-small">Configurar Cuenta</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-onepassword  text-info"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1 text-small">Cambiar Contraseña</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-            </div>
+            
           </div>
         </li>
         <li class="nav-item nav-category">
@@ -147,17 +124,7 @@
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                 <h6 class="p-3 mb-0">Profile</h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-settings text-success"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject mb-1">Settings</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
+
                 <a class="dropdown-item preview-item" href="#" id="cerrar_sesion">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
@@ -168,8 +135,7 @@
                     <p class="preview-subject mb-1">Log out</p>
                   </div>
                 </a>
-                <div class="dropdown-divider"></div>
-                <p class="p-3 mb-0 text-center">Advanced settings</p>
+                
               </div>
             </li>
           </ul>
@@ -187,18 +153,106 @@
   <div class="col-12 col-md-6">
     <input type="text" class="form-control" id="search-venta-producto" placeholder="Buscar producto vendido" autocomplete="off">
   </div>
+  <div class="col-12 col-md-6 text-right">
+    <button class="btn btn-primary" id="btnNuevaVenta"><i class="mdi mdi-plus"></i> Nueva Venta</button>
+  </div>
+</div>
+<!-- Modal para registrar/editar venta tipo carrito -->
+<div class="modal fade" id="modalVenta" tabindex="-1" role="dialog" aria-labelledby="modalVentaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form id="formVenta">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalVentaLabel">Registrar Venta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="alertModalVenta"></div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ventaUsuario">Usuario</label>
+              <select class="form-control" id="ventaUsuario" required></select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ventaSucursal">Sucursal</label>
+              <select class="form-control" id="ventaSucursal" required></select>
+            </div>
+          </div>
+          <hr>
+          <h6>Agregar productos</h6>
+          <div class="form-row align-items-end">
+            <div class="form-group col-md-5">
+              <label for="ventaProducto">Producto</label>
+              <select class="form-control" id="ventaProducto"></select>
+              <small id="stockDisponible" class="form-text text-muted" style="font-weight:bold;"></small>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="ventaCantidad">Cantidad</label>
+              <input type="number" class="form-control" id="ventaCantidad" min="1" value="1">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="ventaPrecio">Precio unitario</label>
+              <input type="number" class="form-control" id="ventaPrecio" min="0" step="0.01">
+            </div>
+            <div class="form-group col-md-1">
+              <button type="button" class="btn btn-success" id="btnAgregarProducto"><i class="mdi mdi-cart-plus"></i></button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered" id="tablaCarrito">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio unitario</th>
+                  <th>Subtotal</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="text-right font-weight-bold">Total: $<span id="ventaTotal">0.00</span></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Venta</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <div class="col-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Ventas de Productos</h4>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="editarEstadoVenta"><b>Editar estado de venta:</b></label>
+          <div style="position:relative;">
+            <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#007bff;font-size:1.2em;pointer-events:none;">
+              <i class="mdi mdi-swap-horizontal"></i>
+            </span>
+            <select id="editarEstadoVenta" class="form-control" disabled
+              style="padding-left:2.2em;background: #f4f8fb; border-radius: 0.5em; border: 1.5px solid #b6d4fe; font-weight:bold; color:#1a237e;">
+              <option value="pendiente">Pendiente</option>
+              <option value="entregado">Entregado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+          <small id="ventaSeleccionadaInfo" class="text-muted"></small>
+        </div>
+      </div>
       <div class="table-responsive">
         <table class="table table-bordered table-hover" id="tabla-ventas-productos">
           <thead>
             <tr>
               <th>#</th>
-              <th>Producto</th>
-              <th>Cantidad</th>
+              <th>Usuario</th>
+              <th>Sucursal</th>
+              <th>Fecha</th>
               <th>Total</th>
               <th>Estado</th>
               <th>Acciones</th>
@@ -212,75 +266,6 @@
     </div>
   </div>
 </div>
-<script>
-// --- Llenar y filtrar ventas de productos ---
-document.addEventListener("DOMContentLoaded", function () {
-  const token = localStorage.getItem("token");
-  const tbody = document.getElementById('ventas-productos-tbody');
-  const inputBuscar = document.getElementById('search-venta-producto');
-  let ventasOriginales = [];
-
-  function renderVentasTabla(ventas) {
-    if (!tbody) return;
-    tbody.innerHTML = '';
-    ventas.forEach((v, idx) => {
-      const tr = document.createElement('tr');
-      let estadoClass = 'btn-secondary';
-      if (v.estado === 'pendiente') estadoClass = 'btn-warning';
-      else if (v.estado === 'cancelado') estadoClass = 'btn-danger';
-      else if (v.estado === 'completado') estadoClass = 'btn-success';
-      tr.innerHTML = `
-        <td>${idx + 1}</td>
-        <td>${v.producto}</td>
-        <td>${v.cantidad}</td>
-        <td>$${Number(v.total).toFixed(2)}</td>
-        <td><span class="btn ${estadoClass} btn-sm">${v.estado.charAt(0).toUpperCase() + v.estado.slice(1)}</span></td>
-        <td>
-          <button class="btn btn-success btn-sm" onclick="cambiarEstadoVenta(${v.id}, 'completado')">Completar</button>
-          <button class="btn btn-danger btn-sm" onclick="cambiarEstadoVenta(${v.id}, 'cancelado')">Cancelar</button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-
-  function cargarVentas() {
-    fetch('http://localhost:8000/dashboard/admin/ventas_por_producto', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then(res => res.json())
-      .then(data => {
-        // Simulación de estados para demo
-        ventasOriginales = (data.labels || []).map((nombre, idx) => ({
-          id: idx + 1,
-          producto: nombre,
-          cantidad: data.data[idx],
-          total: (data.data[idx] * 1000) || 0, // Simula total
-          estado: ['pendiente', 'completado', 'cancelado'][idx % 3]
-        }));
-        renderVentasTabla(ventasOriginales);
-      });
-  }
-
-  if (inputBuscar) {
-    inputBuscar.addEventListener('input', function() {
-      const texto = this.value.trim().toLowerCase();
-      let filtrados = ventasOriginales;
-      if (texto) {
-        filtrados = ventasOriginales.filter(v => v.producto.toLowerCase().includes(texto));
-      }
-      renderVentasTabla(filtrados);
-    });
-  }
-
-  window.cambiarEstadoVenta = function(id, nuevoEstado) {
-    ventasOriginales = ventasOriginales.map(v => v.id === id ? { ...v, estado: nuevoEstado } : v);
-    renderVentasTabla(ventasOriginales);
-  };
-
-  cargarVentas();
-});
-</script>
         </div>
         <!-- content-wrapper ends -->
 
@@ -308,6 +293,10 @@ document.addEventListener("DOMContentLoaded", function () {
   <script src="../../assets/js/settings.js"></script>
   <script src="../../assets/js/todolist.js"></script>
   <!-- endinject -->
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../../../../assets/js/ventas.js"></script>
+
 </body>
 
 </html>

@@ -1,31 +1,45 @@
 // frontend/assets/js/inventario.js
 
 document.addEventListener('DOMContentLoaded', function () {
+    // No hay restricciones de rol - todos los usuarios tienen acceso completo
+    
+    // Definir elementos una sola vez al inicio
+    const exportBtn = document.querySelector('.btn-outline-success');
+    const btnNuevoProducto = document.getElementById('btnNuevoProducto');
+    
     cargarFiltros();
     cargarInventario();
     document.getElementById('dropdownSucursal').addEventListener('click', mostrarDropdownSucursal);
     document.getElementById('dropdownCategoria').addEventListener('click', mostrarDropdownCategoria);
     // Exportar a CSV
-    const exportBtn = document.querySelector('.btn-outline-success');
     if (exportBtn) {
         exportBtn.addEventListener('click', exportarCSV);
     }
     // Abrir modal Nuevo Producto
-    const nuevoBtn = document.getElementById('btnNuevoProducto');
-    if (nuevoBtn) {
-        nuevoBtn.addEventListener('click', function() {
+    if (btnNuevoProducto) {
+        btnNuevoProducto.addEventListener('click', function() {
+            // Resetear completamente el modal para nuevo producto
+            resetModalNuevoProducto();
             // Cambiar título del modal
             document.getElementById('modalNuevoProductoLabel').textContent = 'Nuevo Producto';
             // Limpiar modo edición
             const form = document.getElementById('formNuevoProducto');
-            if (form) form.removeAttribute('data-edit-id');
+            if (form) {
+                form.removeAttribute('data-edit-id');
+                form.reset(); // Limpiar todos los campos del formulario
+            }
             // Poblar sucursales y categorías en el select del modal
+            const userRole = getUserRole();
+            const baseEndpoint = userRole === 'empacador' 
+                ? `${API_URL}/dashboard/empacador` 
+                : `${API_URL}/dashboard/admin`;
+            
             Promise.all([
-                fetch(`${API_URL}/dashboard/admin/data`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                fetch(`${baseEndpoint}/data`, {
+                    headers: { 'Authorization': `Bearer ${getInventarioToken()}` }
                 }).then(res => res.json()),
                 fetch(`${API_URL}/inventario/categorias`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 'Authorization': `Bearer ${getInventarioToken()}` }
                 }).then(res => res.json())
             ]).then(([data, categorias]) => {
                 // Sucursales
@@ -46,6 +60,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 // Limpiar campos del formulario
                 form.reset();
+                // Asegurar que los selects queden en vacío
+                if (selectSuc) selectSuc.value = '';
+                if (selectCat) selectCat.value = '';
                 $('#modalNuevoProducto').modal('show');
             });
         });
@@ -60,15 +77,33 @@ document.addEventListener('DOMContentLoaded', function () {
             const descripcion = document.getElementById('descripcionProducto').value.trim();
             const precio_compra = document.getElementById('precioCompra').value;
             const precio_venta = document.getElementById('precioVenta').value;
-            const stock_minimo = document.getElementById('stockMinimo').value;
+            // Eliminar referencia a stockMinimo (ya no existe)
             const sucursal = document.getElementById('sucursalProducto').value;
             const categoria = document.getElementById('categoriaProducto').value;
+            // El stock_inicial ahora siempre será 7 (oculto)
+            const stock_inicial = 7;
             let error = '';
+            // Validaciones personalizadas
+            const regexNombreDesc = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s.,\-\/()]+$/;
+            const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ]+$/;
+            // Detectar cadenas repetidas (ej: adadadadadad)
+            function esCadenaRepetida(str) {
+                if (str.length < 6) return false;
+                const patrones = [/^(\w{2,4})\1+$/, /^(\w)\1+$/];
+                return patrones.some(pat => pat.test(str.replace(/\s/g, '')));
+            }
             if (!nombre || nombre.replace(/\s/g, '') === '') error = 'El nombre es obligatorio.';
+            else if (!regexNombreDesc.test(nombre) || /^\d+$/.test(nombre)) error = 'El nombre debe contener letras y ser válido para electrodomésticos.';
+            else if (soloLetras.test(nombre) && esCadenaRepetida(nombre)) error = 'El nombre no puede ser una cadena repetitiva sin sentido.';
             else if (!descripcion || descripcion.replace(/\s/g, '') === '') error = 'La descripción es obligatoria.';
+            else if (!regexNombreDesc.test(descripcion) || /^\d+$/.test(descripcion)) error = 'La descripción debe contener letras y ser válida para electrodomésticos.';
+            else if (soloLetras.test(descripcion) && esCadenaRepetida(descripcion)) error = 'La descripción no puede ser una cadena repetitiva sin sentido.';
             else if (!precio_compra || isNaN(precio_compra) || Number(precio_compra) <= 0) error = 'Precio de compra inválido.';
             else if (!precio_venta || isNaN(precio_venta) || Number(precio_venta) <= 0) error = 'Precio de venta inválido.';
-            else if (!stock_minimo || isNaN(stock_minimo) || Number(stock_minimo) < 0) error = 'Stock mínimo inválido.';
+            else if (Number(precio_compra) === Number(precio_venta)) error = 'El precio de compra y venta no pueden ser iguales.';
+            else if (Number(precio_venta) <= Number(precio_compra)) error = 'El precio de venta debe ser mayor al de compra.';
+            // Eliminar validación de stock_minimo (ya no existe)
+            else if (stock_inicial === '' || isNaN(stock_inicial) || Number(stock_inicial) < 1 || Number(stock_inicial) > 99999) error = 'Stock inicial inválido. Debe ser un número entre 1 y 99999.';
             else if (!sucursal) error = 'Debe seleccionar una sucursal.';
             else if (!categoria) error = 'Debe seleccionar una categoría.';
             if (error) {
@@ -84,14 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     descripcion,
                     precio_compra: Number(precio_compra),
                     precio_venta: Number(precio_venta),
-                    stock_minimo: Number(stock_minimo),
                     id_categoria: Number(categoria)
                 };
                 fetch(`${API_URL}/inventario/editar/${editId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getInventarioToken()}`
                     },
                     body: JSON.stringify(body)
                 })
@@ -117,15 +151,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 descripcion,
                 precio_compra: Number(precio_compra),
                 precio_venta: Number(precio_venta),
-                stock_minimo: Number(stock_minimo),
                 id_sucursal: Number(sucursal),
-                id_categoria: Number(categoria)
+                id_categoria: Number(categoria),
+                stock_inicial: stock_inicial
             };
             fetch(`${API_URL}/inventario/agregar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getInventarioToken()}`
                 },
                 body: JSON.stringify(body)
             })
@@ -145,6 +179,10 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+    // Resetear modal cuando se cierre
+    $('#modalNuevoProducto').on('hidden.bs.modal', function () {
+        resetModalNuevoProducto();
+    });
 });
 
 let sucursalSeleccionada = 'Todas';
@@ -153,13 +191,23 @@ let inventarioGlobal = [];
 let textoBusqueda = '';
 
 const API_URL = 'http://localhost:8000';
-const token = localStorage.getItem('token');
+
+// Función para obtener el token
+function getInventarioToken() {
+    return localStorage.getItem('token');
+}
 
 function cargarFiltros() {
+    // Detectar rol y usar el endpoint apropiado
+    const userRole = getUserRole();
+    const baseEndpoint = userRole === 'empacador' 
+        ? `${API_URL}/dashboard/empacador` 
+        : `${API_URL}/dashboard/admin`;
+    
     // Cargar sucursales
-    fetch(`${API_URL}/dashboard/admin/data`, {
+    fetch(`${baseEndpoint}/data`, {
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${getInventarioToken()}`
         }
     })
         .then(res => res.json())
@@ -182,7 +230,7 @@ function cargarFiltros() {
     // Cargar categorías
     fetch(`${API_URL}/inventario/categorias`, {
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${getInventarioToken()}`
         }
     })
         .then(res => res.json())
@@ -214,7 +262,7 @@ function cargarFiltros() {
 function cargarInventario() {
     fetch(`${API_URL}/inventario/listar`, {
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${getInventarioToken()}`
         }
     })
         .then(response => response.json())
@@ -231,6 +279,7 @@ function filtrarTabla() {
     const tbody = document.querySelector('table.table tbody');
     tbody.innerHTML = '';
     let datos = inventarioGlobal;
+    
     if (sucursalSeleccionada !== 'Todas') {
         datos = datos.filter(item => item.sucursal === sucursalSeleccionada);
     }
@@ -244,15 +293,18 @@ function filtrarTabla() {
             (item.sucursal && item.sucursal.toLowerCase().includes(textoBusqueda))
         );
     }
+    
     datos.forEach(item => {
         const tr = document.createElement('tr');
+        
+        // Mostrar información completa incluyendo precios para todos los roles
         tr.innerHTML = `
             <td>${item.id}</td>
             <td>${item.producto}</td>
             <td class="d-none d-md-table-cell">${item.descripcion}</td>
             <td>${item.precio_compra.toFixed(2)}</td>
             <td>${item.precio_venta.toFixed(2)}</td>
-            <td>${item.stock}</td>
+            <td>${(item.stock !== undefined && item.stock !== null && !isNaN(item.stock)) ? item.stock : 0}</td>
             <td>${item.sucursal}</td>
             <td>${item.categoria}</td>
             <td style="vertical-align:middle;">
@@ -277,7 +329,7 @@ function filtrarTabla() {
                 if (result.isConfirmed) {
                     fetch(`${API_URL}/inventario/eliminar/${item.id}`, {
                         method: 'DELETE',
-                        headers: { 'Authorization': `Bearer ${token}` }
+                        headers: { 'Authorization': `Bearer ${getInventarioToken()}` }
                     })
                     .then(res => {
                         if (!res.ok) throw new Error('Error al eliminar producto');
@@ -295,12 +347,17 @@ function filtrarTabla() {
             document.getElementById('modalNuevoProductoLabel').textContent = 'Editar Producto';
             const form = document.getElementById('formNuevoProducto');
             // Poblar sucursales y categorías antes de mostrar el modal
+            const userRole = getUserRole();
+            const baseEndpoint = userRole === 'empacador' 
+                ? `${API_URL}/dashboard/empacador` 
+                : `${API_URL}/dashboard/admin`;
+            
             Promise.all([
-                fetch(`${API_URL}/dashboard/admin/data`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                fetch(`${baseEndpoint}/data`, {
+                    headers: { 'Authorization': `Bearer ${getInventarioToken()}` }
                 }).then(res => res.json()),
                 fetch(`${API_URL}/inventario/categorias`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 'Authorization': `Bearer ${getInventarioToken()}` }
                 }).then(res => res.json())
             ]).then(([data, categorias]) => {
                 // Sucursales
@@ -324,7 +381,7 @@ function filtrarTabla() {
                 document.getElementById('descripcionProducto').value = item.descripcion;
                 document.getElementById('precioCompra').value = item.precio_compra;
                 document.getElementById('precioVenta').value = item.precio_venta;
-                document.getElementById('stockMinimo').value = item.stock_minimo;
+                // Eliminar referencia a stockMinimo (ya no existe)
                 // Seleccionar sucursal y categoría actuales
                 if (selectSuc) selectSuc.value = data.sucursales.find(s => s.nombre === item.sucursal)?.id || '';
                 if (selectCat) selectCat.value = categorias.find(c => c.nombre === item.categoria)?.id || '';
@@ -336,6 +393,13 @@ function filtrarTabla() {
         tbody.appendChild(tr);
     });
 }
+
+// Inicializar dropdowns cuando se cargue el DOM
+setTimeout(function() {
+    // Forzar inicialización de dropdowns
+    $('.dropdown-toggle').dropdown();
+    console.log('[INVENTARIO] Dropdowns inicializados');
+}, 100);
 
 // Botón global para abrir el modal de ajustar stock
 
@@ -369,8 +433,7 @@ if (btnAjustarStockGlobal) {
                 return;
             }
             const producto = inventarioGlobal.find(p => String(p.id) === String(id));
-            console.log('Producto seleccionado:', producto);
-            if (stockActual) stockActual.textContent = producto ? producto.stock : '-';
+            if (stockActual) stockActual.textContent = (producto && producto.stock !== undefined && producto.stock !== null && !isNaN(producto.stock)) ? producto.stock : 0;
         };
         const formAjustarStock = document.getElementById('formAjustarStock');
         if (formAjustarStock) {
@@ -388,7 +451,7 @@ if (btnAjustarStockGlobal) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${getInventarioToken()}`
                     },
                     body: JSON.stringify({ id_inventario: Number(id_inventario), cantidad, motivo })
                 })
@@ -452,7 +515,7 @@ function exportarCSV() {
         return;
     }
     // Encabezados
-    const headers = ['ID', 'Producto', 'Descripción', 'P. Compra', 'P. Venta', 'Stock', 'Stock Min.', 'Sucursal', 'Categoría'];
+    const headers = ['ID', 'Producto', 'Descripción', 'P. Compra', 'P. Venta', 'Stock', 'Sucursal', 'Categoría'];
     const rows = datos.map(item => [
         item.id,
         item.producto,
@@ -460,7 +523,6 @@ function exportarCSV() {
         item.precio_compra.toFixed(2),
         item.precio_venta.toFixed(2),
         item.stock,
-        item.stock_minimo,
         item.sucursal,
         item.categoria
     ]);
@@ -504,4 +566,53 @@ function mostrarMensajeArriba(msg, tipo) {
     alert.className = 'alert alert-' + tipo + ' mt-2';
     alert.textContent = msg;
     setTimeout(() => { alert.remove(); }, 3000);
+}
+
+// Función para detectar rol del usuario
+function parseJwt(token) {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+}
+
+function getUserRole() {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+  const decoded = parseJwt(token);
+  return decoded ? decoded.rol : null;
+}
+
+// Función para resetear completamente el modal de nuevo producto
+function resetModalNuevoProducto() {
+    // Cambiar título
+    const modalTitle = document.getElementById('modalNuevoProductoLabel');
+    if (modalTitle) {
+        modalTitle.textContent = 'Nuevo Producto';
+    }
+    
+    // Limpiar formulario
+    const form = document.getElementById('formNuevoProducto');
+    if (form) {
+        form.reset();
+        form.removeAttribute('data-edit-id');
+    }
+    
+    // Limpiar selects
+    const selectSuc = document.getElementById('sucursalProducto');
+    if (selectSuc) {
+        selectSuc.innerHTML = '<option value="">Seleccione una sucursal</option>';
+    }
+    
+    const selectCat = document.getElementById('categoriaProducto');
+    if (selectCat) {
+        selectCat.innerHTML = '<option value="">Seleccione una categoría</option>';
+    }
+    
+    // Restaurar stock inicial por defecto
+    const stockInput = document.getElementById('stockInicial');
+    if (stockInput) {
+        stockInput.value = '7';
+    }
 }

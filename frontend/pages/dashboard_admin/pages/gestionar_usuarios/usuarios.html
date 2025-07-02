@@ -23,7 +23,9 @@
   <!-- End custom js for this page -->
    <!-- Script Guardias y Datos-->
   <script src="../../../../assets/js/jwt-decode.js"></script>
-  <script src="../../../../assets/js/auth-guard_nav.js"></script>
+  <script src="../../../../assets/js/global-guard.js"></script>
+  <script src="../../../../assets/js/auth-guard.js"></script>
+  <script src="../../../../assets/js/role-guard.js"></script>
   <script src="../../../../assets/js/dashboard_nav.js"></script>
   <!-- End Script Guardias y Datos-->
   <!-- Script SweetAlert -->
@@ -55,32 +57,7 @@
                 <span></span>
               </div>
             </div>
-            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-              aria-labelledby="profile-dropdown">
-              <a href="#" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-settings text-primary"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1 text-small">Configurar Cuenta</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-onepassword  text-info"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1 text-small">Cambiar Contraseña</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-            </div>
+            
           </div>
         </li>
         <li class="nav-item nav-category">
@@ -155,17 +132,7 @@
                 aria-labelledby="profileDropdown">
                 <h6 class="p-3 mb-0">Profile</h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-settings text-success"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject mb-1">Settings</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
+                
                 <a class="dropdown-item preview-item" href="#" id="cerrar_sesion">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
@@ -176,8 +143,7 @@
                     <p class="preview-subject mb-1">Log out</p>
                   </div>
                 </a>
-                <div class="dropdown-divider"></div>
-                <p class="p-3 mb-0 text-center">Advanced settings</p>
+                
               </div>
             </li>
           </ul>

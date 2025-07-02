@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Intrapod Admin</title>
+  <title>Intrapod - Ventas</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -22,7 +22,10 @@
   <!-- <script src="assets/js/dashboard.js"></script> -->
   <!-- End custom js for this page -->
   <script src="../../../../assets/js/jwt-decode.js"></script>
-  <script src="../../../../assets/js/auth-guard_nav.js"></script>
+  <script src="../../../../assets/js/profile-display.js"></script>
+  <script src="../../../../assets/js/global-guard.js"></script>
+  <script src="../../../../assets/js/auth-guard.js"></script>
+  <script src="../../../../assets/js/role-guard.js"></script>
   <script src="../../../../assets/js/dashboard_nav.js"></script>
 
 </head>
@@ -51,6 +54,7 @@
                 <span></span>
               </div>
             </div>
+            
           </div>
         </li>
         <li class="nav-item nav-category">
@@ -64,15 +68,7 @@
             <span class="menu-title">Dashboard</span>
           </a>
         </li>
-        
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../gestionar_usuarios/usuarios.html">
-            <span class="menu-icon">
-              <i class="mdi mdi-account-multiple"></i>
-            </span>
-            <span class="menu-title">Gestionar Usuarios</span>
-          </a>
-        </li>
+        <!-- Gestionar Usuarios removido para empacadores -->
         <li class="nav-item menu-items">
           <a class="nav-link"
             href="../ventas/ventas.html">
@@ -91,14 +87,7 @@
             <span class="menu-title">Inventario</span>
           </a>
         </li>
-        <li class="nav-item menu-items">
-          <a class="nav-link"
-            href="../reportes/reportes.html">
-            <span class="menu-icon">
-<i class="mdi mdi-chart-line"></i>            </span>
-            <span class="menu-title">Reportes</span>
-          </a>
-        </li>
+        
       </ul>
     </nav>
     <!-- partial -->
@@ -109,6 +98,7 @@
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
+          
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item dropdown">
               <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
@@ -121,6 +111,7 @@
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                 <h6 class="p-3 mb-0">Profile</h6>
                 <div class="dropdown-divider"></div>
+
                 <a class="dropdown-item preview-item" href="#" id="cerrar_sesion">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
@@ -144,60 +135,127 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title"> Reportes </h3>
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Reportes</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Gráficas</li>
-              </ol>
-            </nav>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Ventas por mes</h4>
-                  <canvas id="lineChart" style="height:250px"></canvas>
-                </div>
-              </div>
+          <!-- Filtro y tabla de ventas de productos -->
+<div class="row mb-4">
+  <div class="col-12 col-md-6">
+    <input type="text" class="form-control" id="search-venta-producto" placeholder="Buscar producto vendido" autocomplete="off">
+  </div>
+  <div class="col-12 col-md-6 text-right">
+    <button class="btn btn-primary" id="btnNuevaVenta"><i class="mdi mdi-plus"></i> Nueva Venta</button>
+  </div>
+</div>
+<!-- Modal para registrar/editar venta tipo carrito -->
+<div class="modal fade" id="modalVenta" tabindex="-1" role="dialog" aria-labelledby="modalVentaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form id="formVenta">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalVentaLabel">Registrar Venta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="alertModalVenta"></div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ventaUsuario">Usuario</label>
+              <select class="form-control" id="ventaUsuario" required></select>
             </div>
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Inventario por categoría</h4>
-                  <canvas id="barChart" style="height:230px"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Proporción de productos</h4>
-                  <canvas id="doughnutChart" style="height:250px"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Ventas por producto</h4>
-                  <canvas id="pieChart" style="height:250px"></canvas>
-                </div>
-              </div>
+            <div class="form-group col-md-6">
+              <label for="ventaSucursal">Sucursal</label>
+              <select class="form-control" id="ventaSucursal" required></select>
             </div>
           </div>
+          <hr>
+          <h6>Agregar productos</h6>
+          <div class="form-row align-items-end">
+            <div class="form-group col-md-5">
+              <label for="ventaProducto">Producto</label>
+              <select class="form-control" id="ventaProducto"></select>
+              <small id="stockDisponible" class="form-text text-muted" style="font-weight:bold;"></small>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="ventaCantidad">Cantidad</label>
+              <input type="number" class="form-control" id="ventaCantidad" min="1" value="1">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="ventaPrecio">Precio unitario</label>
+              <input type="number" class="form-control" id="ventaPrecio" min="0" step="0.01">
+            </div>
+            <div class="form-group col-md-1">
+              <button type="button" class="btn btn-success" id="btnAgregarProducto"><i class="mdi mdi-cart-plus"></i></button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered" id="tablaCarrito">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio unitario</th>
+                  <th>Subtotal</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="text-right font-weight-bold">Total: $<span id="ventaTotal">0.00</span></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Venta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ventas de Productos</h4>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="editarEstadoVenta"><b>Editar estado de venta:</b></label>
+          <div style="position:relative;">
+            <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#007bff;font-size:1.2em;pointer-events:none;">
+              <i class="mdi mdi-swap-horizontal"></i>
+            </span>
+            <select id="editarEstadoVenta" class="form-control" disabled
+              style="padding-left:2.2em;background: #f4f8fb; border-radius: 0.5em; border: 1.5px solid #b6d4fe; font-weight:bold; color:#1a237e;">
+              <option value="pendiente">Pendiente</option>
+              <option value="entregado">Entregado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+          <small id="ventaSeleccionadaInfo" class="text-muted"></small>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tabla-ventas-productos">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Usuario</th>
+              <th>Sucursal</th>
+              <th>Fecha</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="ventas-productos-tbody">
+            <!-- Aquí se llenarán las ventas dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Intrapod 2025</span>
-          </div>
-        </footer>
-        <!-- partial -->
+
       </div>
       <!-- main-panel ends -->
     </div>
@@ -222,7 +280,12 @@
   <script src="../../assets/js/settings.js"></script>
   <script src="../../assets/js/todolist.js"></script>
   <!-- endinject -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="../../../../assets/js/reportes.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Script de depuración temporal -->
+  <script src="../../../../assets/js/debug-auth.js"></script>
+  <script src="../../../../assets/js/ventas.js"></script>
+
 </body>
+
 </html>

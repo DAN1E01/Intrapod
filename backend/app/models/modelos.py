@@ -52,6 +52,7 @@ class Producto(Base):
     inventarios = relationship("Inventario", back_populates="producto")
     detalles_compra = relationship("DetalleCompra", back_populates="producto")
     detalles_venta = relationship("DetalleVenta", back_populates="producto")
+    detalles_movimiento = relationship("DetalleMovimiento", back_populates="producto")
 
 class Inventario(Base):
     __tablename__ = "inventario"
@@ -132,3 +133,15 @@ class Auditoria(Base):
     
     # Relaciones
     usuario = relationship("Usuario", back_populates="auditorias")
+
+class DetalleMovimiento(Base):
+    __tablename__ = "detalle_movimiento"
+
+    id = Column(Integer, primary_key=True, index=True)
+    id_movimiento = Column(Integer, ForeignKey("movimientos.id"), nullable=False)
+    id_producto = Column(Integer, ForeignKey("productos.id"), nullable=False)
+    cantidad = Column(Integer, nullable=False)
+    precio_unitario = Column(Numeric(10, 2))
+
+    # Relaciones
+    producto = relationship("Producto", back_populates="detalles_movimiento")

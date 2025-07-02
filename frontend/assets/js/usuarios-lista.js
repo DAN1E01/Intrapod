@@ -3,7 +3,6 @@ const API_URL = "http://localhost:8000"; // Cambia esto si tu backend usa otro p
 // Script para cargar y mostrar usuarios en la tabla
 
 document.addEventListener("DOMContentLoaded", function () {
-  let usuariosExistentes = [];
   const inputBuscar = document.getElementById('search-user');
   const tbody = document.querySelector('table.tabla-usuarios tbody');
 
@@ -24,11 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
         </td>
       `;
       tbody.appendChild(tr);
-    });
-    document.querySelectorAll('.btn-editar-usuario').forEach(btn => {
-      btn.onclick = function() {
-        abrirModalEditarUsuario(this.dataset.id);
-      };
     });
   }
 
@@ -216,6 +210,17 @@ if (formUsuario) {
   });
 }
 
+// Delegación de eventos para editar usuario
+const tbodyUsuarios = document.querySelector('table.tabla-usuarios tbody');
+if (tbodyUsuarios) {
+  tbodyUsuarios.addEventListener('click', function(e) {
+    const btn = e.target.closest('.btn-editar-usuario');
+    if (btn) {
+      abrirModalEditarUsuario(btn.dataset.id);
+    }
+  });
+}
+
 function renderUsuariosTabla(usuarios) {
   const tbody = document.querySelector('table.tabla-usuarios tbody');
   if (!tbody) return;
@@ -235,11 +240,7 @@ function renderUsuariosTabla(usuarios) {
     `;
     tbody.appendChild(tr);
   });
-  document.querySelectorAll('.btn-editar-usuario').forEach(btn => {
-    btn.onclick = function() {
-      abrirModalEditarUsuario(this.dataset.id);
-    };
-  });
+  // Ya no se asignan eventos aquí
 }
 
 function cargarUsuarios() {
